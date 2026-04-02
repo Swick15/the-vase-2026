@@ -242,6 +242,43 @@
     transition: transform 0.2s, border-color 0.2s;
     cursor: pointer;
   }
+  .card-photo {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--green-light);
+  }
+  .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .card-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--text-dim);
+    opacity: 0.3;
+  }
+  .modal-photo {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: var(--green-light);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .modal-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
   .player-card:hover {
     transform: translateY(-3px);
     border-color: var(--green-bright);
@@ -1086,6 +1123,9 @@
         <div class="modal-recognisable" id="modalRecognisable"></div>
       </div>
       <div class="modal-stats-col">
+        <div class="modal-photo" id="modalPhotoWrap" style="display:none;">
+          <img id="modalPhoto" src="" alt="">
+        </div>
         <h4>Stats</h4>
         <div id="modalStats"></div>
       </div>
@@ -1232,10 +1272,6 @@
       </div>
       <ul class="day-items">
         <li class="day-item">
-          <span class="day-item-time">Early</span>
-          <div class="day-item-text"><strong>Convoy South</strong>Cars loaded. Bags packed. Headed to the Peninsula.</div>
-        </li>
-        <li class="day-item">
           <span class="day-item-time">7:20am</span>
           <div class="day-item-text"><strong>Round 1 — Moonah Links Legends Course</strong>First group tee off. Individual Stableford. The weekend begins.</div>
         </li>
@@ -1256,29 +1292,9 @@
 
     <div class="day-card">
       <div class="day-header">
-        <span class="day-name">Friday Night</span>
-        <h3>The Night Before</h3>
-      </div>
-      <ul class="day-items">
-        <li class="day-item">
-          <span class="day-item-time">TBC</span>
-          <div class="day-item-text"><strong>Dinner &amp; Drinks</strong>See the Venues section below for the shortlist.</div>
-        </li>
-        <li class="day-item">
-          <span class="day-item-time">Late</span>
-          <div class="day-item-text"><strong>Fireplace</strong>Back at the house. Wind down before Saturday's round.</div>
-        </li>
-        <li class="day-item">
-          <span class="day-item-time">Midnight</span>
-          <div class="day-item-text"><strong>Bed</strong>9am tee off Saturday. Early night encouraged.</div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="day-card">
-      <div class="day-header">
         <span class="day-name">Saturday — Day Two</span>
         <h3>The Decider</h3>
+
       </div>
       <ul class="day-items">
         <li class="day-item">
@@ -1287,24 +1303,71 @@
         </li>
         <li class="day-item">
           <span class="day-item-time">Post-Round</span>
-          <div class="day-item-text"><strong>The Presentation</strong>Final standings confirmed. The Vase is awarded.</div>
+          <div class="day-item-text"><strong>The Pub</strong>Presentations held. The Vase awarded. Jugs tallied.</div>
         </li>
         <li class="day-item">
-          <span class="day-item-time">Depart</span>
-          <div class="day-item-text"><strong>Head Home</strong>Weekend done. See you next year.</div>
+          <span class="day-item-time">Afternoon</span>
+          <div class="day-item-text"><strong>Footy On</strong>Settle in. Weekend done right.</div>
         </li>
       </ul>
     </div>
+
+    <div class="day-card">
+      <div class="day-header">
+        <span class="day-name">Sunday — Day Three</span>
+        <h3>Home</h3>
+      </div>
+      <ul class="day-items">
+        <li class="day-item">
+          <span class="day-item-time">Morning</span>
+          <div class="day-item-text"><strong>Head Home</strong>Pack up. Convoy north. See you next year.</div>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </div>
+
+<!-- ACCOMMODATION -->
+<section id="accommodation">
+  <div class="section-header">
+    <span class="eyebrow">Where We're Staying</span>
+    <h2>Accommodation</h2>
+    <div class="divider"></div>
+    <p>Two houses on the Peninsula. Who is staying where — TBD.</p>
+  </div>
+
+  <div class="venue-grid">
+
+    <div class="venue-card">
+      <div class="venue-header">
+        <div class="venue-status confirmed">House 1</div>
+        <h4>Lazy Daze</h4>
+        <div class="venue-location">&#128205; Mornington Peninsula &nbsp;·&nbsp; Address TBC</div>
+      </div>
+      <p class="venue-desc">Players: TBD</p>
+      <p style="margin-top:0.7rem;font-size:0.8rem;"><a href="https://www.airbnb.com.au/rooms/52589980" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">&#8599; View on Airbnb</a></p>
+    </div>
+
+    <div class="venue-card">
+      <div class="venue-header">
+        <div class="venue-status confirmed">House 2</div>
+        <h4>A Splash of Rye</h4>
+        <div class="venue-location">&#128205; Rye, Mornington Peninsula &nbsp;·&nbsp; Address TBC</div>
+      </div>
+      <p class="venue-desc">Players: TBD</p>
+      <p style="margin-top:0.7rem;font-size:0.8rem;"><a href="https://www.airbnb.com.au/rooms/975008689766124989" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">&#8599; View on Airbnb</a></p>
+    </div>
+
+  </div>
+</section>
 
 <!-- VENUES -->
 <section id="venues">
   <div class="section-header">
-    <span class="eyebrow">Off the Course</span>
-    <h2>Watering Holes</h2>
+    <span class="eyebrow">Saturday Afternoon</span>
+    <h2>After the Round</h2>
     <div class="divider"></div>
-    <p>The committee has shortlisted the options. A decision will be made in due course. All venues are capable of producing incidents that will be discussed for years.</p>
   </div>
 
   <div class="venue-grid">
@@ -1315,7 +1378,7 @@
         <h4>Rosebud Hotel</h4>
         <div class="venue-location">&#128205; Rosebud, Mornington Peninsula</div>
       </div>
-      <p class="venue-desc">The reliable. The known quantity. Fireplace that Brad will be stoking by 9pm. The embers outlast most of the group. Brendan operates in the corner. Buff laughs loud enough to turn heads across the room. A classic golf trip pub.</p>
+      <p class="venue-desc">The known quantity. Hosted the presentation last year and does a solid counter meal. Reliable, comfortable, and proven.</p>
     </div>
 
     <div class="venue-card">
@@ -1324,7 +1387,7 @@
         <h4>Rye Hotel</h4>
         <div class="venue-location">&#128205; Rye, Mornington Peninsula</div>
       </div>
-      <p class="venue-desc">Local stalwart. The kind of pub that doesn't need to try hard because it doesn't need to. Cold beer, loud enough to talk over. Rye is close, which matters after 36 holes and nobody wanting to be in a car for long.</p>
+      <p class="venue-desc">Closest pub to the accommodation. Reputation yet to be established — but proximity counts.</p>
     </div>
 
     <div class="venue-card">
@@ -1333,7 +1396,7 @@
         <h4>Continental Hotel Sorrento</h4>
         <div class="venue-location">&#128205; Ocean Beach Rd, Sorrento VIC 3943</div>
       </div>
-      <p class="venue-desc">The Conti. A step up in ambience, which means a step up in the chance someone orders something off the wine list and gets roasted for it. Sorrento has energy. The group brings its own. Outcomes unpredictable.</p>
+      <p class="venue-desc">The Conti. A step up in ambience — Sorrento's marquee venue if the group is after something a bit more upmarket on Saturday afternoon.</p>
     </div>
 
     <div class="venue-card">
@@ -1342,16 +1405,15 @@
         <h4>Sorrento Hotel</h4>
         <div class="venue-location">&#128205; Ocean Beach Rd, Sorrento VIC 3943</div>
       </div>
-      <p class="venue-desc">The alternative Sorrento option. Same town, different vibe. Decent beer garden, solid food, the sort of place that absorbs a large group without complaint. Toss-up between this and the Conti will be resolved on the night.</p>
+      <p class="venue-desc">The alternative Sorrento option. Same town, slightly different vibe. If not the Conti, this is the call — both are a step up from the local.</p>
     </div>
 
     <div class="venue-card">
       <div class="venue-header">
         <div class="venue-status wildcard">Wildcard</div>
         <h4>Local Footy</h4>
-        <div class="venue-location">&#128205; Peninsula, wherever the bounce of the ball takes us</div>
+        <div class="venue-location">&#128205; Dromana &amp; Sorrento playing home games</div>
       </div>
-      <p class="venue-desc">If there's footy on. If it's accessible. If the vibe is right. Nothing bonds a group like being around strangers who don't know any of the backstory. The Drain Man will find the bar within 90 seconds. The Gow will have a strong opinion about the umpiring.</p>
     </div>
 
   </div>
@@ -1450,8 +1512,13 @@
     </div>
     <div class="format-card">
       <span class="icon">&#9917;</span>
-      <h4>Side Bets</h4>
-      <p>Nearest the pin. Longest drive. First to four-putt. Creative wagering encouraged throughout the weekend.</p>
+      <h4>Nearest the Pin</h4>
+      <p>Each course has 4 par 3s. Open to anyone who wants in.</p>
+      <ul style="margin-top:0.7rem;font-size:0.82rem;color:var(--text-dim);line-height:1.9;padding-left:1.1rem;">
+        <li>$20 entry per round — $5 per par 3 hole.</li>
+        <li>Closest to the pin on each hole takes that hole's pot.</li>
+        <li>Applies to all three rounds. In the Round 2 scramble, everyone hits their own tee shot on par 3s for nearest the pin purposes.</li>
+      </ul>
     </div>
   </div>
 
@@ -1526,7 +1593,7 @@
 <script>
 const players = [
   {
-    id: 1, name: "Brad Hunt", handicap: "20", nickname: null,
+    id: 1, name: "Brad Hunt", handicap: "20", nickname: null, photo: "Brad hunt.JPG",
     pgaComp: "Akshay Bhatia",
     ability: "Violent post-shot club swing followed by stiff-armed walk",
     recognisable: "Ill-fitting attire, woods without head covers, hat optional",
@@ -1534,7 +1601,7 @@ const players = [
     stats: {power:5, accuracy:6, consistency:5, touch:3, stamina:7, magic:5, mental:7, emotional:6}
   },
   {
-    id: 2, name: "Brendan Hunt", handicap: "22", nickname: null,
+    id: 2, name: "Brendan Hunt", handicap: "22", nickname: null, photo: "Bren Hunt.JPG",
     pgaComp: "Joel Dahmen",
     ability: "Unearned confidence, cheeky operator",
     recognisable: "Bucket hat, similar attire to Brad, dangerous with Buff nearby",
@@ -1542,7 +1609,7 @@ const players = [
     stats: {power:6, accuracy:5, consistency:4, touch:5, stamina:7, magic:7, mental:7, emotional:7}
   },
   {
-    id: 3, name: "Daniel Hunt", handicap: "10", nickname: "Spider",
+    id: 3, name: "Daniel Hunt", handicap: "10", nickname: "Spider", photo: "Dan Hunt.JPG",
     pgaComp: "Craig Stadler",
     ability: "Two-time Vase winner, Saturday only — ineligible to defend. A new champion will be crowned.",
     recognisable: "Large back, drop-kick tee shot, built to carry teammates and large advertisements",
@@ -1550,7 +1617,7 @@ const players = [
     stats: {power:8, accuracy:7, consistency:8, touch:5, stamina:6, magic:6, mental:8, emotional:7}
   },
   {
-    id: 4, name: "Tom Hussey", handicap: "25", nickname: "The Drain Man",
+    id: 4, name: "Tom Hussey", handicap: "25", nickname: "The Drain Man", photo: "Hussey.JPG",
     pgaComp: "Patrick Reed",
     ability: "Volatility: birdie in a hurricane or a 10 on a 100m par 3. The niggler — kryptonite or can of spinach depending on which side you're on.",
     recognisable: "Built like Monty Burns, natural athlete",
@@ -1558,7 +1625,7 @@ const players = [
     stats: {power:5, accuracy:2, consistency:3, touch:6, stamina:8, magic:8, mental:6, emotional:8}
   },
   {
-    id: 5, name: "Travis Davis", handicap: "14.9", nickname: null,
+    id: 5, name: "Travis Davis", handicap: "14.9", nickname: null, photo: "Trav.JPG",
     pgaComp: "Tommy Fleetwood",
     ability: "Back at 100% — ultra consistent, not afraid to have a crack, current favourite for The Vase",
     recognisable: "Not long but ultra consistent, quiet finisher, low ball flight",
@@ -1566,7 +1633,7 @@ const players = [
     stats: {power:6, accuracy:8, consistency:9, touch:4, stamina:8, magic:4, mental:10, emotional:9}
   },
   {
-    id: 6, name: "Damo Lovie", handicap: "19", nickname: "Damo",
+    id: 6, name: "Damo Lovie", handicap: "19", nickname: "Damo", photo: "Damo.JPG",
     pgaComp: "Ernie Els",
     ability: "The Big Easy. Easy length, sensible decisions, solid fundamentals. Spiritual leader of the quaddie.",
     recognisable: "A presence. You won't have glimpsed him yet but you'll know when he's arrived.",
@@ -1574,7 +1641,7 @@ const players = [
     stats: {power:7, accuracy:6, consistency:6, touch:5, stamina:5, magic:6, mental:8, emotional:9}
   },
   {
-    id: 7, name: "Chris McGowan", handicap: "30", nickname: "The Gow, Gosto, Gowsten",
+    id: 7, name: "Chris McGowan", handicap: "30", nickname: "The Gow, Gosto, Gowsten", photo: "Gow.JPG",
     pgaComp: "Bob Barker",
     ability: "'I've figured it out boys' — often cueing a run of 3s and 4s. In contention for The Vase and most balls lost.",
     recognisable: "Groans audible from multiple fairways, pre-round red enthusiast, powerful mitts",
@@ -1582,7 +1649,7 @@ const players = [
     stats: {power:8, accuracy:2, consistency:2, touch:4, stamina:9, magic:8, mental:4, emotional:2}
   },
   {
-    id: 8, name: "Chris Jones", handicap: "7.2", nickname: "Jonsey",
+    id: 8, name: "Chris Jones", handicap: "7.2", nickname: "Jonsey", photo: "Chris jonse.jpg",
     pgaComp: "Jason Day",
     ability: "Make par from anywhere, naughty spinners",
     recognisable: "Flowing red hair, arms and legs coloured in",
@@ -1590,7 +1657,7 @@ const players = [
     stats: {power:7, accuracy:7, consistency:5, touch:10, stamina:6, magic:8, mental:2, emotional:5}
   },
   {
-    id: 9, name: "Pete Sweeney", handicap: "4.9", nickname: "Pete",
+    id: 9, name: "Pete Sweeney", handicap: "4.9", nickname: "Pete", photo: "Pete.JPG",
     pgaComp: "Brian Harman",
     ability: "To see the window and play the safe shot anyway",
     recognisable: "Floral polo neatly tucked, polished white Footjoys",
@@ -1598,7 +1665,7 @@ const players = [
     stats: {power:7, accuracy:9, consistency:10, touch:7, stamina:7, magic:2, mental:9, emotional:6}
   },
   {
-    id: 10, name: "Daniel Riley", handicap: "23", nickname: "Riley, Sir, Mr Riley, Lord",
+    id: 10, name: "Daniel Riley", handicap: "23", nickname: "Riley, Sir, Mr Riley, Lord", photo: "Riley.JPG",
     pgaComp: "Jon Rahm",
     ability: "Beating Heath off the stick despite playing twice a year",
     recognisable: "Hand-glued Dunlop driver",
@@ -1606,7 +1673,7 @@ const players = [
     stats: {power:7, accuracy:4, consistency:3, touch:4, stamina:5, magic:9, mental:10, emotional:10}
   },
   {
-    id: 11, name: "Chris Shepardson", handicap: "18.5", nickname: "Shep",
+    id: 11, name: "Chris Shepardson", handicap: "18.5", nickname: "Shep", photo: "Shep.JPG",
     pgaComp: "Anthony Kim",
     ability: "Power game",
     recognisable: "Unique pre-tee shot routine",
@@ -1614,7 +1681,7 @@ const players = [
     stats: {power:8, accuracy:4, consistency:4, touch:4, stamina:10, magic:7, mental:6, emotional:6}
   },
   {
-    id: 12, name: "Shane Somers", handicap: "10", nickname: "Buff, Hardwork, President, Shanga, Shangakara",
+    id: 12, name: "Shane Somers", handicap: "10", nickname: "Buff, Hardwork, President, Shanga, Shangakara", photo: "Buff.JPG",
     pgaComp: "Matt Fitzpatrick",
     ability: "Complete lack of balance on a tee shot",
     recognisable: "Beard, sprayed range balls, unmistakable laugh",
@@ -1622,7 +1689,7 @@ const players = [
     stats: {power:6, accuracy:6, consistency:6, touch:9, stamina:2, magic:7, mental:6, emotional:6}
   },
   {
-    id: 13, name: "Dom Ciconte", handicap: "11", nickname: "Dim",
+    id: 13, name: "Dom Ciconte", handicap: "11", nickname: "Dim", photo: "Dom.JPG",
     pgaComp: "Ian Woosnam",
     ability: "In-utero fade, momentum player",
     recognisable: "Wearing children's pants as shorts",
@@ -1630,7 +1697,7 @@ const players = [
     stats: {power:2, accuracy:8, consistency:7, touch:4, stamina:8, magic:5, mental:8, emotional:5}
   },
   {
-    id: 15, name: "Mick Sweeney", handicap: "7.1", nickname: null,
+    id: 15, name: "Mick Sweeney", handicap: "7.1", nickname: null, photo: "Mick.JPG",
     pgaComp: "TBC",
     ability: "The organiser. Getting 16 blokes to a golf trip is harder than winning it.",
     recognisable: "TBC — drop your details and we'll fill this in properly",
@@ -1638,7 +1705,7 @@ const players = [
     stats: {power:8, accuracy:6, consistency:5, touch:4, stamina:7, magic:7, mental:6, emotional:7}
   },
   {
-    id: 16, name: "Andrew Chadwick", handicap: "7.8", nickname: "Chaders",
+    id: 16, name: "Andrew Chadwick", handicap: "7.8", nickname: "Chaders", photo: "Andrew.JPG",
     pgaComp: "TBC",
     ability: "TBC — but that 9 Power and 8 Emotional suggests we should be paying attention.",
     recognisable: "TBC — bio incoming.",
@@ -1646,7 +1713,7 @@ const players = [
     stats: {power:9, accuracy:5, consistency:6, touch:5, stamina:7, magic:5, mental:4, emotional:8}
   },
   {
-    id: 14, name: "Heath Attwood", handicap: "21.1", nickname: "Hatwood, Heata",
+    id: 14, name: "Heath Attwood", handicap: "21.1", nickname: "Hatwood, Heata", photo: "Heath.JPG",
     pgaComp: "Ho-Sung Choi",
     ability: "Two-time Vase winner looking to be the first to three. Capable of a powerful and completely unrepeatable golf swing.",
     recognisable: "Non-threatening demeanour, exasperated with golf and life, clubs in the bag he's genuinely never used",
@@ -1688,7 +1755,12 @@ function buildPlayerCard(p, index) {
   const nicknameHTML = p.nickname ? `<div class="player-nickname">"${p.nickname}"</div>` : '';
   const pgaHTML = p.pgaComp ? `<div class="pga-comp">Plays like: <span>${p.pgaComp}</span></div>` : '';
 
+  const photoHTML = p.photo
+    ? `<div class="card-photo"><img src="images/${p.photo}" alt="${p.name}" loading="lazy"></div>`
+    : `<div class="card-photo"><div class="card-photo-placeholder">&#9968;</div></div>`;
+
   card.innerHTML = `
+    ${photoHTML}
     <div class="card-header">
       <div class="card-header-top">
         <span class="player-number">${String(index+1).padStart(2,'0')}</span>
@@ -1724,6 +1796,16 @@ function openModal(id) {
   document.getElementById('modalAbility').textContent = p.ability;
   document.getElementById('modalBio').textContent = p.bio;
   document.getElementById('modalRecognisable').textContent = p.recognisable;
+
+  const photoWrap = document.getElementById('modalPhotoWrap');
+  const photoImg = document.getElementById('modalPhoto');
+  if (p.photo) {
+    photoImg.src = `images/${p.photo}`;
+    photoImg.alt = p.name;
+    photoWrap.style.display = 'block';
+  } else {
+    photoWrap.style.display = 'none';
+  }
 
   const statsHTML = Object.entries(p.stats).map(([key, val]) => `
     <div class="modal-stat-row">
