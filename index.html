@@ -853,6 +853,24 @@
     color: var(--text-dim);
     font-style: italic;
   }
+  .course-detail-block {
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .course-detail-block h5 {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.45rem;
+  }
+  .course-detail-block p {
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
 
   /* ===== VENUES ===== */
   .venue-grid {
@@ -897,6 +915,94 @@
     font-size: 0.85rem;
     color: var(--text-dim);
     line-height: 1.65;
+  }
+
+  /* ===== POINTS TABLE ===== */
+  .points-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  .points-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+  }
+  .points-table th {
+    background: var(--green-light);
+    color: var(--gold);
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.9rem 1.1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+    white-space: nowrap;
+  }
+  .points-table td {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--text-dim);
+    vertical-align: top;
+  }
+  .points-table tr:last-child td { border-bottom: none; }
+  .points-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .rd3-row td { background: rgba(201,168,76,0.04); }
+
+  .rd {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .rd1 { background: rgba(61,122,70,0.3); color: #6bcb77; border: 1px solid #3d7a46; }
+  .rd2 { background: rgba(41,128,185,0.2); color: #74b9e8; border: 1px solid #2980b9; }
+  .rd3 { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid var(--gold); }
+
+  .fmt-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    background: rgba(61,122,70,0.2);
+    color: #6bcb77;
+    border: 1px solid #3d7a46;
+    white-space: nowrap;
+  }
+  .scramble-tag {
+    background: rgba(41,128,185,0.2);
+    color: #74b9e8;
+    border-color: #2980b9;
+  }
+  .pts-range {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cream);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .pts-sub {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .pts-na {
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+  .pts-note {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    max-width: 260px;
   }
 
   /* ===== UTILITIES ===== */
@@ -1033,11 +1139,20 @@
         <div class="course-name-sub">Legends Course</div>
       </div>
       <div class="course-body">
-        <p class="course-desc">The older sibling. Linksland that bites. Named after legends of the game — which sets expectations for everyone involved, most of whom are legends only in their own group chats. The Legends Course rewards ball-strikers and punishes the loose. Wind off the bay makes every club selection a negotiation. Brendan once topped the first tee here so comprehensively the ball finished behind him. That story has never died. It never will.</p>
+        <p class="course-desc">Designed by Ross Perrett and opened in 2003, the Legends Course consistently ranks as the more popular of the two Moonah Links layouts. Each hole is named after a golfing legend — Australian Open champions alongside international icons like Palmer and Nicklaus. The course opens through valleys and dense stretches of ancient Moonah trees before opening out into wild, rugged bunkering and gently rolling links-style fairways.</p>
         <div class="course-stats-row">
-          <div class="course-stat"><span class="cs-label">Type</span><span class="cs-val">Links</span></div>
-          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">73</span></div>
-          <div class="course-stat"><span class="cs-label">Location</span><span class="cs-val">Fingal, Mornington Peninsula</span></div>
+          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">72</span></div>
+          <div class="course-stat"><span class="cs-label">Distance</span><span class="cs-val">~6,315m</span></div>
+          <div class="course-stat"><span class="cs-label">Slope</span><span class="cs-val">137–141</span></div>
+          <div class="course-stat"><span class="cs-label">Format</span><span class="cs-val">Individual Stableford</span></div>
+        </div>
+        <div class="course-detail-block">
+          <h5>What to Expect</h5>
+          <p>More forgiving than the Open Course, but still a genuine challenge. Approach shot accuracy is critical — hitting the correct portion of these large, undulating greens is the difference between a makeable putt and a three-putt. The 16th features the largest green in the southern hemisphere, which sounds generous until you're facing a 25-metre lag putt with significant break. The 18th is a 580m par 5 littered with eleven strategically placed bunkers.</p>
+        </div>
+        <div class="course-detail-block">
+          <h5>Who It Suits</h5>
+          <p>Wide fairways make tee shots forgiving — accuracy off the tee is less critical than approach shot precision and putting on large, undulating greens. Players with a volatile driver but a reliable mid-game will find this layout more forgiving than most. Long hitters with poor short games will struggle to capitalise.</p>
         </div>
         <div class="course-address">&#128205; Peter Thomson Dr, Fingal VIC 3939</div>
       </div>
@@ -1051,11 +1166,20 @@
         <div class="course-name-sub">Open Course</div>
       </div>
       <div class="course-body">
-        <p class="course-desc">The younger, meaner sibling — designed to host the Australian Open, which tells you everything about the gap between that field and this one. Wider fairways than you'd expect, but every hazard is placed with intent. Two rounds in one day means legs will be burning by the time afternoon tee-off arrives. Shep's 10/10 stamina will be the most important stat of the weekend. The back nine will separate the field.</p>
+        <p class="course-desc">Peter Thomson's magnum opus — the only course in Australia specifically designed and built to host the Australian Open, which it did in 2003 and 2005. Thomson called it "The Leviathan." The layout is routed over rolling sand dunes, with over 80 pot bunkers scattered across the course, many hidden or placed mid-fairway. Blind tee shots feature throughout, and the coastal wind adds another layer of difficulty at every turn.</p>
         <div class="course-stats-row">
-          <div class="course-stat"><span class="cs-label">Type</span><span class="cs-val">Parkland/Links</span></div>
-          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">71</span></div>
-          <div class="course-stat"><span class="cs-label">Location</span><span class="cs-val">Fingal, Mornington Peninsula</span></div>
+          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">72</span></div>
+          <div class="course-stat"><span class="cs-label">Distance</span><span class="cs-val">~6,783m</span></div>
+          <div class="course-stat"><span class="cs-label">Slope</span><span class="cs-val">143–144</span></div>
+          <div class="course-stat"><span class="cs-label">Format</span><span class="cs-val">Scramble</span></div>
+        </div>
+        <div class="course-detail-block">
+          <h5>What to Expect</h5>
+          <p>Championship golf. Five par fours exceed 400m. Three holes stretch beyond 515m. Thomson estimated a club golfer would need an additional eight strokes for net par. The 10th — a 464m par four — plays longer than many par fives, particularly into wind. The scramble format will be essential. One quality shot per position can tame the Leviathan — individual medal play here would be a different story entirely.</p>
+        </div>
+        <div class="course-detail-block">
+          <h5>Who It Suits</h5>
+          <p>Length matters. The sheer yardage demands players who can move the ball off the tee — teams with at least one long, reliable driver will have a significant advantage. Beyond distance, this course rewards composure. The pot bunkers are penal, the greens multi-tiered, and course management is critical. Local knowledge of where hidden bunkers lie separates good scores from disasters.</p>
         </div>
         <div class="course-address">&#128205; Peter Thomson Dr, Fingal VIC 3939</div>
       </div>
@@ -1069,11 +1193,20 @@
         <div class="course-name-sub">Golf Club</div>
       </div>
       <div class="course-body">
-        <p class="course-desc">The showpiece. The one everyone's been waiting for. St Andrews Beach is a genuine world-class links layout that demands respect and repays bottle. Sweeping views, rolling fairways, and enough character to make or break a scorecard on any given hole. This is where The Vase gets decided. Anyone still in contention by the turn has earned their shot. The group chat has referenced St Andrews in a previous trip — it already carries weight. Saturday morning, 9am. Let's go.</p>
+        <p class="course-desc">Tom Doak's first Australian mainland design, opened in 2004. Doak has stated publicly that if he could have any course in his backyard, this would be it — high praise from an architect whose portfolio includes Pacific Dunes, Ballyneal, and Tara Iti. Set across 175 hectares of former grazing land, routed across sweeping duneland near the thundering surf of Gunnamatta Beach. Doak's minimalist philosophy is on full display — 16 of the 18 fairways were left entirely in their natural state, with virtually no earth moved during construction.</p>
         <div class="course-stats-row">
-          <div class="course-stat"><span class="cs-label">Type</span><span class="cs-val">Links</span></div>
-          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">72</span></div>
-          <div class="course-stat"><span class="cs-label">Location</span><span class="cs-val">Fingal, Mornington Peninsula</span></div>
+          <div class="course-stat"><span class="cs-label">Par</span><span class="cs-val">70</span></div>
+          <div class="course-stat"><span class="cs-label">Distance</span><span class="cs-val">~6,074m</span></div>
+          <div class="course-stat"><span class="cs-label">Slope</span><span class="cs-val">123–139</span></div>
+          <div class="course-stat"><span class="cs-label">Format</span><span class="cs-val">Individual Stableford</span></div>
+        </div>
+        <div class="course-detail-block">
+          <h5>What to Expect</h5>
+          <p>A complete contrast to Moonah Links. The layout uses short par 4s and par 3s to navigate the steepest ridges, while longer holes stretch through the valleys. Features Australia's longest par four (13th, 500m) and reportedly its longest par three (16th). The greens are among the smallest and most complex Doak has built. Prevailing winds arrive from the west and southwest off Bass Strait — because the routing forms a loop, the wind changes its relationship to the player on nearly every hole. Expect wallabies on the property, particularly early morning.</p>
+        </div>
+        <div class="course-detail-block">
+          <h5>Who It Suits</h5>
+          <p>This course rewards the thinker. At just over 6,000m and par 70, raw distance is less important than shot selection and course management. The small, contoured greens demand precision — this is not a course where you miss greens and rely on a straightforward up-and-down. Mentally, this is where the weekend will be decided. Fatigue from Friday's 36 holes will be a factor. The player who can maintain concentration and commit to smart decisions under pressure will be lifting The Vase on Saturday afternoon.</p>
         </div>
         <div class="course-address">&#128205; Browns Rd, Fingal VIC 3939</div>
       </div>
@@ -1237,36 +1370,122 @@
     <p>The rules are simple. The handicaps are controversial. The trash talk is mandatory.</p>
   </div>
 
-  <div class="format-grid">
-    <div class="format-card">
-      <span class="icon">&#127959;</span>
-      <h4>Stroke Play</h4>
-      <p>Full handicap applied. Net score counts. If you're posting 110+ off a 23, the committee reserves the right to raise an eyebrow.</p>
-    </div>
+  <!-- POINTS TABLE -->
+  <div class="points-table-wrap">
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Venue</th>
+          <th>Format</th>
+          <th>Individual Pts</th>
+          <th>Team Pts</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rd-badge"><span class="rd rd1">Rd 1</span></td>
+          <td>Moonah Links — Legends</td>
+          <td><span class="fmt-tag">Stableford</span></td>
+          <td><span class="pts-range">12 – 1</span></td>
+          <td><span class="pts-range">6 – 1</span> <span class="pts-sub">Pairs Aggregate</span></td>
+          <td class="pts-note">Points awarded to top 12 individually. Pairs combined Stableford score earns team points.</td>
+        </tr>
+        <tr>
+          <td class="rd-badge"><span class="rd rd2">Rd 2</span></td>
+          <td>Moonah Links — Open</td>
+          <td><span class="fmt-tag scramble-tag">Scramble</span></td>
+          <td><span class="pts-na">N/A</span></td>
+          <td><span class="pts-range">6 – 3 – 1</span> <span class="pts-sub">Win / Draw / Loss</span></td>
+          <td class="pts-note">
+            Team format only. No individual points on offer.<br><br>
+            <strong style="color:var(--cream)">The Snake Draft</strong><br>
+            The top 4 players from Round 1 become team captains. In rank order, each captain <em>chooses their draft position</em> in the snake — they don't get assigned it.<br><br>
+            The snake runs: <span style="color:var(--gold)">1 → 2 → 3 → 4 → 4 → 3 → 2 → 1…</span> and repeats.<br><br>
+            <em>Example:</em> The Round 1 leader might elect to draft <strong>4th</strong> in the first round — meaning they pick last initially, but first in round 2 of the draft, and last again in the final round. A calculated gamble on who's still available mid-draft.
+          </td>
+        </tr>
+        <tr class="rd3-row">
+          <td class="rd-badge"><span class="rd rd3">Rd 3</span></td>
+          <td>St Andrews Beach</td>
+          <td><span class="fmt-tag">Stableford</span></td>
+          <td><span class="pts-range">16 – 1</span></td>
+          <td><span class="pts-range">8 – 1</span> <span class="pts-sub">Pairs Aggregate</span></td>
+          <td class="pts-note">&#9733; Top 8 on the leaderboard randomised with bottom 8 for Saturday pairs. The final shake-up.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="format-grid" style="margin-top: 2rem;">
     <div class="format-card">
       <span class="icon">&#127358;</span>
-      <h4>Stableford</h4>
-      <p>Points for pars and better. The format that lets you walk away from a disaster hole without completely derailing your round. The Gow needs this badly.</p>
+      <h4>Stableford Scoring</h4>
+      <p>Points awarded based on your score relative to par on each hole — Bogey = 1 pt, Par = 2 pts, Birdie = 3 pts, Eagle = 4 pts. Bad holes cost you nothing; you score zero and move on. Handicap strokes are applied per hole.</p>
+      <p style="margin-top:0.8rem;"><a href="https://www.randa.org/en/rog/2019/rules/the-rules-of-golf/rule-21#21-1" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-size:0.82rem;">&#8599; Rules of Golf — Stableford (R&amp;A)</a></p>
+    </div>
+    <div class="format-card">
+      <span class="icon">&#129309;</span>
+      <h4>Scramble</h4>
+      <p>All players tee off. The best ball is selected and must remain in place — played as it lies. All other players drop within one club length, no closer to the hole. Repeat until holed.</p>
+      <ul style="margin-top:0.7rem;font-size:0.82rem;color:var(--text-dim);line-height:1.8;padding-left:1.1rem;">
+        <li>Every player must contribute a minimum of 3 tee shots across the round.</li>
+        <li>A ball in the bunker must be dropped in the bunker, not placed.</li>
+        <li>One club length applies throughout the course — if the drop moves you from rough to fairway, that's your good fortune. The drop may not bring you onto the green.</li>
+        <li>Exception: if the selected ball is in a hazard, all players must play from within that hazard within one club length.</li>
+        <li>Scramble is stroke play. Team handicap calculated via the <a href="http://www.leaderboard.com/scramcap.htm" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Scramble Handicap Calculator</a>.</li>
+      </ul>
     </div>
     <div class="format-card">
       <span class="icon">&#129351;</span>
       <h4>The Vase</h4>
-      <p>Aggregate over the weekend. Two-time winner Spider is the benchmark. Everyone else is playing for second and trying not to admit it.</p>
+      <p>The overall winner is determined by aggregate individual and team points across all three rounds. The player with the most points at the end of Saturday claims The Vase.</p>
+    </div>
+    <div class="format-card">
+      <span class="icon">&#128256;</span>
+      <h4>The Saturday Shake-Up</h4>
+      <p>Top 8 randomised with bottom 8 for Round 3 pairs. No hiding. No safe draws. If you're leading, you're getting tested. If you're trailing, this is your lifeline.</p>
     </div>
     <div class="format-card">
       <span class="icon">&#127808;</span>
       <h4>Handicap Integrity</h4>
-      <p>You know who you are. Brad and Damo will both accuse each other. Both will be partially correct. Chaos ensues. The Drain Man buys a round.</p>
+      <p>All handicaps are declared prior to the trip and locked in. Current official Golf Australia handicaps apply. Queries go to the committee — decisions are final.</p>
     </div>
     <div class="format-card">
       <span class="icon">&#9917;</span>
       <h4>Side Bets</h4>
-      <p>Nearest the pin. Longest drive. First to four-putt. Creative wagering encouraged. Bitcoin ball markers accepted (Brad only).</p>
+      <p>Nearest the pin. Longest drive. First to four-putt. Creative wagering encouraged throughout the weekend.</p>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:3rem;">
+    <span class="eyebrow">Jug Rules</span>
+    <h2>Buying Jugs</h2>
+    <div class="divider"></div>
+    <p>Certain offences result in the immediate obligation to buy a jug. There is no appeal process.</p>
+  </div>
+
+  <div class="format-grid" style="margin-top:1.5rem;">
+    <div class="format-card">
+      <span class="icon">&#127866;</span>
+      <h4>Automatic Jug Offences</h4>
+      <ul style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-dim);line-height:2;padding-left:1.1rem;">
+        <li>4-putt on any hole</li>
+        <li>Playing from the ladies tee</li>
+        <li>4 shots in the sand on a single hole</li>
+        <li>Putting from off the green</li>
+      </ul>
+      <p style="margin-top:0.8rem;font-size:0.8rem;color:var(--text-dim);font-style:italic;">* Putts are only counted on the green. Strokes taken from off the green do not count as putts.</p>
     </div>
     <div class="format-card">
-      <span class="icon">&#127867;</span>
-      <h4>The Quaddie</h4>
-      <p>Brad avoids it on principle and invests $50 in biotech instead. Brendan is in. Dom is dangerous as a momentum player. Good luck to all.</p>
+      <span class="icon">&#127991;</span>
+      <h4>The 3-Putt Token</h4>
+      <p>At the start of Rounds 1 and 3, a token is given to the group. The first player to 3-putt takes possession of the token. The holder of the token at the end of the round buys a jug.</p>
+      <ul style="margin-top:0.8rem;font-size:0.82rem;color:var(--text-dim);line-height:1.9;padding-left:1.1rem;">
+        <li>To pass the token, the holder must first 2-putt on the same hole as someone else 3-putts.</li>
+        <li>If the holder 2-putts and two or more players 3-putt on the same hole, those players rock paper scissors for the token.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1391,7 +1610,7 @@ const players = [
     stats: {power:7, accuracy:4, consistency:3, touch:4, stamina:5, magic:9, mental:10, emotional:10}
   },
   {
-    id: 11, name: "Chris Shepardson", handicap: "23", nickname: "Shep",
+    id: 11, name: "Chris Shepardson", handicap: "18.5", nickname: "Shep",
     pgaComp: "Anthony Kim",
     ability: "Power game",
     recognisable: "Unique pre-tee shot routine",
