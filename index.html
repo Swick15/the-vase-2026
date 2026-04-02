@@ -1756,7 +1756,7 @@ function buildPlayerCard(p, index) {
   const pgaHTML = p.pgaComp ? `<div class="pga-comp">Plays like: <span>${p.pgaComp}</span></div>` : '';
 
   const photoHTML = p.photo
-    ? `<div class="card-photo"><img src="images/${p.photo}" alt="${p.name}" loading="lazy"></div>`
+    ? `<div class="card-photo"><img src="Images/${p.photo}" alt="${p.name}" loading="lazy"></div>`
     : `<div class="card-photo"><div class="card-photo-placeholder">&#9968;</div></div>`;
 
   card.innerHTML = `
@@ -1800,7 +1800,7 @@ function openModal(id) {
   const photoWrap = document.getElementById('modalPhotoWrap');
   const photoImg = document.getElementById('modalPhoto');
   if (p.photo) {
-    photoImg.src = `images/${p.photo}`;
+    photoImg.src = `Images/${p.photo}`;
     photoImg.alt = p.name;
     photoWrap.style.display = 'block';
   } else {
