@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>The Vase 2026 — Golf Trip</title>
 <style>
   :root {
@@ -579,6 +582,141 @@
   .pos-other { background: var(--green-mid); color: var(--text-dim); }
   .tbc-row td { opacity: 0.4; font-style: italic; }
 
+  /* ===== PLAYER MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    animation: fadeIn 0.2s ease;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 720px;
+    overflow: hidden;
+    animation: slideUp 0.25s ease;
+    margin: auto;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+    padding: 2rem 2rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: none;
+    border: 1px solid var(--card-border);
+    color: var(--text-dim);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--green-bright); color: #fff; border-color: var(--green-bright); }
+
+  .modal-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .modal-name { font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--cream); margin-bottom: 0.2rem; }
+  .modal-nickname { font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .modal-pga { font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--text-dim); font-style: italic; }
+  .modal-hcp-block { text-align: right; flex-shrink: 0; }
+  .modal-hcp-block .hcp-label { font-family: Arial, sans-serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); display: block; }
+  .modal-hcp-block .hcp-value { font-size: 2rem; color: var(--gold); font-style: italic; }
+
+  .modal-ability {
+    margin-top: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: var(--green-bright);
+    border: 1px solid var(--green-bright);
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 0;
+  }
+  @media (max-width: 580px) { .modal-body { grid-template-columns: 1fr; } }
+
+  .modal-bio-col {
+    padding: 1.8rem 2rem;
+    border-right: 1px solid var(--card-border);
+  }
+  .modal-bio-col h4 {
+    font-family: Arial, sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .modal-bio {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    white-space: pre-line;
+  }
+  .modal-recognisable {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--card-border);
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    border-left: 2px solid var(--green-bright);
+    padding-left: 0.8rem;
+    font-style: italic;
+  }
+
+  .modal-stats-col {
+    padding: 1.8rem 1.5rem;
+  }
+  .modal-stats-col h4 {
+    font-family: Arial, sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .modal-stat-row {
+    display: grid;
+    grid-template-columns: 64px 1fr 22px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .modal-stat-label { font-family: Arial, sans-serif; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); }
+  .modal-stat-track { height: 5px; background: var(--green-mid); border-radius: 3px; overflow: hidden; }
+  .modal-stat-fill { height: 100%; border-radius: 3px; }
+  .modal-stat-val { font-family: Arial, sans-serif; font-size: 0.72rem; color: var(--text-dim); text-align: right; }
+
   /* ===== QUOTES / BANTER ===== */
   .quote-strip {
     background: var(--green-dark);
@@ -815,6 +953,38 @@
   </div>
 
   <div class="scroll-hint">Scroll</div>
+</div>
+
+<!-- PLAYER MODAL -->
+<div class="modal-overlay" id="playerModal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalInner">
+    <div class="modal-header" id="modalHeader">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header-top">
+        <div>
+          <div class="modal-nickname" id="modalNickname"></div>
+          <div class="modal-name" id="modalName"></div>
+          <div class="modal-pga" id="modalPga"></div>
+        </div>
+        <div class="modal-hcp-block">
+          <span class="hcp-label">Handicap</span>
+          <span class="hcp-value" id="modalHcp"></span>
+        </div>
+      </div>
+      <div class="modal-ability" id="modalAbility"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-bio-col">
+        <h4>Profile</h4>
+        <div class="modal-bio" id="modalBio"></div>
+        <div class="modal-recognisable" id="modalRecognisable"></div>
+      </div>
+      <div class="modal-stats-col">
+        <h4>Stats</h4>
+        <div id="modalStats"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- QUOTE TICKER -->
@@ -1141,138 +1311,139 @@
 <script>
 const players = [
   {
-    id: 1, name: "Brad Hunt", handicap: "23", nickname: null,
-    pgaComp: "TBC",
+    id: 1, name: "Brad Hunt", handicap: "20", nickname: null,
+    pgaComp: "Akshay Bhatia",
     ability: "Violent post-shot club swing followed by stiff-armed walk",
-    recognisable: "Ill-fitting attire, woods without head covers, preened-over hair",
-    bio: "Eldest of three Hunt brothers on the trip. Original member from the very first trip to Yarrawonga in the Generation Showdown. Making his long-awaited return after years away — once a keen golfer, but like many, his 30s have not been kind. Family commitments have taken priority, and the game has suffered accordingly.\n\nAlready lobbying in the background for a blowout allocated handicap. Will play coy in the lead-up but is quietly capable. Mid-90s ceiling, 110+ floor — the lack of recent golf is a real concern.\n\nCan be identified by ill-fitting attire, woods without head covers, hat optional. Some form of new equipment will likely be purchased prior to departure, or failing that, from the pro shop on the first morning.\n\nUses a bitcoin for a ball marker. Watch for the post-shot routine: after a bad one he will swing the club violently — stay clear — followed by a stiff-armed walk to wherever the ball ended up.\n\nLikely to be one of the most nervous over his first tee shot. Hopefully placed in the first group with a large crowd watching.\n\nWill avoid the quaddie, preferring instead to invest his $50 into a biotech start-up that will definitely pay off. Will simultaneously accuse fellow handicap bandit Damo of having a cheat handicap while doing the exact same thing. Will politic hard to land himself on what he perceives to be the strongest scramble team. Absolute meltdown if picked last in the draft.",
-    stats: {driver:6, approach:5, chipping:5, putting:3, mental:5, stamina:6, mana:5}
+    recognisable: "Ill-fitting attire, woods without head covers, hat optional",
+    bio: "Eldest of three Hunt brothers on the trip. Original member from the very first trip to Yarrawonga in the Generation Showdown. Making his long-awaited return after years away.\n\nWas once a keen golfer — like many, his 30s have not been kind to his golf game with family commitments taking priority. Already lobbying in the background for a blowout allocated handicap. Will play coy in the lead-up but is quietly capable. Mid-90s ceiling, 110+ floor — the lack of recent golf is a concern.\n\nAkshay Bhatia is a fitting comp for Bradley. He'll portray the 'I'm just happy to be here' vibes, but this belies a proud, motivated and ambitious competitor. Like Akshay, similarly low ball flight — and Brad can get yippy over a two-footer. Brad would do well to cop the embarrassment and turn up with a broomstick putter anchored to his chest like an extra appendage.\n\nCan be identified by ill-fitting attire, woods without head covers, hat optional. Some form of new equipment will likely be purchased prior, or even in the pro shop on the first morning. Uses a bitcoin for a ball marker.\n\nFor everyone's safety, watch for… after a bad shot he will swing the club violently — stay clear — followed by a stiff-armed walk to wherever the ball ended up.\n\nLikely to be one of the most nervous over his first tee shot. Hopefully in the first group with a large crowd.\n\nWill avoid the quaddie, instead likely to invest his $50 into a biotech start-up company.\n\nOnce he gets on a roll he'll be adding logs to the Rosebud Hotel fireplace as they stop serving us. Brad does share the family trait of being an active listener and able to engage in topics of your interest. Don't take this for a lack of desire to take The Vase home — he's as competitive as any. Don't be surprised if you make a good start scoring-wise, only to have Brad strike up a conversation about the local housing market, the cost of living, the teachers' strike… before you know it you've wiped the last three holes.\n\nWill accuse fellow handicap bandit Damo of having a cheat handicap while doing the exact same thing. Will politic hard to manipulate himself onto what he perceives to be the strongest scramble team. Absolute meltdown if picked last in the draft.",
+    stats: {power:5, accuracy:6, consistency:5, touch:3, stamina:7, magic:5, mental:7, emotional:6}
   },
   {
-    id: 2, name: "Brendan Hunt", handicap: "23", nickname: null,
-    pgaComp: "Named in the Epstein files",
+    id: 2, name: "Brendan Hunt", handicap: "22", nickname: null,
+    pgaComp: "Joel Dahmen",
     ability: "Unearned confidence, cheeky operator",
     recognisable: "Bucket hat, similar attire to Brad, dangerous with Buff nearby",
-    bio: "The youngest of the Hunt brothers. Will say he isn't a golfer — and he's probably right. However, he is more of a golf trip golfer. He'll be at the range in the lead-up, or even on a golf trip to warm up for this golf trip. Similar attire situation to Brad — throw in a bucket hat for good measure.\n\nSome may remember his first tee shot on the Legends Course at Moonah last year. I stand corrected but I believe it was a violent top, pitching 3 inches in front of him and finishing behind him. He is returning to St Andrews Beach Golf Course on this trip — a place that saw him lead his team like Maximus in Gladiator on a Punters trip many years ago. From a seemingly hopeless position, rousing his men with speeches of glory, backing it up with long putts sunk, and intimidating his opponents with vocal momentum.\n\nHis driver is now a legit weapon — the Callaway Paradym AI Smoke has been tamed. A hard man to pin down. A rogue, a scallywag, a vagrant, a drifter, a renaissance man. His own man. He will bring an air of confidence completely unearned but present nonetheless.\n\nRecent form: mid-pack non-factor last year, but recently played exceptionally well to be in the winning scramble team on a golf day. He will partake in the quaddie. He will be there long after the Rosebud Hotel fireplace embers have gone out. A cheeky operator who just loves a good time. Dangerous combination when paired with Buff.",
-    stats: {driver:7, approach:6, chipping:5, putting:6, mental:7, stamina:7, mana:7}
+    bio: "The youngest of the Hunt brothers. Will say he isn't a golfer — and he's probably right. However, he is more of a golf trip golfer. He'll be at the range in the lead-up, or even on a golf trip to warm up for this golf trip.\n\nSimilar attire situation to Brad. Throw in a bucket hat for good measure.\n\nSome may remember his first tee shot in the afternoon on the Legends Course at Moonah last year. I stand corrected but I believe it was a violent top, pitching 3 inches in front of him and finishing behind him.\n\nWhile being named in the Epstein Files isn't the ideal preparation, we know like all accusations thrown his way he'll take it in his stride and perform admirably.\n\nHe is returning to Prince Andrew's Beach Golf Course on this trip. A place that saw him lead his team like Maximus in Gladiator on a Punters trip many years ago. From a seemingly hopeless position, rousing his men with speeches of glory, backing it up with long putts sunk, and intimidating his opponents with vocal momentum. Two down, two to play — he led the boys to a halved match.\n\nHis driver is now a legit weapon — the Callaway Paradym AI Smoke has been tamed. I'm confident we won't have a repeat of the dozen fluro-yellow golf balls lost on a previous trip.\n\nA hard man to pin down. A rogue, a scallywag, a vagrant, a drifter, a renaissance man — his own man. He will bring an air of confidence completely unearned but present nonetheless.\n\nRecent form: mid-pack non-factor last year, but recently played exceptionally well to be in the winning scramble team on another Punters golf day.\n\nHe will partake in the quaddie, selecting on colours and an omen name alone. Will warm up nicely at the pub on Saturday afternoon, knowing his best work will be done at the Sound Bar later on.\n\nA cheeky operator who just loves a good time. Dangerous combination when paired with Buff Somers.",
+    stats: {power:6, accuracy:5, consistency:4, touch:5, stamina:7, magic:7, mental:7, emotional:7}
   },
   {
     id: 3, name: "Daniel Hunt", handicap: "10", nickname: "Spider",
     pgaComp: "TBC",
-    ability: "Two-time Vase winner, defending champion, Saturday only — ineligible to defend",
-    recognisable: "Large back, drop-kick tee shot, spare sheets needed",
-    bio: "Two-time winner and reigning champion of The Vase. Unlike his brothers, a keen golfer. Once a member of Settlers Run — shot +11 in a Par competition off a handicap of 6. Now a member of Beacon Hills, where he has spent the months leading into this trip quietly blowing his handicap back out. Impressively getting away with attending this trip despite being the father of four boys. We hope swimming lessons on Sunday afternoon are postponed for his sake.\n\nNo question one of the most competent golfers on the trip. Solid all-round game. Capable of monster drives. Famed for the drop-kick tee shot. Large back — both in reality and metaphorically — built to carry scramble teammates. We'll be bringing a spare set of sheets this year.\n\nThe putter remains suspect. The gentleman's four putt runs in the family. A stabby edge-burner from two feet followed by a sharp, audible inhale through the nose tells you everything you need to know about what's going on inside. Not a frequent drinker, but fond of a beer in the right company — and in Huss, Damo, Gow and Pete he will have all the wrong encouragement he can handle.\n\nNow — the elephant in the room. Spider is joining us on Saturday only. One round. Ineligible to defend The Vase. The reigning champion will be watching someone else lift it. He can still influence proceedings enormously on the Saturday, and anyone paired with him should consider themselves either very fortunate or very under pressure, depending on the leaderboard.\n\nFleetwood to Trav's Molinari — the bromance is alive and well. Trav carried Dan to bed last year. Devotion beyond the course. The Vase is up for grabs. But Spider will still be watching. And judging.",
-    stats: {driver:8, approach:7, chipping:6, putting:4, mental:8, stamina:7, mana:8}
+    ability: "Two-time Vase winner, Saturday only — ineligible to defend. A new champion will be crowned.",
+    recognisable: "Large back, drop-kick tee shot, built to carry teammates and large advertisements",
+    bio: "Two-time winner of The Vase. Unlike his brothers, a keen golfer.\n\nOnce a member of Settlers Run — shot +11 in a Par competition playing off a handicap of 6. Now a member of Beacon Hills, where he spends his months leading into this trip blowing his handicap back out.\n\nRegrettably, the fourth son has cost him his eligibility for The Vase this year. Dan will be joining us for the Saturday round only — ensuring a new champion will be crowned.\n\nNo question one of the most competent golfers on the trip. Solid all-round game. Famed for the drop-kick tee shot, as far as anyone's cleanly struck ball. Large back — both in reality and metaphorically — built to carry scramble teammates, host board games, and large advertisements. He'll be relishing his first look at St Andrews Beach.\n\nThe putter remains suspect: the gentleman's four putt runs in the family. Stabby edge-burner from two feet followed by a sharp, audible inhale through the nose lets us know the man is absolutely raging inside.\n\nNot a frequent drinker, but fond of a beer or two in the right company — and in Huss, Damo, Gow and Pete he will have all the wrong type of encouragement he can handle. He should come well prepared for strong lobbying to stay Saturday evening. Plenty of room.\n\nMany will be pleased to see an official handicap of 10 currently in play. Much more realistic compared to last year. This also suggests some form leading in.\n\nMolinari to Trav's Fleetwood. Trav won't be carrying The Great Man to bed this year. Dan carrying Trav to the title if paired on Saturday — far more likely, and far more storybook.",
+    stats: {power:8, accuracy:7, consistency:8, touch:5, stamina:6, magic:6, mental:8, emotional:7}
   },
   {
-    id: 4, name: "Tom Hussey", handicap: "24", nickname: "The Drain Man",
+    id: 4, name: "Tom Hussey", handicap: "25", nickname: "The Drain Man",
     pgaComp: "Patrick Reed",
-    ability: "Volatility: birdie in a hurricane or a 10 on a 100m par 3",
+    ability: "Volatility: birdie in a hurricane or a 10 on a 100m par 3. The niggler — kryptonite or can of spinach depending on which side you're on.",
     recognisable: "Built like Monty Burns, natural athlete",
-    bio: "Best known by his golf trip persona: The Drain Man. A natural athlete, built like Monty Burns. As skilful as this man is, golf is the great leveller. He is capable of birdying one of the hardest holes at 13th Beach in a hurricane — and posting a 10 on the first at Bembridge GC in heavenly conditions. For context: Bembridge was a local 9-hole course we all grew up playing. It's now a cemetery, which feels appropriate. The first hole was a dead flat 100m par three. Incredibly easy. That's the irony.\n\nThis is a player that inspires enthusiasm for the trip. The perfect blend of average ability, overconfident lip, competitive dignity — while not actually giving a shit — and leading the charge in pouring pots from the jugs he's had to buy. He may lack a little edge without Dom on the trip to fire him up though.\n\nRecently retired from cricket, despite coming back to post a century against Casey Cardinia League All Abilities Grade. His ability to improve his golf game has always been stifled by cricket. I can see a few range sessions being had in the lead-up — he can't help but want to compete.\n\nSelf-named The Drain Man. Apparently made a putt once. Not named through any evidence of elite level putting. Another one that could go one of two ways.",
-    stats: {driver:7, approach:6, chipping:5, putting:6, mental:7, stamina:6, mana:7}
+    bio: "Best known as his golf trip persona 'The Drain Man'. A natural athlete, built like Monty Burns.\n\nAs skilful as this man is, golf is the great leveller. He is capable of birdying one of the hardest holes in a hurricane at 13th Beach and posting a 10 on the first at Bembridge GC in heavenly conditions.\n\nThis is a player that inspires enthusiasm for the trip. The perfect blend of average ability, overconfident lip, competitive dignity — while not actually giving a shit — and leading the charge in pouring pots for everyone from the jugs he's had to buy.\n\nSelf-named 'The Drain Man'. Not named through any evidence of elite level putting.\n\nRecently retired from cricket, despite coming back to post a century in the Casey Cardinia League All Abilities Competition. His ability to improve his golf game has always been stifled by cricket. I can see a few range sessions being had in the lead-up. He can't help but want to compete.\n\nThe niggler. A lot hinges on whether you're with him or against him. Can be your kryptonite or your can of spinach. A Huss, Buff, Gow and a decent golfer scramble combination could be an absolute thing of nightmares if they gain some momentum.\n\nAnother golfer on the trip that could go one of two ways — although an asset to a scramble team is without question. I predict an individual single-digit Stableford score for a set of nine holes at some stage, if not twice. I also anticipate a freakish 18+ points at some stage.\n\nIf we make it to the local footy on the Saturday afternoon, this is where you'll likely see Huss do his best work with half-time heroics, can in hand. Likely to be the instigator of getting the lights turned on for kicking at goal.\n\nLike his player comparison, he had some time away but he's back on tour — and the annual golf trip is better for it.",
+    stats: {power:5, accuracy:2, consistency:3, touch:6, stamina:8, magic:8, mental:6, emotional:8}
   },
   {
-    id: 5, name: "Travis Davis", handicap: "18.4", nickname: null,
+    id: 5, name: "Travis Davis", handicap: "14.9", nickname: null,
     pgaComp: "Tommy Fleetwood",
-    ability: "Comeback from achilles, ultra consistent, has a crack",
+    ability: "Back at 100% — ultra consistent, not afraid to have a crack, current favourite for The Vase",
     recognisable: "Not long but ultra consistent, quiet finisher, low ball flight",
-    bio: "Comeback trail from an achilles injury — boot off, already back out there. After Settlers Run butchered his handicap, erasing his data from his time at Warrigul and essentially pulling a number from 1997, we'll need to analyse his recent rounds closely before entertaining the official figure. Not known for strong Golf Trip performances — coming last and second last respectively — but the man is due.\n\nFrom what I've seen, the break has done wonders. Recently posted a 40-point Stableford round at former golf trip venue Black Bull GC. I liken his game to Dom's but with a spine — not particularly long, ultra consistent, and not afraid to have a crack. Dan Hunt is his spirit animal. He may even have a poster of him on his wall.\n\nPete and Trav recently did a driver shaft swap. I also forgot to mention to either of them that the tip settings are reversed when you put the opposite-handed head on the shaft. Interesting fact. Both are happy with the changes and improved drives could follow — especially for Trav, who was known for an incredibly low ball flight.",
-    stats: {driver:6, approach:7, chipping:7, putting:7, mental:7, stamina:7, mana:6}
+    bio: "Trav is on the comeback trail from an achilles issue. The boot and gloves are off. The man is back at 100% and serving up some quality golf recently!\n\nAfter Settlers Run butchered his handicap — erasing his data from his time at Warragul and taking his handicap from 1997 — Trav has enjoyed regular scores of 36+ points. This has seen his handicap come back to something that could be called reasonable. That GA number of 18.4 is outrageous and coming down.\n\nNot known for his strong Golf Trip performances, coming last and second last respectively — but the man is due. From what I've seen, the break has done wonders. Recently posting a 40-point Stableford round at former Golf Trip venue Black Bull GC. I had a front row seat to a 2-over, 26-point back nine at Settlers recently that he made look easy and very repeatable.\n\nI liken his golf game to Dom's but with a spine. Not particularly long but ultra consistent and not afraid to have a crack.\n\nPete and Trav recently did a driver shaft swap. Both are happy with the changes and could see improved drives — especially from Trav, who was known for an incredibly low ball flight.\n\nJust a bloody solid all-rounder. His performances don't match his ability. On paper he should be in contention for The Vase, as his game is well suited to both individual and scramble formats.\n\nA more confident golfer now. Familiar with the group attending. He'll use previous experience and be in contention on the back nine on Saturday.\n\nTrav is my current favourite to turn his recent Golf Trip form around and take The Vase home to Lauren — who I know will absolutely love having it take pride of place in their living room.",
+    stats: {power:6, accuracy:8, consistency:9, touch:4, stamina:8, magic:4, mental:10, emotional:9}
   },
   {
-    id: 6, name: "Damo Lovie", handicap: "26", nickname: "Damo",
-    pgaComp: "Brooks Koepka",
-    ability: "Master encourager, most capable if played regularly, McGowan support blanket",
-    recognisable: "Built like the T1000, quiet operator, quick laugh",
-    bio: "Built like the T1000. Navy man. Father of twins. Quiet man, quick with a laugh. Master encourager. The McGowan support blanket — arguably his most important role on the trip.\n\nProbably the most capable golfer on the trip if he played regularly. Loves a high handicap. Still waiting for a St Kilda Football Club premiership — likely 2026, he says, every year.\n\nDamo is a harder one to write for. He's a quieter operator and I really only see him once a year at this trip. What I can tell you is that he shows up, gets on with it, keeps The Gow alive, and is always good value. The 26 handicap is doing a lot of work and everyone knows it.",
-    stats: {driver:7, approach:6, chipping:5, putting:5, mental:8, stamina:6, mana:6}
+    id: 6, name: "Damo Lovie", handicap: "19", nickname: "Damo",
+    pgaComp: "Ernie Els",
+    ability: "The Big Easy. Easy length, sensible decisions, solid fundamentals. Spiritual leader of the quaddie.",
+    recognisable: "A presence. You won't have glimpsed him yet but you'll know when he's arrived.",
+    bio: "The Big Easy. Like Riley, the man has a presence about him. You won't have even glimpsed him in person, but you'll sense when he's arrived. Goosebumps, hair on the back of your neck, the urge to roll over and expose your belly to him are all natural sensations around Damo.\n\nWill be on time, and on the range prior to the round — despite having stopped to help old ladies across the road, rescue kittens from a burning house, and negotiate a deal for cheap oil with Tehran.\n\nDamo's golf game is currently a myth to me. I'm personally yet to be drawn in the same group or team with him. Despite this, his reputation for easy length, sensible decision-making, and solid fundamentals precedes him.\n\nWhat I do know is that he will be the spiritual leader of the quaddie on Saturday arvo. The quiet instigator — a thin veil of a voice of reason — will quickly give way under the pressure of a Chinese burn.\n\nWill be carrying on, cheering home a $20 outsider in the last leg of the quaddie, and agonising over the Saints hanging on to a slim lead with minutes to go against the Crows on Saturday afternoon.",
+    stats: {power:7, accuracy:6, consistency:6, touch:5, stamina:5, magic:6, mental:8, emotional:9}
   },
   {
-    id: 7, name: "Chris McGowan", handicap: "29", nickname: "The Gow",
-    pgaComp: "Ian Poulter",
-    ability: "Intense, combustible, brilliant when adrenaline flows",
-    recognisable: "Groans audible from multiple fairways, pre-round red wine enthusiast",
-    bio: "OG member. Took years away from the trip — for the safety of all involved. The most volatile member of the group without question. Holds a lifetime ban from multiple basketball associations. Will defend teammates vigorously, ends things his mates start, and has been known to headbutt. Still owes your dad a driver shaft — snapped it, circumstances remain disputed.\n\nPre-round glass of red enthusiast. Not fussy on the drop. Famous catchphrase, repeated with full conviction every single year: 'I'VE FIGURED IT OUT.' Ultimate downhill skier. Intense groans of frustration audible from multiple fairways away.\n\nGenerally a happy, good-humoured man off the course. White line fever is real and intense the moment he steps on it. Plays best when relaxed. Rarely relaxed once the round starts. Career widely considered to have declined after abandoning the all-white TaylorMade RocketBallz driver. Matches Buff's scramble enthusiasm entirely.\n\nSchrödinger's golfer — confirmed attending but not real until physically sighted on the first tee. Damo is his emotional support animal. High 20s, possibly 30 handicap. The Vase is not the goal. Surviving the weekend with his dignity intact is.",
-    stats: {driver:5, approach:6, chipping:4, putting:4, mental:7, stamina:5, mana:7}
+    id: 7, name: "Chris McGowan", handicap: "30", nickname: "The Gow, Gosto, Gowsten",
+    pgaComp: "Bob Barker",
+    ability: "'I've figured it out boys' — often cueing a run of 3s and 4s. In contention for The Vase and most balls lost.",
+    recognisable: "Groans audible from multiple fairways, pre-round red enthusiast, powerful mitts",
+    bio: "Original member of the trip, then took many years away before making a glorious return in recent years.\n\nThe most volatile of the group without question. A lifetime ban from multiple basketball associations has led him back to the game of golf.\n\nThe Gosto plays his best golf when relaxed. Unfortunately, this can be a rare occurrence. Famously buying The Tone a replacement driver shaft once after a 'heightened' moment on the tee box.\n\nNot sure if the halcyon days of a warm-up consisting of a glass or two of red before athletic performance are behind him or not — I hope not — but I'm anticipating him to be ready and as up for the event as ever.\n\nUltimate downhill skier. A cry of 'I've figured it out boys' could spell trouble for the rest of us. Often cueing a run of 3- and 4-point holes, utilising an extravagant handicap to his advantage.\n\nOnly one that can match Buff's enthusiasm for the scramble round. His combination of high handicap and intensity for the contest should be highly sought after in the draft.\n\nChris would do well to be scouring Facebook Marketplace for a TaylorMade RocketBallz driver prior to the opening round. I've never seen him hit the ball better than when the flashy white crown with fluro-green accents was in his powerful mitts.\n\nIn contention for both The Vase and most balls lost. Could easily win both.",
+    stats: {power:8, accuracy:2, consistency:2, touch:4, stamina:9, magic:8, mental:4, emotional:2}
   },
   {
-    id: 8, name: "Chris Jones", handicap: null, nickname: "Jonsey",
+    id: 8, name: "Chris Jones", handicap: "7.2", nickname: "Jonsey",
     pgaComp: "Jason Day",
     ability: "Make par from anywhere, naughty spinners",
     recognisable: "Flowing red hair, arms and legs coloured in",
     bio: "Like his player comparison, an excellent short game. However, Jonsey is also likely to turn up with his third set of irons he's trialing this week from his mates, cousins, uncle. He'll have the matching branded bag and putter to go with them. Some may remember when he gave himself a Callaway sponsorship. A tinkerer, a student of the game, an all time overthinker. No one over complicates the game like this man.\n\nPossessing the ability to make long par 4s and 5s look like child's play off the tee, a short game that Buff would dream of, ability to sink putts that would have Pete regularly under par. Thankfully for the rest of us these skills rarely come together, otherwise we are all playing for second place. His dedication to the short game permanently inked on the knuckles of his left and right hand, reading CHIP and PUTT respectively.\n\nLike Buff, has recently sunk hard earned into the Mark Auhl school of golf. Don't be alarmed to see grown men practicing throwing an imaginary tennis ball with a limp wrist, in a meditative state chanting \"it's an arc, it's an arc, it's an arc\". Loves to get in a shout being the only one that wants a Balta when the shout is Dry. Don't fall into the trap of him playing terribly early, then offering you a random side bet. Nothing gets him going more than that.\n\nUnfortunately, Jonsey will only be making an appearance on the Saturday. This rules him out of taking The Vase home himself. However, fuelled by a concoction of Chinese peptides, I predict he will help someone make a charge towards the title on Saturday morning.",
-    stats: {driver:7, approach:6, chipping:10, putting:7, mental:2, stamina:7, mana:9}
+    stats: {power:7, accuracy:7, consistency:5, touch:10, stamina:6, magic:8, mental:2, emotional:5}
   },
   {
-    id: 9, name: "Pete Sweeney", handicap: null, nickname: "Pete",
+    id: 9, name: "Pete Sweeney", handicap: "4.9", nickname: "Pete",
     pgaComp: "Brian Harman",
     ability: "To see the window and play the safe shot anyway",
     recognisable: "Floral polo neatly tucked, polished white Footjoys",
     bio: "Similar to Heath — I googled 'boringly consistent left handed pro golfer' for his comparison. We can expect fairways hit and 2-putting. I could really end the description there. However, like many this trip presents a chance for Pete to socialise with other adults. No doubt the Bryce story will be wheeled out with great fervour for anyone that hasn't heard it, or for the 7th time if you have already.\n\nOne of the real enjoyers of other people's struggles with the game of golf — happily reminding you and everyone around of the third ball you put in the paddock off the tee, and telling you over a beer that he was wondering why your alignment looked like Shivnarine Chanderpaul facing Glen McGrath.\n\nLook for him to start and establish a lead and downhill ski all the way to The Vase. Admittedly his form is passing both the eye test and the stats suggest the same, with the handicap into the 4s. Recent victor of the Settlers Run Handicap A Grade Club Championship. Has he peaked too soon before the main event?",
-    stats: {driver:8, approach:7, chipping:8, putting:7, mental:7, stamina:7, mana:2}
+    stats: {power:7, accuracy:9, consistency:10, touch:7, stamina:7, magic:2, mental:9, emotional:6}
   },
   {
-    id: 10, name: "Daniel Riley", handicap: null, nickname: "Riley, Sir, Mr Riley, Lord",
+    id: 10, name: "Daniel Riley", handicap: "23", nickname: "Riley, Sir, Mr Riley, Lord",
     pgaComp: "Jon Rahm",
     ability: "Beating Heath off the stick despite playing twice a year",
     recognisable: "Hand-glued Dunlop driver",
     bio: "I had to give Riley a good player comparison or have my life threatened. I feel like the build and swing speed is accurate though. Riley has been lucky enough to have one of us let him have a day off from work to be on this trip. No doubt someone after 4 beers will tell him about the laundry they need renovating.\n\nWhen thinking of Riley's swing — the lead left heel popping off the ground followed by a courageous, fearless swing of the Dunlop comes straight to mind. Never seen the man miss left. He will be hoping for adjoining fairways on the right. A high magic factor for this man, evidenced by the 260m 3-wood off the deck to a couple of foot to set up eagle at Rosebud GC earlier in the year.\n\nHe will be hoping for a favourable handicap and that the last minute range sessions pay off. Individually he is an unknown quantity. In a scramble he will be a highly sought after asset — combining a high handicap with quality shots under pressure. 3 rounds in 2 days will be a factor though. Ruling him out of contention for The Vase, although would not be surprised to see him in the top 8 and a strong mathematical chance on Saturday morning.",
-    stats: {driver:6, approach:3, chipping:3, putting:5, mental:10, stamina:4, mana:9}
+    stats: {power:7, accuracy:4, consistency:3, touch:4, stamina:5, magic:9, mental:10, emotional:10}
   },
   {
-    id: 11, name: "Chris Shepardson", handicap: null, nickname: "Shep",
+    id: 11, name: "Chris Shepardson", handicap: "23", nickname: "Shep",
     pgaComp: "Anthony Kim",
     ability: "Power game",
     recognisable: "Unique pre-tee shot routine",
     bio: "Googling 'Golfer on a comeback' offered up Anthony Kim. 'Returning to golf after a 12-year absence, a journey described as a major life redemption story.' You can word it better than that. Shep looks after himself a little better than old Kimmy looked after his beak though. Shep returns to the game sporting a brand new set of fully fitted Ping clubs. A long way removed from the man that threw his full set, bag and all, all the way down the right side rough of the 12th hole at Amstel one day. The game is richer for having him back!\n\nA recent Future Golf member — the official handicap will be interesting to see, as well as any recent recorded scores on Golflink. The man is a natural athlete with raw power. Glass shattering and Shep walking down the ramp with knee braces on ready to dish out stunners on the first tee is romantic to visualise. It's the nuance of the game for Shep. That visual can turn to Bambi on ice on the putting green.\n\nA player in the hunt on Saturday — paired with The Great Man, do well to support Shep mentally and emotionally. Keep him well fed, hydrated, happy and you'll be rewarded with a partner that can post an easy 40 points. Come ready to talk through the 1997 draft and who went where and you'll have yourself a new friend for the afternoon.",
-    stats: {driver:7, approach:6, chipping:2, putting:3, mental:4, stamina:10, mana:8}
+    stats: {power:8, accuracy:4, consistency:4, touch:4, stamina:10, magic:7, mental:6, emotional:6}
   },
   {
-    id: 12, name: "Shane Somers", handicap: null, nickname: "Buff, Hardwork, President, Shanga, Shangakara",
+    id: 12, name: "Shane Somers", handicap: "10", nickname: "Buff, Hardwork, President, Shanga, Shangakara",
     pgaComp: null,
     ability: "Complete lack of balance on a tee shot",
     recognisable: "Beard, sprayed range balls, unmistakable laugh",
     bio: "Mark Auhl now lives in Kew after the amount of lessons Buff has had from him. Buttery smooth hands over a chip — telling everyone the key is to not get any wrists or hands involved, despite clearly getting a heap of wrist and hands involved. Self-conscious about his driving distance. Can't stand Dom having a better handicap.\n\nIn form. He, Pete and Trav are the form golfers I've witnessed. Trav and Pete potentially getting the edge with consistency. Elite short game remains the calling card. Those Vokey wedges working overtime. The Scotty Cameron 'Star Ship Enterprise' however isn't the rock solid performer it once was — there has been talk of moving it on.\n\nFully fit and firing after last year's shoulder issue. Great encourager, especially when paired with Bren. Both talk underwater. If Gow, Buff, Bren and someone with genuine ability join forces in the scramble — look out. Super team potential. Off-course enabler. Will need to wear him down physically on the Saturday afternoon.",
-    stats: {driver:5, approach:7, chipping:10, putting:7, mental:6, stamina:2, mana:6}
+    stats: {power:6, accuracy:6, consistency:6, touch:9, stamina:2, magic:7, mental:6, emotional:6}
   },
   {
-    id: 13, name: "Dom Ciconte", handicap: null, nickname: "Dim",
+    id: 13, name: "Dom Ciconte", handicap: "11", nickname: "Dim",
     pgaComp: "Ian Woosnam",
     ability: "In-utero fade, momentum player",
     recognisable: "Wearing children's pants as shorts",
     bio: "Dom's Saturday afternoon headache and quaddie disappearing act has started early. Favouring his family over us. We will all pretend to be happy he's there anyway. To be fair, although ruling himself ineligible by not playing Friday, no one will be more driven to influence the outcome of and home of The Vase for 2026. He will directly link any success to himself being partnered on the day, demanding his name be engraved alongside the actual winner.\n\nMuch like Riley, I have never ever seen the man hit the ball left. Unlike Riley, doesn't have the facilities to hit the ball far enough to get in much trouble to the right. Once the owner of a solid chipping action, the yips have reduced his assets to a reliable in-utero fade (a baby fade is too generous). Putting has also been a bit hit and miss.\n\nForm-wise, Dom recently dipped into single figures. A remarkable effort. Remarkable in the fact it's taken him this long considering he only submits scorecards over 34 points. A competitive beast, sorely missed on the Friday. Anyone paired with him on the Saturday morning will have a motivated, committed, fresh partner ready to help them towards The Vase.",
-    stats: {driver:6, approach:5, chipping:3, putting:5, mental:8, stamina:7, mana:6}
+    stats: {power:2, accuracy:8, consistency:7, touch:4, stamina:8, magic:5, mental:8, emotional:5}
   },
   {
-    id: 15, name: "Mick", handicap: null, nickname: null,
+    id: 15, name: "Mick", handicap: "7.1", nickname: null,
     pgaComp: "TBC",
     ability: "The organiser. Getting 16 blokes to a golf trip is harder than winning it.",
     recognisable: "TBC — drop your details and we'll fill this in properly",
     bio: "The man behind the curtain. Every golf trip has one — the one who books the tee times, chases the payments, sends the twelve-message thread that eventually becomes a spreadsheet. Without him, none of this exists. Bio to be updated with full player profile and banter shortly.",
-    stats: {driver:7, approach:7, chipping:7, putting:7, mental:8, stamina:7, mana:8}
+    stats: {power:8, accuracy:6, consistency:5, touch:4, stamina:7, magic:7, mental:6, emotional:7}
   },
   {
-    id: 16, name: "TBC — Still Hunting", handicap: null, nickname: "The Mystery",
+    id: 16, name: "Chaders", handicap: "TBC", nickname: "Chaders",
     pgaComp: "TBC",
-    ability: "Unknown. Could be anything. That's what makes it dangerous.",
-    recognisable: "Not yet known. The field is watching.",
-    bio: "The 16th spot remains open. Whoever fills it walks into a field with two-time Vase winner Spider Hunt, the human volatility index Tom Hussey, and a man who once headbutted a basketball fan. Welcome to the trip. Your bio will be written when we know who you are.",
-    stats: {driver:5, approach:5, chipping:5, putting:5, mental:5, stamina:5, mana:10}
+    ability: "TBC — but that 9 Power and 8 Emotional suggests we should be paying attention.",
+    recognisable: "TBC — bio incoming.",
+    bio: "Chaders. The newest name on the sheet. Stats suggest raw power and emotional intensity in equal measure. Bio incoming once we know more. Welcome to the trip.",
+    stats: {power:9, accuracy:5, consistency:6, touch:5, stamina:7, magic:5, mental:4, emotional:8}
   },
   {
-    id: 14, name: "Heath Attwood", handicap: null, nickname: "Hatwood, Heata",
+    id: 14, name: "Heath Attwood", handicap: "21.1", nickname: "Hatwood, Heata",
     pgaComp: "Ho-Sung Choi",
-    ability: "Ball bouncing off the rock, forwards 150m after a top says it all. Can lose 2 balls off the tee, pipe the next one 280 and take 2 points away.",
-    recognisable: "Giant sway off the ball, reads the cup by 4 inches on a 3-inch putt, lining up directly at the hazard on the right of the tee box",
-    bio: "For Heath's player comparison I literally typed 'wildly inconsistent pro golfer' — says all we need to know. However one of his few consistencies is finding a way to be competitive on this trip. A two-time member of The Vase can't be ignored. New Settlers Run member. Impossible form line to pin down: 23, 35, 35, 23, 39, 35, 28... Which Heath will turn up? Most recent round was completely unable to get the ball off the ground — which also saw him cold top a ball into a dry river bed, somehow propelling it forward 150m greenside. Peak Heath.\n\nPUBLIC SERVICE ANNOUNCEMENT: We need to stop reading his putts and offering advice feeling sorry for him. We just have to. Support each other in this please! Putter change implemented — the extreme toe-hanging Odyssey last seen in Phil Mickelson's hands has been retired. Now supporting the blacked out Evnroll double blade. Has clubs in his bag that he's genuinely never used. No idea what's in there.\n\nSecretary of the quaddie. Fatigue will be an issue for the great man. With his handicap he only needs to play 27 decent holes out of 56 to be vying for the title again. The strategy will be putting him under pressure on the back 9 on Saturday.",
-    stats: {driver:4, approach:7, chipping:6, putting:3, mental:4, stamina:2, mana:7}
+    ability: "Two-time Vase winner looking to be the first to three. Capable of a powerful and completely unrepeatable golf swing.",
+    recognisable: "Non-threatening demeanour, exasperated with golf and life, clubs in the bag he's genuinely never used",
+    bio: "Two-time Vase winner — looking to be the first to three.\n\nNew Settlers Run member with an impossible form line to pin down: 23, 35, 35, 23, 39, 35, 28… Which Heath will turn up?\n\nHis most recent round saw him completely unable to get the ball off the ground — including a cold top into a dry riverbed that somehow propelled the ball forward 150m greenside. To fully understand the level of despair coupled with a never-give-in attitude: Heath was on the 9th hole at Settlers, the last of his round. 180m uphill to the pin. Instead of shooting the distance, Heath proceeded to talk aloud through his thought process of topping his approach and which way the fairway would funnel the ball along the ground. I've never heard anything like it. A testament to his commitment to the game.\n\nCapable of a powerful and completely unrepeatable golf swing. Like his player comparison, it defies all logic but somehow gets the job done.\n\nKnown for his non-threatening demeanour. Will appear frustrated and exasperated with the game of golf and life. We need to stop feeling sorry for him, reading his putts, selecting his clubs and offering advice. We just have to. Support each other in this please! (Mainly me.)\n\nPutter change implemented — the extreme toe-hanging Odyssey last seen in Phil Mickelson's hands has been retired. Now supporting the blacked-out Evnroll double blade.\n\nHas clubs in his bag that he's genuinely never used. No idea what's in there.\n\nStill the organiser of the accommodation. Secretary of the quaddie.\n\nFatigue will be an issue for the great man. With his handicap he only needs to play 27 decent holes out of 56 to be vying for the title again. The strategy will be putting him under pressure on the back nine on Saturday.",
+    stats: {power:6, accuracy:2, consistency:1, touch:4, stamina:2, magic:8, mental:9, emotional:7}
   }
 ];
 
 const statLabels = {
-  driver: 'Driver', approach: 'Approach', chipping: 'Chipping',
-  putting: 'Putting', mental: 'Mental', stamina: 'Stamina', mana: 'Mana'
+  power: 'Power', accuracy: 'Accuracy', consistency: 'Consistency',
+  touch: 'Touch', stamina: 'Stamina', magic: 'Magic',
+  mental: 'Mental', emotional: 'Emotional'
 };
 
 function getTierClass(val) {
@@ -1319,30 +1490,49 @@ function buildPlayerCard(p, index) {
       <div class="ability-tag">${p.ability}</div>
       <div class="stats-grid">${statsHTML}</div>
     </div>
-    <button class="expand-toggle" onclick="toggleCard(${p.id})">
-      Full Profile <span class="arrow">&#8964;</span>
+    <button class="expand-toggle" onclick="openModal(${p.id})">
+      Full Profile <span class="arrow">&#8599;</span>
     </button>
-    <div class="card-expand" id="expand-${p.id}">
-      <div class="card-expand-inner">
-        <p class="bio-text">${p.bio}</p>
-        <p class="recognisable-tag">${p.recognisable}</p>
-        ${p.pgaComp ? `<span class="pga-pill">&#9971; Plays like ${p.pgaComp}</span>` : ''}
-      </div>
-    </div>
   `;
 
   return card;
 }
 
-function toggleCard(id) {
-  const expand = document.getElementById(`expand-${id}`);
-  const btn = expand.previousElementSibling;
-  const card = btn.closest('.player-card');
-  const isOpen = expand.classList.contains('open');
-  expand.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  card.classList.toggle('expanded', !isOpen);
+function openModal(id) {
+  const p = players.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalNickname').textContent = p.nickname ? `"${p.nickname}"` : '';
+  document.getElementById('modalPga').textContent = p.pgaComp ? `Plays like: ${p.pgaComp}` : '';
+  document.getElementById('modalHcp').textContent = p.handicap ?? '?';
+  document.getElementById('modalAbility').textContent = p.ability;
+  document.getElementById('modalBio').textContent = p.bio;
+  document.getElementById('modalRecognisable').textContent = p.recognisable;
+
+  const statsHTML = Object.entries(p.stats).map(([key, val]) => `
+    <div class="modal-stat-row">
+      <span class="modal-stat-label">${statLabels[key]}</span>
+      <div class="modal-stat-track"><div class="modal-stat-fill ${getTierClass(val)}" style="width:${val*10}%"></div></div>
+      <span class="modal-stat-val">${val}</span>
+    </div>
+  `).join('');
+  document.getElementById('modalStats').innerHTML = statsHTML;
+
+  document.getElementById('playerModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+
+function closeModal() {
+  document.getElementById('playerModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('playerModal')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // Build player grid
 const grid = document.getElementById('playerGrid');
