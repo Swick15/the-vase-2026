@@ -1872,5 +1872,71 @@ sorted.forEach((p, i) => {
   tbody.appendChild(tr);
 });
 </script>
+
+<!-- YOUTUBE AUDIO PLAYER -->
+<div id="ytPlayerContainer" style="position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;top:-9999px;">
+  <div id="ytPlayer"></div>
+</div>
+
+<!-- FLOATING MUSIC BUTTON -->
+<button id="musicBtn" onclick="toggleMusic()" title="Toggle music" style="
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+">🎵</button>
+
+<script>
+  var ytPlayer;
+  var musicPlaying = false;
+
+  // Load YouTube IFrame API
+  var ytScript = document.createElement('script');
+  ytScript.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(ytScript);
+
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('ytPlayer', {
+      videoId: 'G97AdMLbfr4',
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        loop: 1,
+        playlist: 'G97AdMLbfr4',
+        enablejsapi: 1
+      }
+    });
+  }
+
+  function toggleMusic() {
+    if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+    var btn = document.getElementById('musicBtn');
+    if (musicPlaying) {
+      ytPlayer.pauseVideo();
+      btn.textContent = '🎵';
+      btn.style.boxShadow = '0 2px 12px rgba(0,0,0,0.4)';
+      musicPlaying = false;
+    } else {
+      ytPlayer.playVideo();
+      btn.textContent = '⏸';
+      btn.style.boxShadow = '0 0 16px rgba(197,160,80,0.5)';
+      musicPlaying = true;
+    }
+  }
+</script>
+
 </body>
 </html>
