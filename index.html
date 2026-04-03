@@ -281,7 +281,8 @@
   }
   .player-card:hover {
     transform: translateY(-3px);
-    border-color: var(--green-bright);
+    border-color: var(--gold);
+    box-shadow: 0 0 16px rgba(197, 160, 80, 0.35);
   }
   .player-card.expanded {
     border-color: var(--gold);
@@ -813,9 +814,9 @@
     overflow: hidden;
     transition: border-color 0.2s;
   }
-  .course-card:hover { border-color: var(--green-bright); }
+  .course-card:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(197, 160, 80, 0.3); }
   .featured-course { border-color: var(--gold); }
-  .featured-course:hover { border-color: var(--gold-light); }
+  .featured-course:hover { border-color: var(--gold-light); box-shadow: 0 0 24px rgba(197, 160, 80, 0.5); }
   .course-header {
     background: linear-gradient(135deg, var(--green-light), var(--green-mid));
     padding: 1.5rem;
@@ -1089,10 +1090,6 @@
       <span class="label">Defending Champion</span>
       <span class="value">Dan 'Spider' Hunt</span>
     </div>
-    <div class="hero-meta-item">
-      <span class="label">Handicap Disputes</span>
-      <span class="value">Inevitable</span>
-    </div>
   </div>
 
   <div class="scroll-hint">Scroll</div>
@@ -1136,16 +1133,40 @@
 <!-- QUOTE TICKER -->
 <div class="quote-strip">
   <div class="quote-ticker" id="ticker">
-    <span class="quote-item">I'VE FIGURED IT OUT &nbsp;— The Gow, every year</span>
-    <span class="quote-item">That's a gentleman's four putt &nbsp;— Spider, to himself</span>
-    <span class="quote-item">My handicap is genuinely too low &nbsp;— Damo, probably</span>
-    <span class="quote-item">Named in the Epstein files &nbsp;— Brendan Hunt's PGA comp</span>
-    <span class="quote-item">The Drain Man drains another jug &nbsp;— Huss, on brand</span>
-    <span class="quote-item">I'VE FIGURED IT OUT &nbsp;— The Gow, every year</span>
-    <span class="quote-item">That's a gentleman's four putt &nbsp;— Spider, to himself</span>
-    <span class="quote-item">My handicap is genuinely too low &nbsp;— Damo, probably</span>
-    <span class="quote-item">Named in the Epstein files &nbsp;— Brendan Hunt's PGA comp</span>
-    <span class="quote-item">The Drain Man drains another jug &nbsp;— Huss, on brand</span>
+    <span class="quote-item">"Is that behind the markers Mike?" &nbsp;— Bryce, 2024</span>
+    <span class="quote-item">"I've clocked golf, I might need a new sport" &nbsp;— P. Sweeney, 2026</span>
+    <span class="quote-item">"Give me the ten out of ten!" &nbsp;— Portarlington, 2023</span>
+    <span class="quote-item">"The GASH" &nbsp;— Mulwala, 2022</span>
+    <span class="quote-item">Mulwala Lions break their premiership drought &nbsp;— 2022</span>
+    <span class="quote-item">"You're not very good, but you try hard" &nbsp;— P. Sweeney reviews the Yabbies ruckman, 2021</span>
+    <span class="quote-item">T. Hussey gets a ride home in the President's car &nbsp;— 2021</span>
+    <span class="quote-item">We meet Dim &nbsp;— Mulwala, 2022</span>
+    <span class="quote-item">The 2023 Quaddie run!</span>
+    <span class="quote-item">Trav wins eskie at Rosebud Pub, demands to collect it at Rosebud GC &nbsp;— 2025</span>
+    <span class="quote-item">Pete goes even par at 13th Beach &nbsp;— 2024</span>
+    <span class="quote-item">"I'll make par from there" &nbsp;— C. Jones</span>
+    <span class="quote-item">"I've figured it out!" &nbsp;— C. McGowan</span>
+    <span class="quote-item">Bren goes through a box of balls in a round &nbsp;— 2024</span>
+    <span class="quote-item">Portarlington skipper does his hammy in the third and the losing streak continues</span>
+    <span class="quote-item">Shaving cream set on fire &nbsp;— 2024</span>
+    <span class="quote-item">"We need to take my drive!" &nbsp;— H. Attwood</span>
+    <span class="quote-item">"Is that behind the markers Mike?" &nbsp;— Bryce, 2024</span>
+    <span class="quote-item">"I've clocked golf, I might need a new sport" &nbsp;— P. Sweeney, 2026</span>
+    <span class="quote-item">"Give me the ten out of ten!" &nbsp;— Portarlington, 2023</span>
+    <span class="quote-item">"The GASH" &nbsp;— Mulwala, 2022</span>
+    <span class="quote-item">Mulwala Lions break their premiership drought &nbsp;— 2022</span>
+    <span class="quote-item">"You're not very good, but you try hard" &nbsp;— P. Sweeney reviews the Yabbies ruckman, 2021</span>
+    <span class="quote-item">T. Hussey gets a ride home in the President's car &nbsp;— 2021</span>
+    <span class="quote-item">We meet Dim &nbsp;— Mulwala, 2022</span>
+    <span class="quote-item">The 2023 Quaddie run!</span>
+    <span class="quote-item">Trav wins eskie at Rosebud Pub, demands to collect it at Rosebud GC &nbsp;— 2025</span>
+    <span class="quote-item">Pete goes even par at 13th Beach &nbsp;— 2024</span>
+    <span class="quote-item">"I'll make par from there" &nbsp;— C. Jones</span>
+    <span class="quote-item">"I've figured it out!" &nbsp;— C. McGowan</span>
+    <span class="quote-item">Bren goes through a box of balls in a round &nbsp;— 2024</span>
+    <span class="quote-item">Portarlington skipper does his hammy in the third and the losing streak continues</span>
+    <span class="quote-item">Shaving cream set on fire &nbsp;— 2024</span>
+    <span class="quote-item">"We need to take my drive!" &nbsp;— H. Attwood</span>
   </div>
 </div>
 
@@ -1706,10 +1727,10 @@ const players = [
   },
   {
     id: 16, name: "Andrew Chadwick", handicap: "7.8", nickname: "Chaders", photo: "Andrew.JPG",
-    pgaComp: "TBC",
-    ability: "TBC — but that 9 Power and 8 Emotional suggests we should be paying attention.",
-    recognisable: "TBC — bio incoming.",
-    bio: "Chaders. The newest name on the sheet. Stats suggest raw power and emotional intensity in equal measure. Bio incoming once we know more. Welcome to the trip.",
+    pgaComp: "Bubba Watson",
+    ability: "Doesn't own a driver. Long, unconventional, and somehow makes it work off the tee.",
+    recognisable: "No driver in the bag, outrageous haircut, long sweeping power draw",
+    bio: "Much like Bubba Watson, Chaders marches to the beat of his own 3-wood. Far from conventional, he doesn't own a driver. He had one once apparently, but it was a rocky relationship. One he never recovered from. It didn't treat him well. Many have encouraged him to try a few, but he's just not that type of guy. He's saving himself for the right one to come along. Long and slender, glossy virgin crown, with tacky mid-size grip. Hopefully a fitter will introduce him to a nice one soon. Until then he has to make a lack of courage work off the tee, and to be fair, he does!\n\nThe unconventional doesn't stop there though. Sporting one of the most outrageous haircuts you'll see through his younger years.\n\nSomehow a passionate Port Adelaide supporter. An in-person explanation will be required for following a football club whose greatest achievement is Chad Cornes's set-and-forget 2005, 120-averaging SuperCoach season off the backline.\n\nMore recently, golf has taken a back seat to travelling the world. His last recorded Golflink rounds were back in November last year, scoring a 27 and 39 within a week of each other at Settlers Run. This may foreshadow a lack of consistency for the power hitter.\n\nThere is plenty of anticipation for the long, sweeping power draw off the first tee. I'm reliably informed that if there is any sign of the ball not drawing or shaping right, he's in for a very long weekend.\n\nWhere he may lack some courage with the driver, he doesn't off the field. Predicting he will find a comfy seat next to Bren, Buff and Jonesy in the pub on Saturday afternoon.\n\nWith a lack of recent recorded competitive golf, I'm ruling him out of contention for The Vase. However, the single-figure handicap and unconventional style will be a dangerous combination for a scramble team.\n\nWelcome to The Vase, Chaders!",
     stats: {power:9, accuracy:5, consistency:6, touch:5, stamina:7, magic:5, mental:4, emotional:8}
   },
   {
@@ -1755,12 +1776,7 @@ function buildPlayerCard(p, index) {
   const nicknameHTML = p.nickname ? `<div class="player-nickname">"${p.nickname}"</div>` : '';
   const pgaHTML = p.pgaComp ? `<div class="pga-comp">Plays like: <span>${p.pgaComp}</span></div>` : '';
 
-  const photoHTML = p.photo
-    ? `<div class="card-photo"><img src="Images/${p.photo}" alt="${p.name}" loading="lazy"></div>`
-    : `<div class="card-photo"><div class="card-photo-placeholder">&#9968;</div></div>`;
-
   card.innerHTML = `
-    ${photoHTML}
     <div class="card-header">
       <div class="card-header-top">
         <span class="player-number">${String(index+1).padStart(2,'0')}</span>
