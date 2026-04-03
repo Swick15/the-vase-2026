@@ -1897,7 +1897,7 @@ sorted.forEach((p, i) => {
   justify-content: center;
   transition: background 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-">🎵</button>
+">&#9654;</button>
 
 <script>
   var ytPlayer;
@@ -1926,12 +1926,12 @@ sorted.forEach((p, i) => {
     var btn = document.getElementById('musicBtn');
     if (musicPlaying) {
       ytPlayer.pauseVideo();
-      btn.textContent = '🎵';
+      btn.innerHTML = '&#9654;';
       btn.style.boxShadow = '0 2px 12px rgba(0,0,0,0.4)';
       musicPlaying = false;
     } else {
       ytPlayer.playVideo();
-      btn.textContent = '⏸';
+      btn.innerHTML = '&#9646;&#9646;';
       btn.style.boxShadow = '0 0 16px rgba(197,160,80,0.5)';
       musicPlaying = true;
     }
