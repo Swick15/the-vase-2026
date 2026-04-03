@@ -778,6 +778,9 @@
     white-space: nowrap;
   }
   .quote-ticker:hover { animation-play-state: paused; }
+  @media (max-width: 768px) {
+    .quote-ticker { animation-duration: 18s; }
+  }
   @keyframes ticker {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -1692,7 +1695,7 @@ const players = [
     ability: "To see the window and play the safe shot anyway",
     recognisable: "Floral polo neatly tucked, polished white Footjoys",
     bio: "Similar to Heath — I googled 'boringly consistent left handed pro golfer' for his comparison. We can expect fairways hit and 2-putting. I could really end the description there. However, like many this trip presents a chance for Pete to socialise with other adults. No doubt the Bryce story will be wheeled out with great fervour for anyone that hasn't heard it, or for the 7th time if you have already.\n\nOne of the real enjoyers of other people's struggles with the game of golf — happily reminding you and everyone around of the third ball you put in the paddock off the tee, and telling you over a beer that he was wondering why your alignment looked like Shivnarine Chanderpaul facing Glen McGrath.\n\nLook for him to start and establish a lead and downhill ski all the way to The Vase. Admittedly his form is passing both the eye test and the stats suggest the same, with the handicap into the 4s. Recent victor of the Settlers Run Handicap A Grade Club Championship. Has he peaked too soon before the main event?",
-    stats: {power:7, accuracy:9, consistency:10, touch:7, stamina:7, magic:2, mental:9, emotional:6}
+    stats: {power:7, accuracy:9, consistency:10, touch:8, stamina:7, magic:2, mental:9, emotional:6}
   },
   {
     id: 10, name: "Daniel Riley", handicap: "23", nickname: "Riley, Sir, Mr Riley, Lord", photo: "Riley.JPG",
