@@ -1058,12 +1058,137 @@
   .text-gold { color: var(--gold); }
   .text-center { text-align: center; }
 
+  /* ===== COUNTDOWN ===== */
+  .countdown {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0 2.5rem;
+    flex-wrap: wrap;
+  }
+  .countdown-unit {
+    text-align: center;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 0.8rem 1.2rem;
+    min-width: 72px;
+  }
+  .countdown-num {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--gold);
+    display: block;
+    font-style: italic;
+    letter-spacing: 2px;
+  }
+  .countdown-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: block;
+    margin-top: 0.3rem;
+  }
+  .countdown-live {
+    color: var(--gold);
+    font-style: italic;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  /* ===== PAST WINNERS ===== */
+  .winners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .winner-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1.2rem;
+    text-align: center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .winner-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 16px rgba(197,160,80,0.3);
+  }
+  .winner-year {
+    font-family: Arial, sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+  .winner-trophy-icon { font-size: 1.8rem; display: block; margin: 0.4rem 0; }
+  .winner-name { font-size: 1.1rem; color: var(--gold); margin-bottom: 0.2rem; }
+  .winner-venue { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); font-style: italic; }
+
+  /* ===== WEATHER ===== */
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .weather-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .weather-day { font-family: Arial, sans-serif; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .weather-round { font-family: Arial, sans-serif; font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.6rem; }
+  .weather-icon { font-size: 2.8rem; display: block; margin: 0.5rem 0; }
+  .weather-desc { color: var(--cream); font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .weather-temps { display: flex; justify-content: center; gap: 1.2rem; font-family: Arial, sans-serif; font-size: 0.9rem; }
+  .weather-max { color: var(--gold); }
+  .weather-min { color: var(--text-dim); }
+  .weather-wind { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); margin-top: 0.6rem; }
+  .weather-loading { color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem; grid-column: 1/-1; }
+
+  /* ===== LEADERBOARD EDIT ===== */
+  .lb-toolbar { display: flex; justify-content: flex-end; margin-bottom: 0.8rem; }
+  .lb-edit-btn {
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.4rem 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .lb-edit-btn:hover, .lb-edit-btn.saving { background: var(--gold); color: var(--green-dark); }
+  .score-input {
+    background: var(--green-mid);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    width: 48px;
+    padding: 0.25rem 0.3rem;
+    font-size: 0.82rem;
+    text-align: center;
+    border-radius: 2px;
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
     nav ul { display: none; }
     .hero-meta { gap: 1.5rem; }
     .hero h1 { font-size: 3rem; }
     section { padding: 4rem 1rem; }
+    .countdown-num { font-size: 1.6rem; }
+    .countdown-unit { min-width: 60px; padding: 0.6rem 0.8rem; }
   }
 </style>
 </head>
@@ -1079,6 +1204,8 @@
     <li><a href="#venues">Venues</a></li>
     <li><a href="#format">Format</a></li>
     <li><a href="#leaderboard">Leaderboard</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#weather">Weather</a></li>
   </ul>
 </nav>
 
@@ -1088,6 +1215,13 @@
   <h1>The<span>Vase</span></h1>
   <p class="hero-subtitle">16 Men &nbsp;·&nbsp; 3 Courses &nbsp;·&nbsp; One Trophy</p>
   <p class="hero-quote">"Hello friends and welcome to a tradition unlike any other."</p>
+
+  <div class="countdown" id="countdown">
+    <div class="countdown-unit"><span class="countdown-num" id="cd-days">--</span><span class="countdown-label">Days</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-label">Hours</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-label">Minutes</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-label">Seconds</span></div>
+  </div>
 
   <div class="hero-meta">
     <div class="hero-meta-item">
@@ -1595,6 +1729,9 @@
     <p>Updated live during the trip. Until then — conjecture, hope, and dread.</p>
   </div>
 
+  <div class="lb-toolbar">
+    <button class="lb-edit-btn" id="lbEditBtn" onclick="toggleLeaderboardEdit()">&#9998; Edit Scores</button>
+  </div>
   <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 4px; overflow: hidden;">
     <table class="leaderboard-table">
       <thead>
@@ -1614,6 +1751,30 @@
   <p style="text-align:center; margin-top: 1.5rem; font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); letter-spacing: 1px;">
     * Handicap disputes to be directed to the committee. The committee is unavailable.
   </p>
+</section>
+
+<!-- PAST WINNERS -->
+<section id="history">
+  <div class="section-header">
+    <span class="eyebrow">The Trophy Cabinet</span>
+    <h2>Past Champions</h2>
+    <div class="divider"></div>
+    <p>Every year a champion is crowned. This is their honour roll.</p>
+  </div>
+  <div class="winners-grid" id="winnersGrid"></div>
+</section>
+
+<!-- WEATHER -->
+<section id="weather">
+  <div class="section-header">
+    <span class="eyebrow">Fingal, Mornington Peninsula</span>
+    <h2>Weekend Forecast</h2>
+    <div class="divider"></div>
+    <p>Live forecast for the weekend. Updated automatically.</p>
+  </div>
+  <div class="weather-grid" id="weatherGrid">
+    <p class="weather-loading">Fetching forecast...</p>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -1863,26 +2024,180 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 const grid = document.getElementById('playerGrid');
 players.forEach((p, i) => grid.appendChild(buildPlayerCard(p, i)));
 
-// Build leaderboard placeholder
-const tbody = document.getElementById('leaderboardBody');
-const sorted = [...players].sort((a,b) => (parseFloat(a.handicap)||20) - (parseFloat(b.handicap)||20));
-sorted.forEach((p, i) => {
-  const pos = i + 1;
-  let posClass = 'pos-other';
-  if (pos === 1) posClass = 'pos-1';
-  else if (pos === 2) posClass = 'pos-2';
-  else if (pos === 3) posClass = 'pos-3';
-  const tr = document.createElement('tr');
-  tr.className = 'tbc-row';
-  tr.innerHTML = `
-    <td><span class="pos-badge ${posClass}">${pos}</span></td>
-    <td>${p.name}${p.nickname ? ` <span style="color:var(--text-dim);font-size:0.78em">(${p.nickname})</span>` : ''}</td>
-    <td>${p.handicap ?? '?'}</td>
-    <td>—</td><td>—</td><td>—</td>
-    <td style="color:var(--text-dim)">TBC</td>
-  `;
-  tbody.appendChild(tr);
-});
+// Leaderboard built by buildLeaderboard() in the new script block above
+</script>
+
+<!-- COUNTDOWN, WINNERS, WEATHER, LEADERBOARD EDIT -->
+<script>
+// ── COUNTDOWN ──────────────────────────────────────────────
+(function() {
+  const teeOff = new Date('2026-04-17T07:20:00+10:00');
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    const diff = teeOff - new Date();
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<p class="countdown-live">We\'re live. First ball in the air. &#9968;</p>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = pad(d);
+    document.getElementById('cd-hours').textContent = pad(h);
+    document.getElementById('cd-mins').textContent  = pad(m);
+    document.getElementById('cd-secs').textContent  = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// ── PAST WINNERS ───────────────────────────────────────────
+const pastWinners = [
+  // Fill in once confirmed — e.g.:
+  // { year: '2022', name: 'Spider', venue: 'Mulwala' },
+];
+(function() {
+  const grid = document.getElementById('winnersGrid');
+  if (!pastWinners.length) {
+    grid.innerHTML = '<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;grid-column:1/-1;">Past champions to be confirmed. The trophy cabinet is being polished.</p>';
+    return;
+  }
+  grid.innerHTML = pastWinners.map(w => `
+    <div class="winner-card">
+      <div class="winner-year">${w.year}</div>
+      <span class="winner-trophy-icon">&#127942;</span>
+      <div class="winner-name">${w.name}</div>
+      <div class="winner-venue">${w.venue}</div>
+    </div>
+  `).join('');
+})();
+
+// ── WEATHER ────────────────────────────────────────────────
+(function() {
+  const grid = document.getElementById('weatherGrid');
+  const codes = {
+    0:'☀️ Clear',1:'🌤️ Mainly Clear',2:'⛅ Partly Cloudy',3:'☁️ Overcast',
+    45:'🌫️ Foggy',48:'🌫️ Icy Fog',51:'🌦️ Light Drizzle',53:'🌦️ Drizzle',
+    55:'🌦️ Heavy Drizzle',61:'🌧️ Light Rain',63:'🌧️ Rain',65:'🌧️ Heavy Rain',
+    80:'🌦️ Showers',81:'🌦️ Showers',82:'⛈️ Heavy Showers',95:'⛈️ Thunderstorm'
+  };
+  function wx(code) {
+    return codes[code] || codes[Math.floor(code/10)*10] || '🌡️ Variable';
+  }
+  const labels = [
+    { day: 'Friday 17 Apr', round: 'Rounds 1 & 2 — Moonah Links' },
+    { day: 'Saturday 18 Apr', round: 'Round 3 — St Andrews Beach' }
+  ];
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.43&longitude=144.78&daily=weathercode,temperature_2m_max,temperature_2m_min,windspeed_10m_max,precipitation_probability_max&timezone=Australia%2FMelbourne&start_date=2026-04-17&end_date=2026-04-18')
+    .then(r => r.json())
+    .then(data => {
+      const d = data.daily;
+      grid.innerHTML = [0,1].map(i => {
+        const [icon, desc] = wx(d.weathercode[i]).split(' ').reduce((a,b,j) => j===0 ? [b,''] : [a[0], a[1]+' '+b], ['','']);
+        const wxStr = wx(d.weathercode[i]);
+        return `
+          <div class="weather-card">
+            <div class="weather-day">${labels[i].day}</div>
+            <div class="weather-round">${labels[i].round}</div>
+            <span class="weather-icon">${wxStr.split(' ')[0]}</span>
+            <div class="weather-desc">${wxStr.split(' ').slice(1).join(' ')}</div>
+            <div class="weather-temps">
+              <span class="weather-max">&#8593; ${Math.round(d.temperature_2m_max[i])}°C</span>
+              <span class="weather-min">&#8595; ${Math.round(d.temperature_2m_min[i])}°C</span>
+            </div>
+            <div class="weather-wind">&#128168; ${Math.round(d.windspeed_10m_max[i])} km/h &nbsp;·&nbsp; &#127783; ${d.precipitation_probability_max[i]}% rain</div>
+          </div>`;
+      }).join('');
+    })
+    .catch(() => {
+      grid.innerHTML = '<p class="weather-loading">Forecast unavailable — check <a href="http://www.bom.gov.au" target="_blank" style="color:var(--gold);">bom.gov.au</a></p>';
+    });
+})();
+
+// ── EDITABLE LEADERBOARD ───────────────────────────────────
+const SCORE_KEY = 'vase2026_scores';
+let lbEditMode = false;
+
+function loadScores() {
+  try { return JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveScores(s) { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); }
+
+function buildLeaderboard() {
+  const scores = loadScores();
+  const withTotals = players.map(p => {
+    const s = scores[p.id] || {};
+    const r1 = s.r1 != null && s.r1 !== '' ? +s.r1 : null;
+    const r2 = s.r2 != null && s.r2 !== '' ? +s.r2 : null;
+    const r3 = s.r3 != null && s.r3 !== '' ? +s.r3 : null;
+    const vals = [r1, r2, r3].filter(x => x !== null);
+    const total = vals.length ? vals.reduce((a,b) => a+b, 0) : null;
+    return {...p, r1, r2, r3, total};
+  });
+  withTotals.sort((a,b) => {
+    if (a.total !== null && b.total !== null) return b.total - a.total;
+    if (a.total !== null) return -1;
+    if (b.total !== null) return 1;
+    return a.name.localeCompare(b.name);
+  });
+  const tbody = document.getElementById('leaderboardBody');
+  tbody.innerHTML = withTotals.map((p, i) => {
+    const pos = i + 1;
+    const posClass = pos===1?'pos-1':pos===2?'pos-2':pos===3?'pos-3':'pos-other';
+    const nameCell = `${p.name}${p.nickname ? ` <span style="color:var(--text-dim);font-size:0.78em">(${p.nickname})</span>` : ''}`;
+    const tbc = p.total === null;
+    if (lbEditMode) {
+      return `<tr class="${tbc?'tbc-row':''}">
+        <td><span class="pos-badge ${posClass}">${pos}</span></td>
+        <td>${nameCell}</td>
+        <td>${p.handicap ?? '?'}</td>
+        <td><input class="score-input" type="number" min="0" max="60" data-pid="${p.id}" data-rd="r1" value="${p.r1 !== null ? p.r1 : ''}"></td>
+        <td><input class="score-input" type="number" min="0" max="60" data-pid="${p.id}" data-rd="r2" value="${p.r2 !== null ? p.r2 : ''}"></td>
+        <td><input class="score-input" type="number" min="0" max="60" data-pid="${p.id}" data-rd="r3" value="${p.r3 !== null ? p.r3 : ''}"></td>
+        <td style="color:var(--gold)">${p.total !== null ? p.total : '—'}</td>
+      </tr>`;
+    } else {
+      return `<tr class="${tbc?'tbc-row':''}">
+        <td><span class="pos-badge ${posClass}">${pos}</span></td>
+        <td>${nameCell}</td>
+        <td>${p.handicap ?? '?'}</td>
+        <td>${p.r1 !== null ? p.r1 : '—'}</td>
+        <td>${p.r2 !== null ? p.r2 : '—'}</td>
+        <td>${p.r3 !== null ? p.r3 : '—'}</td>
+        <td style="color:${p.total !== null ? 'var(--gold)' : 'var(--text-dim)'}">${p.total !== null ? p.total : 'TBC'}</td>
+      </tr>`;
+    }
+  }).join('');
+}
+
+function toggleLeaderboardEdit() {
+  const btn = document.getElementById('lbEditBtn');
+  if (!lbEditMode) {
+    const pwd = prompt('Enter admin password:');
+    if (pwd !== 'vase2026') { alert('Incorrect password.'); return; }
+    lbEditMode = true;
+    btn.textContent = '&#10003; Save Scores';
+    btn.classList.add('saving');
+  } else {
+    const scores = loadScores();
+    document.querySelectorAll('.score-input').forEach(inp => {
+      const pid = +inp.dataset.pid;
+      const rd  = inp.dataset.rd;
+      if (!scores[pid]) scores[pid] = {};
+      scores[pid][rd] = inp.value !== '' ? +inp.value : null;
+    });
+    saveScores(scores);
+    lbEditMode = false;
+    btn.innerHTML = '&#9998; Edit Scores';
+    btn.classList.remove('saving');
+  }
+  buildLeaderboard();
+}
+
+// Replace the old static leaderboard build with the new dynamic one
+buildLeaderboard();
 </script>
 
 <!-- YOUTUBE AUDIO PLAYER -->
