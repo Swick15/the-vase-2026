@@ -2043,6 +2043,9 @@ function openModal(id) {
 
   document.getElementById('playerModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // Trigger music on first profile open if not already playing
+  if (!musicPlaying) toggleMusic();
 }
 
 function closeModal() {
