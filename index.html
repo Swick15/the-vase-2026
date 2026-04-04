@@ -1929,7 +1929,7 @@ const players = [
     ability: "Doesn't own a driver. Long, unconventional, and somehow makes it work off the tee.",
     recognisable: "No driver in the bag, outrageous haircut, long sweeping power draw",
     bio: "Much like Bubba Watson, Chaders marches to the beat of his own 3-wood. Far from conventional, he doesn't own a driver. He had one once apparently, but it was a rocky relationship. One he never recovered from. It didn't treat him well. Many have encouraged him to try a few, but he's just not that type of guy. He's saving himself for the right one to come along. Long and slender, glossy virgin crown, with tacky mid-size grip. Hopefully a fitter will introduce him to a nice one soon. Until then he has to make a lack of courage work off the tee, and to be fair, he does!\n\nThe unconventional doesn't stop there though. Sporting one of the most outrageous haircuts you'll see through his younger years.\n\nSomehow a passionate Port Adelaide supporter. An in-person explanation will be required for following a football club whose greatest achievement is Chad Cornes's set-and-forget 2005, 120-averaging SuperCoach season off the backline.\n\nMore recently, golf has taken a back seat to travelling the world. His last recorded Golflink rounds were back in November last year, scoring a 27 and 39 within a week of each other at Settlers Run. This may foreshadow a lack of consistency for the power hitter.\n\nThere is plenty of anticipation for the long, sweeping power draw off the first tee. I'm reliably informed that if there is any sign of the ball not drawing or shaping right, he's in for a very long weekend.\n\nWhere he may lack some courage with the driver, he doesn't off the field. Predicting he will find a comfy seat next to Bren, Buff and Jonesy in the pub on Saturday afternoon.\n\nWith a lack of recent recorded competitive golf, I'm ruling him out of contention for The Vase. However, the single-figure handicap and unconventional style will be a dangerous combination for a scramble team.\n\nWelcome to The Vase, Chaders!",
-    flag: 'au',
+    flag: 'Images/portpower.jpg',
     stats: {power:9, accuracy:5, consistency:6, touch:5, stamina:7, magic:5, mental:4, emotional:8}
   },
   {
@@ -1975,7 +1975,7 @@ function buildPlayerCard(p, index) {
   const hcDisplay = p.handicap !== null ? p.handicap : '?';
   const nicknameHTML = p.nickname ? `<div class="player-nickname">"${p.nickname}"</div>` : '';
   const pgaHTML = p.pgaComp ? `<div class="pga-comp">Plays like: <span>${p.pgaComp}</span></div>` : '';
-  const flagSrc = p.flag ? (p.flag.startsWith('http') ? p.flag : `https://flagcdn.com/w40/${p.flag}.png`) : '';
+  const flagSrc = p.flag ? (p.flag.startsWith('http') || p.flag.startsWith('Images/') ? p.flag : `https://flagcdn.com/w40/${p.flag}.png`) : '';
   const flagHTML = flagSrc ? `<img class="player-flag" src="${flagSrc}" alt="flag">` : '';
 
   card.innerHTML = `
