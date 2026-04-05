@@ -696,7 +696,8 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  .modal-name { font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--cream); margin-bottom: 0.2rem; }
+  .modal-name { font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--cream); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 10px; }
+  .modal-name .player-flag { width: 32px; height: auto; border-radius: 3px; flex-shrink: 0; }
   .modal-nickname { font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.4rem; }
   .modal-pga { font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--text-dim); font-style: italic; }
   .modal-hcp-block { text-align: right; flex-shrink: 0; }
@@ -1952,6 +1953,7 @@ const players = [
     recognisable: "Non-threatening demeanour, exasperated with golf and life, clubs in the bag he's genuinely never used",
     bio: "Two-time Vase winner — looking to be the first to three.\n\nNew Settlers Run member with an impossible form line to pin down: 23, 35, 35, 23, 39, 35, 28… Which Heath will turn up?\n\nHis most recent round saw him completely unable to get the ball off the ground — including a cold top into a dry riverbed that somehow propelled the ball forward 150m greenside. To fully understand the level of despair coupled with a never-give-in attitude: Heath was on the 9th hole at Settlers, the last of his round. 180m uphill to the pin. Instead of shooting the distance, Heath proceeded to talk aloud through his thought process of topping his approach and which way the fairway would funnel the ball along the ground. I've never heard anything like it. A testament to his commitment to the game.\n\nCapable of a powerful and completely unrepeatable golf swing. Like his player comparison, it defies all logic but somehow gets the job done.\n\nKnown for his non-threatening demeanour. Will appear frustrated and exasperated with the game of golf and life. We need to stop feeling sorry for him, reading his putts, selecting his clubs and offering advice. We just have to. Support each other in this please! (Mainly me.)\n\nPutter change implemented — the extreme toe-hanging Odyssey last seen in Phil Mickelson's hands has been retired. Now supporting the blacked-out Evnroll double blade.\n\nHas clubs in his bag that he's genuinely never used. No idea what's in there.\n\nStill the organiser of the accommodation. Secretary of the quaddie.\n\nFatigue will be an issue for the great man. With his handicap he only needs to play 27 decent holes out of 56 to be vying for the title again. The strategy will be putting him under pressure on the back nine on Saturday.",
     flag: 'my',
+    audioFile: 'MP3/Heath - The White Stripes - I Just Don\'t Know What to Do With Myself (Official Video).mp3',
     stats: {power:6, accuracy:2, consistency:1, touch:4, stamina:2, magic:8, mental:9, emotional:7}
   }
 ];
@@ -2020,7 +2022,7 @@ function openModal(id) {
   const p = players.find(x => x.id === id);
   if (!p) return;
 
-  const mFlagSrc = p.flag ? (p.flag.startsWith('http') ? p.flag : `https://flagcdn.com/w40/${p.flag}.png`) : '';
+  const mFlagSrc = p.flag ? (p.flag.startsWith('http') || p.flag.startsWith('Images/') ? p.flag : `https://flagcdn.com/w40/${p.flag}.png`) : '';
   const modalNameEl = document.getElementById('modalName');
   if (mFlagSrc) {
     modalNameEl.innerHTML = `<img class="player-flag" src="${mFlagSrc}" alt="flag" style="vertical-align:middle;margin-right:8px;">${p.name}`;
