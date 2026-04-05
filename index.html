@@ -2068,6 +2068,12 @@ function openModal(id) {
 function closeModal() {
   document.getElementById('playerModal').classList.remove('open');
   document.body.style.overflow = '';
+  // Stop all audio when closing profile
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') ytPlayer.pauseVideo();
+  musicPlaying = false;
+  var btn = document.getElementById('musicBtn');
+  if (btn) { btn.innerHTML = '&#9654;'; btn.style.boxShadow = '0 2px 12px rgba(0,0,0,0.4)'; }
 }
 
 function closeModalOutside(e) {
