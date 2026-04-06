@@ -1308,6 +1308,10 @@
   .winner-trophy-icon { font-size: 1.8rem; display: block; margin: 0.4rem 0; }
   .winner-name { font-size: 1.1rem; color: var(--gold); margin-bottom: 0.2rem; }
   .winner-venue { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); font-style: italic; }
+  .winner-courses { margin-top: 0.7rem; border-top: 1px solid var(--card-border); padding-top: 0.6rem; }
+  .winner-course-item { font-family: Arial, sans-serif; font-size: 0.7rem; color: var(--text-dim); padding: 0.15rem 0; }
+  .winner-card.pending { opacity: 0.65; }
+  .winner-card.pending .winner-name { color: var(--text-dim); font-style: italic; }
 
   /* ===== WEATHER ===== */
   .weather-grid {
@@ -2671,10 +2675,11 @@ players.forEach((p, i) => grid.appendChild(buildPlayerCard(p, i)));
 
 // ── PAST WINNERS ───────────────────────────────────────────
 const pastWinners = [
-  { year: '2022', name: 'Heath Attwood', venue: 'Mulwala' },
-  { year: '2023', name: 'Dan Hunt', venue: 'Portarlington' },
-  { year: '2024', name: 'Heath Attwood', venue: '13th Beach' },
-  { year: '2025', name: 'Dan Hunt', venue: 'Rosebud' },
+  { year: '2022', name: 'Heath Attwood', venue: 'Mulwala',             courses: ['Hidden Valley', 'Black Bull', 'Yarrawonga'] },
+  { year: '2023', name: 'Dan Hunt',      venue: 'Portarlington',       courses: ['13th Beach — Beach', 'Lonsdale Links', 'Curlewis'] },
+  { year: '2024', name: 'Heath Attwood', venue: '13th Beach',          courses: ['13th Beach — Creek', '13th Beach — Beach', 'Lonsdale Links'] },
+  { year: '2025', name: 'Dan Hunt',      venue: 'Mornington Peninsula',courses: ['Moonah Links — Open', 'Moonah Links — Legends', 'Cape Schank'] },
+  { year: '2026', name: 'To Be Crowned', venue: 'Mornington Peninsula',courses: ['Moonah Links — Legends', 'Moonah Links — Open', 'St Andrews Beach'], pending: true },
 ];
 (function() {
   const grid = document.getElementById('winnersGrid');
@@ -2683,11 +2688,12 @@ const pastWinners = [
     return;
   }
   grid.innerHTML = pastWinners.map(w => `
-    <div class="winner-card">
+    <div class="winner-card${w.pending ? ' pending' : ''}">
       <div class="winner-year">${w.year}</div>
       <span class="winner-trophy-icon">&#127942;</span>
       <div class="winner-name">${w.name}</div>
       <div class="winner-venue">${w.venue}</div>
+      ${w.courses ? `<div class="winner-courses">${w.courses.map(c => `<div class="winner-course-item">${c}</div>`).join('')}</div>` : ''}
     </div>
   `).join('');
 })();
