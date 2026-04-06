@@ -638,6 +638,23 @@
   .scramble-hc-label { font-size: 0.75rem; color: var(--text-dim); font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; }
   .scramble-hc-value { font-size: 1.4rem; color: var(--gold); font-weight: bold; }
   .scramble-hc-formula { font-size: 0.7rem; color: var(--text-dim); font-family: Arial, sans-serif; margin-top: 0.15rem; }
+  .scramble-score-row {
+    display: flex; gap: 0.8rem; margin: 0 1rem 0.8rem;
+  }
+  .scramble-score-box {
+    flex: 1; background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 6px; padding: 0.5rem 0.8rem; text-align: center;
+  }
+  .scramble-score-box.net-box { border-color: rgba(197,160,80,0.4); background: rgba(197,160,80,0.06); }
+  .scramble-score-box .ss-label { display: block; font-size: 0.65rem; color: var(--text-dim); font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; }
+  .scramble-score-box .ss-val { display: block; font-size: 1.3rem; font-weight: bold; color: var(--cream); }
+  .scramble-score-box.net-box .ss-val { color: var(--gold); }
+  .scramble-edit-mode .gross-input {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
+    border-radius: 4px; color: var(--cream); font-family: Arial, sans-serif;
+    font-size: 1.1rem; padding: 0.3rem; text-align: center; font-weight: bold;
+  }
+  .scramble-edit-mode .gross-input:focus { outline: none; border-color: var(--gold); }
   /* Edit mode */
   .scramble-edit-mode .sp-name-input {
     flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
@@ -2302,10 +2319,10 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   let editMode    = false;
 
   const defaultTeams = [
-    { name: 'Team 1', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
-    { name: 'Team 2', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
-    { name: 'Team 3', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
-    { name: 'Team 4', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 1', gross: '', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 2', gross: '', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 3', gross: '', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 4', gross: '', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
   ];
 
   function loadTeams() {
@@ -2366,6 +2383,13 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
         }
       });
 
+      const gross = team.gross !== '' ? parseFloat(team.gross) : null;
+      const net   = (gross !== null && hcVal !== null) ? Math.round((gross - hcVal) * 10) / 10 : null;
+
+      const grossInputHTML = editMode
+        ? `<input class="gross-input" type="number" placeholder="—" value="${team.gross}" onchange="scrambleUpdateGross(${ti}, this.value)" />`
+        : `<span class="ss-val">${gross !== null ? gross : '—'}</span>`;
+
       card.innerHTML = `
         <div class="scramble-team-header">${headerContent}</div>
         <div class="scramble-team-body">${playersHTML}</div>
@@ -2375,6 +2399,16 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
             <div class="scramble-hc-formula">${formulaStr}</div>
           </div>
           <div class="scramble-hc-value">${hcVal !== null ? hcVal : '—'}</div>
+        </div>
+        <div class="scramble-score-row">
+          <div class="scramble-score-box">
+            <span class="ss-label">Gross Score</span>
+            ${grossInputHTML}
+          </div>
+          <div class="scramble-score-box net-box">
+            <span class="ss-label">Net Score</span>
+            <span class="ss-val">${net !== null ? net : '—'}</span>
+          </div>
         </div>`;
       container.appendChild(card);
     });
@@ -2390,6 +2424,13 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
   window.scrambleUpdatePlayer = function(ti, pi, field, val) {
     const teams = loadTeams();
     teams[ti].players[pi][field] = val;
+    saveTeams(teams);
+    render();
+  };
+
+  window.scrambleUpdateGross = function(ti, val) {
+    const teams = loadTeams();
+    teams[ti].gross = val;
     saveTeams(teams);
     render();
   };
