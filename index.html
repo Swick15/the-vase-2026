@@ -750,6 +750,22 @@
   .draw-btn-row { text-align: center; }
   .draw-official-note { text-align: center; color: var(--text-dim); font-size: 0.8rem; font-family: Arial, sans-serif; margin-top: 1rem; font-style: italic; }
 
+  /* ===== COURSE HANDICAPS (modal) ===== */
+  .modal-course-hcp { margin-top: 1.2rem; border-top: 1px solid var(--card-border); padding-top: 1rem; }
+  .modal-course-hcp h4 {
+    font-family: Arial, sans-serif; font-size: 0.6rem; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.8rem;
+  }
+  .course-hcp-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.35rem 0; border-bottom: 1px solid rgba(42,74,46,0.3);
+    font-family: Arial, sans-serif;
+  }
+  .course-hcp-row:last-child { border-bottom: none; }
+  .course-hcp-name { font-size: 0.78rem; color: var(--cream); }
+  .course-hcp-sub { font-size: 0.65rem; color: var(--text-dim); display: block; margin-top: 1px; }
+  .course-hcp-val { font-size: 1.1rem; color: var(--gold); font-weight: bold; font-family: 'Georgia', serif; flex-shrink: 0; margin-left: 1rem; }
+
   /* ===== SATURDAY DRAW ===== */
   .sat-draw-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.5rem; }
   @media (max-width: 600px) { .sat-draw-groups { grid-template-columns: 1fr; } }
@@ -1430,6 +1446,7 @@
         <h4>Profile</h4>
         <div class="modal-bio" id="modalBio"></div>
         <div class="modal-recognisable" id="modalRecognisable"></div>
+        <div id="modalCourseHcp"></div>
       </div>
       <div class="modal-stats-col">
         <div class="modal-photo" id="modalPhotoWrap" style="display:none;">
@@ -2276,6 +2293,28 @@ function openModal(id) {
   document.getElementById('modalAbility').textContent = p.ability;
   document.getElementById('modalBio').textContent = p.bio;
   document.getElementById('modalRecognisable').textContent = p.recognisable;
+
+  // Course handicap calculation
+  const hcpIndex = parseFloat(p.handicap);
+  const courseHcpEl = document.getElementById('modalCourseHcp');
+  if (!isNaN(hcpIndex)) {
+    const courses = [
+      { name: 'Moonah Links Legends', sub: 'White tees · Slope 137 · Fri Round 1', slope: 137 },
+      { name: 'Open Course',           sub: 'Blue tees · Slope 135 · Fri Scramble', slope: 135 },
+      { name: 'St Andrews Beach',       sub: 'Blue tees · Slope 139 · Sat Round 3', slope: 139 },
+    ];
+    const rows = courses.map(function(c) {
+      const adj = Math.round(hcpIndex * (c.slope / 113));
+      return '<div class="course-hcp-row">' +
+        '<span><span class="course-hcp-name">' + c.name + '</span>' +
+        '<span class="course-hcp-sub">' + c.sub + '</span></span>' +
+        '<span class="course-hcp-val">' + adj + '</span>' +
+        '</div>';
+    }).join('');
+    courseHcpEl.innerHTML = '<div class="modal-course-hcp"><h4>Course Handicaps</h4>' + rows + '</div>';
+  } else {
+    courseHcpEl.innerHTML = '';
+  }
 
   const photoWrap = document.getElementById('modalPhotoWrap');
   const photoImg = document.getElementById('modalPhoto');
