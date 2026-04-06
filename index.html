@@ -3011,7 +3011,27 @@ buildLeaderboard();
   function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('ytPlayer', {
       videoId: 'G97AdMLbfr4',
-      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'G97AdMLbfr4', enablejsapi: 1 }
+      playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: 'G97AdMLbfr4', enablejsapi: 1 },
+      events: {
+        onReady: function() {
+          // Auto-play Augusta theme when user scrolls past the hero
+          if (!('IntersectionObserver' in window)) return;
+          var hero = document.querySelector('.hero');
+          if (!hero) return;
+          var triggered = false;
+          var obs = new IntersectionObserver(function(entries) {
+            if (!entries[0].isIntersecting && !triggered && !musicPlaying) {
+              triggered = true;
+              obs.disconnect();
+              ytPlayer.playVideo();
+              musicPlaying = true;
+              var btn = document.getElementById('musicBtn');
+              if (btn) { btn.innerHTML = '&#9646;&#9646;'; btn.style.boxShadow = '0 0 16px rgba(197,160,80,0.5)'; }
+            }
+          }, { threshold: 0 });
+          obs.observe(hero);
+        }
+      }
     });
   }
 
