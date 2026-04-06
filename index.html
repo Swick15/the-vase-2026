@@ -2097,10 +2097,11 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     if (!ticker) return;
     const pxPerSecond = 60;
     const halfWidth = ticker.scrollWidth / 2;
-    const duration = halfWidth / pxPerSecond;
+    const duration = (halfWidth > 100) ? halfWidth / pxPerSecond : 25;
     ticker.style.animationDuration = duration + 's';
   }
-  window.addEventListener('load', initTicker);
+  // Small delay ensures fonts + layout are fully rendered before measuring
+  window.addEventListener('load', function() { setTimeout(initTicker, 200); });
 })();
 
 // Build player grid
