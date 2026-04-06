@@ -600,6 +600,76 @@
     line-height: 1.6;
   }
 
+  /* ===== SCRAMBLE TEAMS ===== */
+  .scramble-section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .scramble-teams { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.5rem; }
+  @media (max-width: 768px) { .scramble-teams { grid-template-columns: 1fr; } }
+  .scramble-team-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .scramble-team-card:hover { border-color: var(--gold); }
+  .scramble-team-header {
+    background: var(--green-mid);
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .scramble-team-name { font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); font-family: Arial, sans-serif; font-weight: bold; }
+  .scramble-team-body { padding: 0.5rem 0; }
+  .scramble-player-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1rem; }
+  .scramble-player-row .sp-num { font-size: 0.7rem; color: var(--text-dim); font-family: Arial, sans-serif; width: 14px; flex-shrink: 0; }
+  .scramble-player-row .sp-name { flex: 1; font-size: 0.95rem; color: var(--cream); }
+  .scramble-player-row .sp-hc { font-size: 0.8rem; color: var(--gold); font-family: Arial, sans-serif; min-width: 28px; text-align: right; }
+  .scramble-hc-result {
+    margin: 0.5rem 1rem 0.8rem;
+    padding: 0.6rem 1rem;
+    background: rgba(197,160,80,0.08);
+    border: 1px solid rgba(197,160,80,0.25);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .scramble-hc-label { font-size: 0.75rem; color: var(--text-dim); font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+  .scramble-hc-value { font-size: 1.4rem; color: var(--gold); font-weight: bold; }
+  .scramble-hc-formula { font-size: 0.7rem; color: var(--text-dim); font-family: Arial, sans-serif; margin-top: 0.15rem; }
+  /* Edit mode */
+  .scramble-edit-mode .sp-name-input {
+    flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
+    border-radius: 4px; color: var(--cream); font-family: 'Georgia', serif;
+    font-size: 0.9rem; padding: 0.3rem 0.5rem;
+  }
+  .scramble-edit-mode .sp-hc-input {
+    width: 52px; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
+    border-radius: 4px; color: var(--gold); font-family: Arial, sans-serif;
+    font-size: 0.9rem; padding: 0.3rem 0.5rem; text-align: center;
+  }
+  .scramble-edit-mode .sp-name-input:focus,
+  .scramble-edit-mode .sp-hc-input:focus { outline: none; border-color: var(--gold); }
+  .scramble-team-name-input {
+    background: transparent; border: none; border-bottom: 1px solid var(--gold);
+    color: var(--gold); font-family: Arial, sans-serif; font-size: 0.85rem;
+    font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase;
+    width: 140px; padding: 0.1rem 0;
+  }
+  .scramble-team-name-input:focus { outline: none; }
+  .scramble-edit-bar { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .scramble-edit-btn {
+    padding: 0.6rem 1.4rem; background: transparent;
+    border: 1px solid var(--gold); color: var(--gold);
+    border-radius: 6px; font-family: Arial, sans-serif; font-size: 0.8rem;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+  }
+  .scramble-edit-btn:hover { background: rgba(197,160,80,0.1); }
+  .scramble-edit-btn.danger { border-color: var(--red); color: var(--red); }
+  .scramble-edit-btn.danger:hover { background: rgba(192,57,43,0.1); }
+  .scramble-empty { color: var(--text-dim); font-style: italic; font-size: 0.85rem; }
+
   /* ===== FRIDAY DRAW ===== */
   .draw-section { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
   .draw-countdown-box {
@@ -1271,6 +1341,7 @@
     <li><a href="#venues">Venues</a></li>
     <li><a href="#format">Format</a></li>
     <li><a href="#draw">Draw</a></li>
+    <li><a href="#scramble">Teams</a></li>
     <li><a href="#leaderboard">Leaderboard</a></li>
     <li><a href="#history">History</a></li>
     <li><a href="#weather">Weather</a></li>
@@ -1822,6 +1893,22 @@
   </div>
 </section>
 
+<!-- SCRAMBLE TEAMS -->
+<section id="scramble">
+  <div class="scramble-section">
+    <div class="section-header">
+      <span class="eyebrow">Round 2 — Saturday Scramble</span>
+      <h2>Team Draw</h2>
+      <div class="divider"></div>
+      <p>4 teams drafted by the Round 1 leaders. Handicap calculated automatically.</p>
+    </div>
+    <div class="scramble-teams" id="scrambleTeams"></div>
+    <div class="scramble-edit-bar">
+      <button class="scramble-edit-btn" id="scrambleEditBtn" onclick="scrambleEditToggle()">🔐 Edit Teams</button>
+    </div>
+  </div>
+</section>
+
 <!-- LEADERBOARD -->
 <section id="leaderboard" style="padding-top: 0;">
   <div class="section-header">
@@ -2205,6 +2292,121 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
     requestAnimationFrame(animate);
   }
   requestAnimationFrame(animate);
+})();
+
+// ── SCRAMBLE TEAMS ───────────────────────────────────────────
+(function() {
+  const STORE_KEY = 'vase2026_scramble';
+  const PASSWORD  = 'vase2026';
+  let editMode    = false;
+
+  const defaultTeams = [
+    { name: 'Team 1', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 2', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 3', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+    { name: 'Team 4', players: [{name:'',hc:''},{name:'',hc:''},{name:'',hc:''},{name:'',hc:''}] },
+  ];
+
+  function loadTeams() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || defaultTeams; }
+    catch(e) { return defaultTeams; }
+  }
+
+  function saveTeams(teams) {
+    localStorage.setItem(STORE_KEY, JSON.stringify(teams));
+  }
+
+  // 20% lowest + 15% 2nd + 10% 3rd + 5% highest
+  function calcScrambleHC(players) {
+    const hcs = players.map(p => parseFloat(p.hc)).filter(h => !isNaN(h) && h !== '');
+    if (hcs.length < 4) return null;
+    hcs.sort((a, b) => a - b);
+    const result = (hcs[0]*0.20) + (hcs[1]*0.15) + (hcs[2]*0.10) + (hcs[3]*0.05);
+    return Math.round(result * 10) / 10;
+  }
+
+  function render() {
+    const teams   = loadTeams();
+    const container = document.getElementById('scrambleTeams');
+    container.innerHTML = '';
+    container.classList.toggle('scramble-edit-mode', editMode);
+
+    teams.forEach(function(team, ti) {
+      const card = document.createElement('div');
+      card.className = 'scramble-team-card';
+
+      const hcVal = calcScrambleHC(team.players);
+      const hcHCs = team.players.map(p => parseFloat(p.hc)).filter(h => !isNaN(h));
+      hcHCs.sort((a,b) => a-b);
+      const formulaStr = hcHCs.length === 4
+        ? `(${hcHCs[0]}×20%) + (${hcHCs[1]}×15%) + (${hcHCs[2]}×10%) + (${hcHCs[3]}×5%)`
+        : 'Enter all 4 handicaps to calculate';
+
+      let headerContent = editMode
+        ? `<input class="scramble-team-name-input" value="${team.name}" onchange="scrambleUpdateName(${ti}, this.value)" />`
+        : `<span class="scramble-team-name">${team.name}</span>`;
+
+      let playersHTML = '';
+      team.players.forEach(function(p, pi) {
+        if (editMode) {
+          playersHTML += `<div class="scramble-player-row">
+            <span class="sp-num">${pi+1}</span>
+            <input class="sp-name-input" placeholder="Player name" value="${p.name}" onchange="scrambleUpdatePlayer(${ti},${pi},'name',this.value)" />
+            <input class="sp-hc-input" placeholder="HC" type="number" step="0.1" value="${p.hc}" onchange="scrambleUpdatePlayer(${ti},${pi},'hc',this.value)" />
+          </div>`;
+        } else {
+          const nameDisplay = p.name || `<span class="scramble-empty">TBC</span>`;
+          const hcDisplay   = p.hc !== '' ? p.hc : '—';
+          playersHTML += `<div class="scramble-player-row">
+            <span class="sp-num">${pi+1}</span>
+            <span class="sp-name">${nameDisplay}</span>
+            <span class="sp-hc">${hcDisplay}</span>
+          </div>`;
+        }
+      });
+
+      card.innerHTML = `
+        <div class="scramble-team-header">${headerContent}</div>
+        <div class="scramble-team-body">${playersHTML}</div>
+        <div class="scramble-hc-result">
+          <div>
+            <div class="scramble-hc-label">Scramble Handicap</div>
+            <div class="scramble-hc-formula">${formulaStr}</div>
+          </div>
+          <div class="scramble-hc-value">${hcVal !== null ? hcVal : '—'}</div>
+        </div>`;
+      container.appendChild(card);
+    });
+  }
+
+  window.scrambleUpdateName = function(ti, val) {
+    const teams = loadTeams();
+    teams[ti].name = val;
+    saveTeams(teams);
+    render();
+  };
+
+  window.scrambleUpdatePlayer = function(ti, pi, field, val) {
+    const teams = loadTeams();
+    teams[ti].players[pi][field] = val;
+    saveTeams(teams);
+    render();
+  };
+
+  window.scrambleEditToggle = function() {
+    if (!editMode) {
+      const pw = prompt('Enter admin password:');
+      if (pw !== PASSWORD) { alert('Incorrect password'); return; }
+      editMode = true;
+      document.getElementById('scrambleEditBtn').textContent = '💾 Save & Lock';
+    } else {
+      editMode = false;
+      document.getElementById('scrambleEditBtn').textContent = '🔐 Edit Teams';
+    }
+    render();
+  };
+
+  render();
 })();
 
 // ── FRIDAY DRAW ──────────────────────────────────────────────
