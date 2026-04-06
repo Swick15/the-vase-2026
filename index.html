@@ -786,10 +786,13 @@
   .quote-ticker {
     display: flex;
     gap: 4rem;
-    animation: ticker linear infinite;
+    animation: ticker 30s linear infinite;
     white-space: nowrap;
   }
   .quote-ticker:hover { animation-play-state: paused; }
+  @media (max-width: 768px) {
+    .quote-ticker { animation-duration: 20s; }
+  }
   @keyframes ticker {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -2090,19 +2093,6 @@ function closeModalOutside(e) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// Ticker speed — fixed pixels per second so it's consistent on all screen sizes
-(function() {
-  function initTicker() {
-    const ticker = document.getElementById('ticker');
-    if (!ticker) return;
-    const pxPerSecond = 60;
-    const halfWidth = ticker.scrollWidth / 2;
-    const duration = (halfWidth > 100) ? halfWidth / pxPerSecond : 25;
-    ticker.style.animationDuration = duration + 's';
-  }
-  // Small delay ensures fonts + layout are fully rendered before measuring
-  window.addEventListener('load', function() { setTimeout(initTicker, 200); });
-})();
 
 // Build player grid
 const grid = document.getElementById('playerGrid');
