@@ -2158,7 +2158,7 @@
       <div id="betSlipRows"></div>
       <button class="bet-add-row-btn" onclick="betAddRow()">+ Add a bet</button>
       <div class="bet-submit-row">
-        <button class="draw-btn" onclick="betSubmit()">💰 Lock In Bets</button>
+        <button id="betSubmitBtn" class="draw-btn" onclick="betSubmit()">💰 Lock In Bets</button>
       </div>
     </div>
   </div>
@@ -2977,8 +2977,15 @@ buildLeaderboard();
 // ── THE BOOK (BETTING) ─────────────────────────────────────────
 (function() {
   var BET_LOCK = new Date('2026-04-16T23:00:00+10:00').getTime();
-  var BET_KEY  = 'vase2026_bets';
   var CREDITS  = 1000;
+  var DB       = 'https://vase2026-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+  // Saturday-only players (for Saturday market result)
+  var SAT_ONLY_NAMES = ['Dom Ciconte','Daniel Hunt','Chris Jones','Chris Shepardson'];
+  // Full-weekend players (for Outright / Top3 / H2H results)
+  var VASE_PLAYERS = ['Travis Davis','Pete Sweeney','Heath Attwood','Mick Sweeney',
+    'Shane Somers','Damo Lovie','Andrew Chadwick','Brendan Hunt','Daniel Riley',
+    'Brad Hunt','Tom Hussey','Chris McGowan'];
 
   var OUTRIGHT = [
     {name:'Travis Davis',odds:4.00},{name:'Pete Sweeney',odds:5.00},
@@ -3011,10 +3018,105 @@ buildLeaderboard();
   ];
 
   function isLocked() { return Date.now() >= BET_LOCK; }
-  function loadBets() { try { return JSON.parse(localStorage.getItem(BET_KEY)) || {}; } catch(e) { return {}; } }
-  function saveBets(b) { localStorage.setItem(BET_KEY, JSON.stringify(b)); }
 
-  // Flat selection list (index used to identify each bet)
+  // ─── FIREBASE ───
+  async function loadBets() {
+    try {
+      var res = await fetch(DB + '/bets.json');
+      var data = await res.json();
+      return data || {};
+    } catch(e) { return {}; }
+  }
+  async function savePersonBets(name, betList) {
+    try {
+      await fetch(DB + '/bets/' + encodeURIComponent(name) + '.json', {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(betList)
+      });
+    } catch(e) { console.error('Firebase save failed', e); }
+  }
+
+  // ─── AUTO-RESULTS ───
+  function getScores() {
+    var scores = {};
+    try { scores = JSON.parse(localStorage.getItem('vase2026_scores')) || {}; } catch(e) {}
+    // Build a name→scores map
+    var result = {};
+    players.forEach(function(p) {
+      var s = scores[p.id] || {};
+      var r1 = (s.r1 != null && s.r1 !== '') ? +s.r1 : null;
+      var r2 = (s.r2 != null && s.r2 !== '') ? +s.r2 : null;
+      var r3 = (s.r3 != null && s.r3 !== '') ? +s.r3 : null;
+      result[p.name] = {r1:r1, r2:r2, r3:r3};
+    });
+    return result;
+  }
+
+  function computeResults() {
+    var sc = getScores();
+
+    // Helper: total weekend score (r1 + r3) for a player
+    function weekendTotal(name) {
+      var s = sc[name]; if (!s) return null;
+      if (s.r1 !== null && s.r3 !== null) return s.r1 + s.r3;
+      return null;
+    }
+
+    // Check all 12 vase players have weekend scores
+    var vaseComplete = VASE_PLAYERS.every(function(n) { return weekendTotal(n) !== null; });
+    // Check all 4 sat-only players have r3
+    var satComplete = SAT_ONLY_NAMES.every(function(n) {
+      var s = sc[n]; return s && s.r3 !== null;
+    });
+
+    // Sort vase players by total descending (stableford — higher is better)
+    var vaseSorted = vaseComplete ? VASE_PLAYERS.slice().sort(function(a,b){
+      return weekendTotal(b) - weekendTotal(a);
+    }) : null;
+
+    // Sort sat-only by r3 descending
+    var satSorted = satComplete ? SAT_ONLY_NAMES.slice().sort(function(a,b){
+      return sc[b].r3 - sc[a].r3;
+    }) : null;
+
+    return function getResult(bet) {
+      var mid = bet.marketId;
+      var sel = bet.selection;
+
+      if (mid === 'outright') {
+        if (!vaseSorted) return 'pending';
+        return vaseSorted[0] === sel ? 'win' : 'loss';
+      }
+      if (mid === 'top3') {
+        if (!vaseSorted) return 'pending';
+        return vaseSorted.indexOf(sel) <= 2 ? 'win' : 'loss';
+      }
+      if (mid === 'saturday') {
+        if (!satSorted) return 'pending';
+        return satSorted[0] === sel ? 'win' : 'loss';
+      }
+      if (mid.startsWith('h2h_')) {
+        var match = H2H.find(function(m){ return 'h2h_'+m.id === mid; });
+        if (!match) return 'pending';
+        var satOnly = match.id === 'buff_dom';
+        if (satOnly) {
+          var sa = sc[match.a.name], sb = sc[match.b.name];
+          if (!sa || sa.r3 === null || !sb || sb.r3 === null) return 'pending';
+          var winner = sa.r3 >= sb.r3 ? match.a.name : match.b.name;
+          return winner === sel ? 'win' : 'loss';
+        } else {
+          var ta = weekendTotal(match.a.name), tb = weekendTotal(match.b.name);
+          if (ta === null || tb === null) return 'pending';
+          var winner = ta >= tb ? match.a.name : match.b.name;
+          return winner === sel ? 'win' : 'loss';
+        }
+      }
+      return 'pending';
+    };
+  }
+
+  // ─── FLAT SELECTION LIST ───
   function getSelections() {
     var s = [];
     OUTRIGHT.forEach(function(x){ s.push({mid:'outright', mLabel:'Outright Winner', name:x.name, odds:x.odds}); });
@@ -3027,7 +3129,6 @@ buildLeaderboard();
     return s;
   }
 
-  // Build select options with optgroups
   function buildOptHTML(sels, selIdx) {
     var groups = {}, order = [];
     sels.forEach(function(s, i) {
@@ -3085,9 +3186,10 @@ buildLeaderboard();
   });
   nameEl.addEventListener('change', function(){ loadPersonBets(nameEl.value); });
 
-  function loadPersonBets(name) {
-    var bets = loadBets();
-    if (name && bets[name] && bets[name].length) {
+  async function loadPersonBets(name) {
+    if (!name) { bettorRows = [{selIdx:0,credits:''}]; renderForm(); updateCredits(); return; }
+    var bets = await loadBets();
+    if (bets[name] && bets[name].length) {
       bettorRows = bets[name].map(function(b){ return {selIdx:b.selIdx, credits:b.credits}; });
     } else {
       bettorRows = [{selIdx:0, credits:''}];
@@ -3123,7 +3225,7 @@ buildLeaderboard();
     if (el) { el.textContent = rem.toLocaleString(); el.style.color = rem < 0 ? '#e74c3c' : 'var(--gold)'; }
   }
 
-  window.betSubmit = function() {
+  window.betSubmit = async function() {
     if (isLocked()) { alert('The book is closed.'); return; }
     var name = document.getElementById('betName').value;
     if (!name) { alert('Please select your name first.'); return; }
@@ -3136,50 +3238,84 @@ buildLeaderboard();
         alert('Row '+(i+1)+' has no credits. Remove it or enter an amount.'); return;
       }
     }
-    var bets = loadBets();
-    bets[name] = bettorRows.map(function(r){
+    var betList = bettorRows.map(function(r){
       var s = sels[r.selIdx];
       return {selIdx:r.selIdx, credits:parseInt(r.credits), market:s.mLabel, marketId:s.mid, selection:s.name, odds:s.odds};
     });
-    saveBets(bets);
-    renderBoard();
+    var btn = document.getElementById('betSubmitBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    await savePersonBets(name, betList);
+    if (btn) { btn.disabled = false; btn.textContent = 'Lock In Bets'; }
+    await renderBoard();
     alert('Bets saved for '+name+'!\n'+used.toLocaleString()+' / 1,000 credits wagered.');
   };
 
   // ─── THE BOARD ───
-  function renderBoard() {
-    var bets  = loadBets();
+  async function renderBoard() {
+    var el = document.getElementById('betBoard');
+    el.innerHTML = '<p style="text-align:center;color:var(--text-dim);font-style:italic;font-family:Arial,sans-serif;font-size:0.85rem;padding:2rem;">Loading bets…</p>';
+    var bets  = await loadBets();
     var names = Object.keys(bets);
-    var el    = document.getElementById('betBoard');
     if (!names.length) {
       el.innerHTML = '<p style="text-align:center;color:var(--text-dim);font-style:italic;font-family:Arial,sans-serif;font-size:0.85rem;padding:2rem;">No bets placed yet. Be the first.</p>';
       return;
     }
-    // Sort by max potential return descending
-    names.sort(function(a,b){
-      var potA = bets[a].reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
-      var potB = bets[b].reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
-      return potB - potA;
-    });
-    el.innerHTML = names.map(function(name, rank){
+
+    var getResult = computeResults();
+
+    // Compute per-person summary
+    var summaries = names.map(function(name) {
       var betList = bets[name];
-      var used = betList.reduce(function(s,b){ return s+b.credits; }, 0);
-      var pot  = betList.reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
+      var used    = betList.reduce(function(s,b){ return s+b.credits; }, 0);
+      var pot     = betList.reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
+      var actual  = 0;
+      var allSettled = true;
+      var anyPending = false;
+      betList.forEach(function(b) {
+        var r = getResult(b);
+        if (r === 'pending') { allSettled = false; anyPending = true; }
+        else if (r === 'win') actual += Math.round(b.credits * b.odds);
+      });
+      return {name:name, betList:betList, used:used, pot:pot, actual:actual, allSettled:allSettled, anyPending:anyPending};
+    });
+
+    // Sort: if any results exist, sort by actual returns desc; otherwise by max potential
+    var hasAnyResults = summaries.some(function(s){ return s.allSettled || !s.anyPending; });
+    summaries.sort(function(a,b){
+      if (a.allSettled && b.allSettled) return b.actual - a.actual;
+      return b.pot - a.pot;
+    });
+
+    el.innerHTML = summaries.map(function(sm, rank){
       var medal = rank===0?'🥇 ':rank===1?'🥈 ':rank===2?'🥉 ':'';
-      var rows = betList.map(function(b){
-        var ret = Math.round(b.credits*b.odds);
+      var rows = sm.betList.map(function(b){
+        var r   = getResult(b);
+        var ret = Math.round(b.credits * b.odds);
+        var badge = r==='win' ? '<span style="color:#2ecc71;font-weight:700;">✅ WIN</span>'
+                  : r==='loss'? '<span style="color:#e74c3c;font-weight:700;">❌ LOSS</span>'
+                  : '<span style="color:var(--text-dim);">⏳</span>';
+        var retLine = r==='win'
+          ? '<div class="bet-board-pot" style="color:#2ecc71;">↳ +'+ret.toLocaleString()+' cr</div>'
+          : r==='loss'
+          ? '<div class="bet-board-pot" style="color:#e74c3c;">↳ 0 cr</div>'
+          : '<div class="bet-board-pot">↳ '+ret.toLocaleString()+' cr if wins</div>';
         return '<div class="bet-board-row">'+
           '<div><div class="bet-board-sel">'+b.selection+'</div><div class="bet-board-mkt">'+b.market+'</div></div>'+
           '<div class="bet-board-right">'+
-            '<span class="bet-board-credits">'+b.credits.toLocaleString()+' cr</span>'+
+            badge+' <span class="bet-board-credits">'+b.credits.toLocaleString()+' cr</span>'+
             ' <span class="bet-board-odds">@ '+b.odds.toFixed(2)+'</span>'+
-            '<div class="bet-board-pot">↳ '+ret.toLocaleString()+' cr if wins</div>'+
+            retLine+
           '</div></div>';
       }).join('');
+
+      var hdrRight = sm.allSettled
+        ? '<span class="bet-board-hdr-pot">'+sm.used.toLocaleString()+' cr wagered &nbsp;·&nbsp; returned <strong style="color:'+(sm.actual>0?'#2ecc71':'#e74c3c')+';">'+sm.actual.toLocaleString()+' cr</strong></span>'
+        : '<span class="bet-board-hdr-pot">'+sm.used.toLocaleString()+' cr wagered &nbsp;·&nbsp; max <strong>'+Math.round(sm.pot).toLocaleString()+' cr</strong></span>';
+
       return '<div class="bet-board-card">'+
         '<div class="bet-board-hdr">'+
-          '<span class="bet-board-hdr-name">'+medal+name+'</span>'+
-          '<span class="bet-board-hdr-pot">'+used.toLocaleString()+' cr wagered &nbsp;·&nbsp; max <strong>'+Math.round(pot).toLocaleString()+' cr</strong></span>'+
+          '<span class="bet-board-hdr-name">'+medal+sm.name+'</span>'+
+          hdrRight+
         '</div>'+rows+'</div>';
     }).join('');
   }
