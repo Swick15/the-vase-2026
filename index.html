@@ -1374,6 +1374,60 @@
   .winner-card.pending { opacity: 0.65; }
   .winner-card.pending .winner-name { color: var(--text-dim); font-style: italic; }
 
+  /* ===== PODCAST ===== */
+  .podcast-player-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .podcast-player-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .podcast-player-art {
+    font-size: 4rem;
+    line-height: 1;
+    background: rgba(197,160,80,0.1);
+    border: 1px solid rgba(197,160,80,0.25);
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .podcast-player-info {
+    text-align: center;
+  }
+  .podcast-player-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .podcast-player-sub {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .podcast-player-card audio {
+    border-radius: 8px;
+    outline: none;
+    filter: brightness(0.9) sepia(0.15);
+  }
+  @media(max-width:600px) {
+    .podcast-player-card { padding: 1.4rem 1rem; }
+    .podcast-player-art { font-size: 2.8rem; width: 70px; height: 70px; }
+  }
+
   /* ===== WEATHER ===== */
   .weather-grid {
     display: grid;
@@ -1453,6 +1507,7 @@
     <li><a href="#leaderboard">Leaderboard</a></li>
     <li><a href="#betting">The Book</a></li>
     <li><a href="#history">History</a></li>
+    <li><a href="#podcast">Podcast</a></li>
     <li><a href="#weather">Weather</a></li>
   </ul>
 </nav>
@@ -2185,6 +2240,29 @@
     <p>Every year a champion is crowned. This is their honour roll.</p>
   </div>
   <div class="winners-grid" id="winnersGrid"></div>
+</section>
+
+<!-- PODCAST -->
+<section id="podcast">
+  <div class="section-header">
+    <span class="eyebrow">NotebookLM AI Generated</span>
+    <h2>The Vase 2026 Podcast</h2>
+    <div class="divider"></div>
+    <p>AI hosts break down the field, the form, and the storylines heading into this year's Vase.</p>
+  </div>
+  <div class="podcast-player-wrap">
+    <div class="podcast-player-card">
+      <div class="podcast-player-art">🎙️</div>
+      <div class="podcast-player-info">
+        <div class="podcast-player-title">The Vase 2026 — 65km/h Gale</div>
+        <div class="podcast-player-sub">NotebookLM Deep Dive · Mornington Peninsula</div>
+      </div>
+      <audio id="podcastAudio" controls preload="metadata" style="width:100%;">
+        <source src="The_Vase_2026_65km_h_Gale.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
 </section>
 
 <!-- WEATHER -->
