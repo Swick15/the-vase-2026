@@ -750,6 +750,67 @@
   .draw-btn-row { text-align: center; }
   .draw-official-note { text-align: center; color: var(--text-dim); font-size: 0.8rem; font-family: Arial, sans-serif; margin-top: 1rem; font-style: italic; }
 
+  /* ===== THE BOOK (BETTING) ===== */
+  .bet-tabs { display:flex; gap:0.5rem; margin:1.5rem 0 0.2rem; flex-wrap:wrap; }
+  .bet-tab {
+    padding:0.45rem 1.1rem; background:transparent; border:1px solid var(--card-border);
+    color:var(--text-dim); font-family:Arial,sans-serif; font-size:0.72rem;
+    letter-spacing:1px; text-transform:uppercase; cursor:pointer; border-radius:4px; transition:all 0.2s;
+  }
+  .bet-tab.active, .bet-tab:hover { border-color:var(--gold); color:var(--gold); background:rgba(197,160,80,0.08); }
+  .bet-panel { margin-top:1rem; }
+  .bet-market-note { font-family:Arial,sans-serif; font-size:0.8rem; color:var(--text-dim); font-style:italic; margin-bottom:1rem; text-align:center; }
+  .bet-odds-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(155px,1fr)); gap:0.6rem; }
+  .bet-odds-card {
+    background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px;
+    padding:0.7rem 1rem; display:flex; justify-content:space-between; align-items:center;
+  }
+  .bet-odds-name { font-size:0.82rem; color:var(--cream); }
+  .bet-odds-price { font-size:1.05rem; color:var(--gold); font-family:'Georgia',serif; font-weight:bold; flex-shrink:0; margin-left:0.5rem; }
+  .bet-h2h-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:0.8rem; margin-top:0.5rem; }
+  .bet-h2h-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; overflow:hidden; }
+  .bet-h2h-lbl { background:var(--green-mid); padding:0.4rem 1rem; display:flex; justify-content:space-between; align-items:center; }
+  .bet-h2h-lbl-title { font-family:Arial,sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
+  .bet-h2h-lbl-note { font-family:Arial,sans-serif; font-size:0.6rem; color:var(--text-dim); }
+  .bet-h2h-players { display:flex; }
+  .bet-h2h-side { flex:1; padding:0.8rem; text-align:center; }
+  .bet-h2h-side:first-child { border-right:1px solid var(--card-border); }
+  .bet-h2h-player { font-size:0.82rem; color:var(--cream); margin-bottom:0.3rem; }
+  .bet-h2h-price { font-size:1.2rem; color:var(--gold); font-family:'Georgia',serif; font-weight:bold; }
+  .bet-entry-box { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:1.5rem; margin-top:1rem; }
+  .bet-entry-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.2rem; }
+  .bet-credits-display { text-align:right; }
+  .bet-credits-num { display:block; font-size:2.2rem; color:var(--gold); font-family:'Georgia',serif; font-weight:bold; line-height:1; }
+  .bet-credits-lbl { font-family:Arial,sans-serif; font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-dim); }
+  .bet-slip-row { display:grid; grid-template-columns:1fr 95px 28px; gap:0.5rem; align-items:center; margin-bottom:0.5rem; }
+  @media(max-width:500px) { .bet-slip-row { grid-template-columns:1fr 75px 28px; } }
+  .bet-sel-select, .bet-credits-input {
+    background:rgba(0,0,0,0.3); border:1px solid var(--card-border); color:var(--cream);
+    padding:0.45rem 0.6rem; border-radius:4px; font-family:Arial,sans-serif; font-size:0.82rem; width:100%;
+  }
+  .bet-remove-btn { background:transparent; border:none; color:var(--text-dim); cursor:pointer; font-size:1rem; padding:0; line-height:1; }
+  .bet-remove-btn:hover { color:#e74c3c; }
+  .bet-add-row-btn {
+    width:100%; margin-top:0.7rem; background:transparent; border:1px dashed rgba(197,160,80,0.25);
+    color:var(--text-dim); padding:0.5rem; border-radius:4px; cursor:pointer;
+    font-family:Arial,sans-serif; font-size:0.8rem; transition:all 0.2s;
+  }
+  .bet-add-row-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .bet-submit-row { margin-top:1.2rem; text-align:center; }
+  .bet-board-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; margin-bottom:0.8rem; overflow:hidden; }
+  .bet-board-hdr { background:var(--green-mid); padding:0.65rem 1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.3rem; }
+  .bet-board-hdr-name { color:var(--gold); font-family:'Georgia',serif; font-size:0.95rem; }
+  .bet-board-hdr-pot { font-family:Arial,sans-serif; font-size:0.72rem; color:var(--text-dim); }
+  .bet-board-hdr-pot strong { color:var(--cream); }
+  .bet-board-row { display:flex; justify-content:space-between; align-items:center; padding:0.45rem 1rem; border-bottom:1px solid rgba(42,74,46,0.25); font-family:Arial,sans-serif; }
+  .bet-board-row:last-child { border-bottom:none; }
+  .bet-board-sel { font-size:0.82rem; color:var(--cream); }
+  .bet-board-mkt { font-size:0.68rem; color:var(--text-dim); margin-top:1px; }
+  .bet-board-right { text-align:right; flex-shrink:0; margin-left:1rem; }
+  .bet-board-credits { color:var(--text-dim); font-size:0.8rem; }
+  .bet-board-odds { color:var(--gold); font-size:0.8rem; }
+  .bet-board-pot { font-size:0.7rem; color:var(--text-dim); margin-top:1px; }
+
   /* ===== COURSE HANDICAPS (modal) ===== */
   .modal-course-hcp { margin-top: 1.2rem; border-top: 1px solid var(--card-border); padding-top: 1rem; }
   .modal-course-hcp h4 {
@@ -1390,6 +1451,7 @@
     <li><a href="#scramble">Teams</a></li>
     <li><a href="#satdraw">Sat Draw</a></li>
     <li><a href="#leaderboard">Leaderboard</a></li>
+    <li><a href="#betting">The Book</a></li>
     <li><a href="#history">History</a></li>
     <li><a href="#weather">Weather</a></li>
   </ul>
@@ -2023,6 +2085,94 @@
   <p style="text-align:center; margin-top: 1.5rem; font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); letter-spacing: 1px;">
     * Handicap disputes to be directed to the committee. The committee is unavailable.
   </p>
+</section>
+
+<!-- THE BOOK -->
+<section id="betting">
+  <div class="section-header">
+    <span class="eyebrow">Damo's Markets</span>
+    <h2>The Book</h2>
+    <div class="divider"></div>
+    <p>1,000 credits each · Spread across any market · Cash buy-in to Damo · Winner takes the pot</p>
+  </div>
+
+  <!-- Lock countdown -->
+  <div class="draw-countdown-box" id="betLockBox">
+    <p>🔒 Betting closes</p>
+    <div class="draw-cd-units">
+      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-days">--</span><span class="draw-cd-label">Days</span></div>
+      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-hours">--</span><span class="draw-cd-label">Hours</span></div>
+      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-mins">--</span><span class="draw-cd-label">Mins</span></div>
+      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-secs">--</span><span class="draw-cd-label">Secs</span></div>
+    </div>
+    <p class="draw-locked-msg">Thursday 16 April · 11:00pm</p>
+  </div>
+  <div id="betLockedMsg" style="display:none;text-align:center;padding:1rem 0 0.5rem;font-family:Arial,sans-serif;font-size:0.8rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">🔒 The book is closed</div>
+
+  <!-- Market tabs -->
+  <div class="bet-tabs">
+    <button class="bet-tab active" data-tab="outright">Outright</button>
+    <button class="bet-tab" data-tab="top3">Top 3</button>
+    <button class="bet-tab" data-tab="h2h">H2H</button>
+    <button class="bet-tab" data-tab="saturday">Saturday</button>
+  </div>
+
+  <div id="bet-panel-outright" class="bet-panel">
+    <p class="bet-market-note">Winner of The Vase — highest individual Stableford total across the weekend.</p>
+    <div class="bet-odds-grid" id="bet-odds-outright"></div>
+  </div>
+  <div id="bet-panel-top3" class="bet-panel" style="display:none">
+    <p class="bet-market-note">Player to finish in the top 3 on the final leaderboard.</p>
+    <div class="bet-odds-grid" id="bet-odds-top3"></div>
+  </div>
+  <div id="bet-panel-h2h" class="bet-panel" style="display:none">
+    <p class="bet-market-note">One-on-one matchups across the weekend. Buff v Dom is Saturday only.</p>
+    <div id="bet-odds-h2h"></div>
+  </div>
+  <div id="bet-panel-saturday" class="bet-panel" style="display:none">
+    <p class="bet-market-note">Highest individual score on Saturday among the ineligible four — Dom, Dan, Jonesy &amp; Shep.</p>
+    <div class="bet-odds-grid" id="bet-odds-saturday"></div>
+  </div>
+
+  <!-- Bet Entry -->
+  <div id="betEntrySection" style="margin-top:2.5rem;">
+    <div class="section-header">
+      <span class="eyebrow">Place Your Bets</span>
+      <h3 style="font-size:1.3rem;color:var(--cream);font-family:'Georgia',serif;">Bet Slip</h3>
+      <div class="divider"></div>
+      <p>Select your name, add your bets, lock them in before Thursday 11pm.</p>
+    </div>
+    <div class="bet-entry-box">
+      <div class="bet-entry-top">
+        <div>
+          <div style="font-family:Arial,sans-serif;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem;">Your Name</div>
+          <select id="betName" class="bet-sel-select" style="min-width:180px;">
+            <option value="">— Select —</option>
+          </select>
+        </div>
+        <div class="bet-credits-display">
+          <span class="bet-credits-num" id="betCreditsLeft">1,000</span>
+          <span class="bet-credits-lbl">credits remaining</span>
+        </div>
+      </div>
+      <div id="betSlipRows"></div>
+      <button class="bet-add-row-btn" onclick="betAddRow()">+ Add a bet</button>
+      <div class="bet-submit-row">
+        <button class="draw-btn" onclick="betSubmit()">💰 Lock In Bets</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Board -->
+  <div style="margin-top:3rem;">
+    <div class="section-header">
+      <span class="eyebrow">All Bets</span>
+      <h3 style="font-size:1.3rem;color:var(--cream);font-family:'Georgia',serif;">The Board</h3>
+      <div class="divider"></div>
+      <p>Everyone's bets. Sorted by maximum potential return.</p>
+    </div>
+    <div id="betBoard"></div>
+  </div>
 </section>
 
 <!-- PAST WINNERS -->
@@ -2823,6 +2973,242 @@ function toggleLeaderboardEdit() {
 
 // Replace the old static leaderboard build with the new dynamic one
 buildLeaderboard();
+
+// ── THE BOOK (BETTING) ─────────────────────────────────────────
+(function() {
+  var BET_LOCK = new Date('2026-04-16T23:00:00+10:00').getTime();
+  var BET_KEY  = 'vase2026_bets';
+  var CREDITS  = 1000;
+
+  var OUTRIGHT = [
+    {name:'Travis Davis',odds:4.00},{name:'Pete Sweeney',odds:5.00},
+    {name:'Heath Attwood',odds:6.25},{name:'Mick Sweeney',odds:8.00},
+    {name:'Shane Somers',odds:10.00},{name:'Damo Lovie',odds:11.00},
+    {name:'Andrew Chadwick',odds:12.00},{name:'Brendan Hunt',odds:13.00},
+    {name:'Daniel Riley',odds:14.00},{name:'Brad Hunt',odds:16.00},
+    {name:'Tom Hussey',odds:22.00},{name:'Chris McGowan',odds:26.00},
+  ];
+  var TOP3 = [
+    {name:'Travis Davis',odds:1.75},{name:'Pete Sweeney',odds:2.00},
+    {name:'Heath Attwood',odds:2.30},{name:'Mick Sweeney',odds:2.70},
+    {name:'Shane Somers',odds:3.10},{name:'Damo Lovie',odds:3.40},
+    {name:'Andrew Chadwick',odds:3.70},{name:'Brendan Hunt',odds:4.00},
+    {name:'Daniel Riley',odds:4.20},{name:'Brad Hunt',odds:5.20},
+    {name:'Tom Hussey',odds:6.80},{name:'Chris McGowan',odds:7.80},
+  ];
+  var H2H = [
+    {id:'tom_gow',    label:'Tom v Gow',      note:'Full weekend',    a:{name:'Tom Hussey',odds:1.60},      b:{name:'Chris McGowan',odds:2.30}},
+    {id:'mick_pete',  label:'Mick v Pete',    note:'Full weekend',    a:{name:'Mick Sweeney',odds:2.20},    b:{name:'Pete Sweeney',odds:1.65}},
+    {id:'heath_trav', label:'Heath v Trav',   note:'Full weekend',    a:{name:'Heath Attwood',odds:2.05},   b:{name:'Travis Davis',odds:1.75}},
+    {id:'bren_brad',  label:'Bren v Brad',    note:'Full weekend',    a:{name:'Brendan Hunt',odds:2.20},    b:{name:'Brad Hunt',odds:1.65}},
+    {id:'buff_riley', label:'Buff v Riley',   note:'Full weekend',    a:{name:'Shane Somers',odds:1.70},    b:{name:'Daniel Riley',odds:2.10}},
+    {id:'damo_chad',  label:'Damo v Chaders', note:'Full weekend',    a:{name:'Damo Lovie',odds:1.80},      b:{name:'Andrew Chadwick',odds:2.00}},
+    {id:'buff_dom',   label:'Buff v Dom',     note:'Saturday only',   a:{name:'Shane Somers',odds:1.65},    b:{name:'Dom Ciconte',odds:2.25}},
+  ];
+  var SATURDAY = [
+    {name:'Dom Ciconte',odds:3.40},{name:'Daniel Hunt',odds:3.70},
+    {name:'Chris Jones',odds:4.00},{name:'Chris Shepardson',odds:4.40},
+  ];
+
+  function isLocked() { return Date.now() >= BET_LOCK; }
+  function loadBets() { try { return JSON.parse(localStorage.getItem(BET_KEY)) || {}; } catch(e) { return {}; } }
+  function saveBets(b) { localStorage.setItem(BET_KEY, JSON.stringify(b)); }
+
+  // Flat selection list (index used to identify each bet)
+  function getSelections() {
+    var s = [];
+    OUTRIGHT.forEach(function(x){ s.push({mid:'outright', mLabel:'Outright Winner', name:x.name, odds:x.odds}); });
+    TOP3.forEach(function(x){ s.push({mid:'top3', mLabel:'Top 3 Finish', name:x.name, odds:x.odds}); });
+    H2H.forEach(function(m){
+      s.push({mid:'h2h_'+m.id, mLabel:'H2H: '+m.label, name:m.a.name, odds:m.a.odds});
+      s.push({mid:'h2h_'+m.id, mLabel:'H2H: '+m.label, name:m.b.name, odds:m.b.odds});
+    });
+    SATURDAY.forEach(function(x){ s.push({mid:'saturday', mLabel:'Saturday Market', name:x.name, odds:x.odds}); });
+    return s;
+  }
+
+  // Build select options with optgroups
+  function buildOptHTML(sels, selIdx) {
+    var groups = {}, order = [];
+    sels.forEach(function(s, i) {
+      if (!groups[s.mLabel]) { groups[s.mLabel] = []; order.push(s.mLabel); }
+      groups[s.mLabel].push({s:s, i:i});
+    });
+    return order.map(function(lbl) {
+      return '<optgroup label="'+lbl+'">'+
+        groups[lbl].map(function(item){
+          return '<option value="'+item.i+'"'+(item.i===selIdx?' selected':'')+'>'+item.s.name+' ('+item.s.odds.toFixed(2)+')</option>';
+        }).join('')+'</optgroup>';
+    }).join('');
+  }
+
+  // ─── ODDS DISPLAY ───
+  function renderOdds() {
+    document.getElementById('bet-odds-outright').innerHTML = OUTRIGHT.map(function(s){
+      return '<div class="bet-odds-card"><span class="bet-odds-name">'+s.name+'</span><span class="bet-odds-price">'+s.odds.toFixed(2)+'</span></div>';
+    }).join('');
+    document.getElementById('bet-odds-top3').innerHTML = TOP3.map(function(s){
+      return '<div class="bet-odds-card"><span class="bet-odds-name">'+s.name+'</span><span class="bet-odds-price">'+s.odds.toFixed(2)+'</span></div>';
+    }).join('');
+    document.getElementById('bet-odds-h2h').innerHTML = '<div class="bet-h2h-grid">'+H2H.map(function(m){
+      return '<div class="bet-h2h-card">'+
+        '<div class="bet-h2h-lbl"><span class="bet-h2h-lbl-title">'+m.label+'</span><span class="bet-h2h-lbl-note">'+m.note+'</span></div>'+
+        '<div class="bet-h2h-players">'+
+          '<div class="bet-h2h-side"><div class="bet-h2h-player">'+m.a.name+'</div><div class="bet-h2h-price">'+m.a.odds.toFixed(2)+'</div></div>'+
+          '<div class="bet-h2h-side"><div class="bet-h2h-player">'+m.b.name+'</div><div class="bet-h2h-price">'+m.b.odds.toFixed(2)+'</div></div>'+
+        '</div></div>';
+    }).join('')+'</div>';
+    document.getElementById('bet-odds-saturday').innerHTML = SATURDAY.map(function(s){
+      return '<div class="bet-odds-card"><span class="bet-odds-name">'+s.name+'</span><span class="bet-odds-price">'+s.odds.toFixed(2)+'</span></div>';
+    }).join('');
+  }
+
+  // ─── TABS ───
+  window.showBetTab = function(tab) {
+    ['outright','top3','h2h','saturday'].forEach(function(t){
+      document.getElementById('bet-panel-'+t).style.display = t===tab?'block':'none';
+    });
+    document.querySelectorAll('.bet-tab').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.tab===tab);
+    });
+  };
+  document.querySelectorAll('.bet-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){ window.showBetTab(btn.dataset.tab); });
+  });
+
+  // ─── BET FORM ───
+  var bettorRows = [{selIdx:0, credits:''}];
+
+  var nameEl = document.getElementById('betName');
+  players.slice().sort(function(a,b){ return a.name.localeCompare(b.name); }).forEach(function(p){
+    var o = document.createElement('option'); o.value = p.name; o.textContent = p.name; nameEl.appendChild(o);
+  });
+  nameEl.addEventListener('change', function(){ loadPersonBets(nameEl.value); });
+
+  function loadPersonBets(name) {
+    var bets = loadBets();
+    if (name && bets[name] && bets[name].length) {
+      bettorRows = bets[name].map(function(b){ return {selIdx:b.selIdx, credits:b.credits}; });
+    } else {
+      bettorRows = [{selIdx:0, credits:''}];
+    }
+    renderForm(); updateCredits();
+  }
+
+  function renderForm() {
+    var sels = getSelections();
+    var locked = isLocked();
+    var container = document.getElementById('betSlipRows');
+    container.innerHTML = '';
+    bettorRows.forEach(function(row, i){
+      var d = document.createElement('div');
+      d.className = 'bet-slip-row';
+      d.innerHTML =
+        '<select class="bet-sel-select"'+(locked?' disabled':'')+' onchange="betRowSel('+i+',this.value)">'+buildOptHTML(sels, row.selIdx)+'</select>'+
+        '<input type="number" class="bet-credits-input" placeholder="Credits" min="1" max="1000" value="'+(row.credits||'')+'"'+(locked?' disabled':'')+' oninput="betRowCr('+i+',this.value)">'+
+        (!locked ? '<button class="bet-remove-btn" onclick="betRowDel('+i+')">✕</button>' : '<span></span>');
+      container.appendChild(d);
+    });
+  }
+
+  window.betRowSel = function(i,v){ bettorRows[i].selIdx=parseInt(v); updateCredits(); };
+  window.betRowCr  = function(i,v){ bettorRows[i].credits=v===''?'':Math.max(0,parseInt(v)||0); updateCredits(); };
+  window.betRowDel = function(i){ bettorRows.splice(i,1); if(!bettorRows.length) bettorRows=[{selIdx:0,credits:''}]; renderForm(); updateCredits(); };
+  window.betAddRow = function(){ bettorRows.push({selIdx:0,credits:''}); renderForm(); updateCredits(); };
+
+  function updateCredits() {
+    var used = bettorRows.reduce(function(s,r){ return s+(parseInt(r.credits)||0); }, 0);
+    var rem  = CREDITS - used;
+    var el   = document.getElementById('betCreditsLeft');
+    if (el) { el.textContent = rem.toLocaleString(); el.style.color = rem < 0 ? '#e74c3c' : 'var(--gold)'; }
+  }
+
+  window.betSubmit = function() {
+    if (isLocked()) { alert('The book is closed.'); return; }
+    var name = document.getElementById('betName').value;
+    if (!name) { alert('Please select your name first.'); return; }
+    var sels = getSelections();
+    var used = bettorRows.reduce(function(s,r){ return s+(parseInt(r.credits)||0); }, 0);
+    if (used === 0) { alert('No credits entered. Add at least one bet.'); return; }
+    if (used > CREDITS) { alert('You\'ve used '+used+' credits — maximum is 1,000. Please adjust.'); return; }
+    for (var i=0; i<bettorRows.length; i++) {
+      if (!bettorRows[i].credits || parseInt(bettorRows[i].credits) < 1) {
+        alert('Row '+(i+1)+' has no credits. Remove it or enter an amount.'); return;
+      }
+    }
+    var bets = loadBets();
+    bets[name] = bettorRows.map(function(r){
+      var s = sels[r.selIdx];
+      return {selIdx:r.selIdx, credits:parseInt(r.credits), market:s.mLabel, marketId:s.mid, selection:s.name, odds:s.odds};
+    });
+    saveBets(bets);
+    renderBoard();
+    alert('Bets saved for '+name+'!\n'+used.toLocaleString()+' / 1,000 credits wagered.');
+  };
+
+  // ─── THE BOARD ───
+  function renderBoard() {
+    var bets  = loadBets();
+    var names = Object.keys(bets);
+    var el    = document.getElementById('betBoard');
+    if (!names.length) {
+      el.innerHTML = '<p style="text-align:center;color:var(--text-dim);font-style:italic;font-family:Arial,sans-serif;font-size:0.85rem;padding:2rem;">No bets placed yet. Be the first.</p>';
+      return;
+    }
+    // Sort by max potential return descending
+    names.sort(function(a,b){
+      var potA = bets[a].reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
+      var potB = bets[b].reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
+      return potB - potA;
+    });
+    el.innerHTML = names.map(function(name, rank){
+      var betList = bets[name];
+      var used = betList.reduce(function(s,b){ return s+b.credits; }, 0);
+      var pot  = betList.reduce(function(s,b){ return s+b.credits*b.odds; }, 0);
+      var medal = rank===0?'🥇 ':rank===1?'🥈 ':rank===2?'🥉 ':'';
+      var rows = betList.map(function(b){
+        var ret = Math.round(b.credits*b.odds);
+        return '<div class="bet-board-row">'+
+          '<div><div class="bet-board-sel">'+b.selection+'</div><div class="bet-board-mkt">'+b.market+'</div></div>'+
+          '<div class="bet-board-right">'+
+            '<span class="bet-board-credits">'+b.credits.toLocaleString()+' cr</span>'+
+            ' <span class="bet-board-odds">@ '+b.odds.toFixed(2)+'</span>'+
+            '<div class="bet-board-pot">↳ '+ret.toLocaleString()+' cr if wins</div>'+
+          '</div></div>';
+      }).join('');
+      return '<div class="bet-board-card">'+
+        '<div class="bet-board-hdr">'+
+          '<span class="bet-board-hdr-name">'+medal+name+'</span>'+
+          '<span class="bet-board-hdr-pot">'+used.toLocaleString()+' cr wagered &nbsp;·&nbsp; max <strong>'+Math.round(pot).toLocaleString()+' cr</strong></span>'+
+        '</div>'+rows+'</div>';
+    }).join('');
+  }
+
+  // ─── COUNTDOWN ───
+  function tick() {
+    var diff = BET_LOCK - Date.now();
+    if (diff <= 0) {
+      var box = document.getElementById('betLockBox'); if(box) box.style.display='none';
+      var msg = document.getElementById('betLockedMsg'); if(msg) msg.style.display='block';
+      var form = document.getElementById('betEntrySection'); if(form) form.style.display='none';
+    } else {
+      var d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+      function p(n){return String(n).padStart(2,'0');}
+      var days=document.getElementById('bcd-days'); if(days) days.textContent=p(d);
+      var hrs=document.getElementById('bcd-hours'); if(hrs) hrs.textContent=p(h);
+      var mins=document.getElementById('bcd-mins'); if(mins) mins.textContent=p(m);
+      var secs=document.getElementById('bcd-secs'); if(secs) secs.textContent=p(s);
+      setTimeout(tick, 1000);
+    }
+  }
+
+  // ─── INIT ───
+  renderOdds();
+  renderBoard();
+  loadPersonBets('');
+  tick();
+})();
 
 // ── SATURDAY DRAW ──────────────────────────────────────────────
 (function() {
