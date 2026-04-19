@@ -1453,7 +1453,7 @@
   .weather-loading { color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem; grid-column: 1/-1; }
 
   /* ===== LEADERBOARD EDIT ===== */
-  .lb-toolbar { display: flex; justify-content: flex-end; margin-bottom: 0.8rem; }
+  .lb-toolbar { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
   .lb-edit-btn {
     background: none;
     border: 1px solid var(--gold);
@@ -2120,8 +2120,8 @@
 
   <div class="lb-toolbar">
     <button class="lb-edit-btn" id="lbEditBtn" onclick="toggleLeaderboardEdit()">&#9998; Edit Scores</button>
-    <button class="lb-edit-btn" id="lbExportBtn" onclick="exportScores()" style="background:rgba(197,160,80,0.12);margin-left:0.5rem;">📤 Export</button>
-    <button class="lb-edit-btn" id="lbImportBtn" onclick="toggleImportBox()" style="background:rgba(197,160,80,0.12);margin-left:0.5rem;">📥 Import</button>
+    <button class="lb-edit-btn" id="lbExportBtn" onclick="exportScores()" style="background:rgba(197,160,80,0.12);">📤 Export</button>
+    <button class="lb-edit-btn" id="lbImportBtn" onclick="toggleImportBox()" style="background:rgba(197,160,80,0.12);">📥 Import</button>
   </div>
   <div id="importBox" style="display:none;margin-bottom:1rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1rem;">
     <p style="font-family:Arial,sans-serif;font-size:0.82rem;color:var(--text-dim);margin:0 0 0.6rem;">Paste exported score data below then click Import:</p>
