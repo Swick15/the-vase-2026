@@ -2983,15 +2983,36 @@ const SCORE_DB  = 'https://vase2026-default-rtdb.asia-southeast1.firebasedatabas
 let lbEditMode  = false;
 let _scoreCache = {};
 
-// Load scores from Firebase (falls back to localStorage)
+// Load scores from Firebase (falls back to localStorage, never overwrites local data with empty)
 async function fetchScoresFromDB() {
+  // Always grab localStorage first as a safety net
+  let localData = {};
+  try { localData = JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; } catch(e) {}
+
   try {
     const res  = await fetch(SCORE_DB + '/scores.json');
     const data = await res.json();
-    _scoreCache = data || {};
-    localStorage.setItem(SCORE_KEY, JSON.stringify(_scoreCache)); // local backup
+    const hasFirebase = data && typeof data === 'object' && Object.keys(data).length > 0;
+    const hasLocal    = Object.keys(localData).length > 0;
+
+    if (hasFirebase) {
+      // Firebase has real data — use it as source of truth
+      _scoreCache = data;
+      localStorage.setItem(SCORE_KEY, JSON.stringify(_scoreCache));
+    } else if (hasLocal) {
+      // Firebase empty but localStorage has data — use local and push up to Firebase
+      _scoreCache = localData;
+      fetch(SCORE_DB + '/scores.json', {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(_scoreCache)
+      });
+    } else {
+      _scoreCache = {};
+    }
   } catch(e) {
-    try { _scoreCache = JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; } catch(e2) { _scoreCache = {}; }
+    // Network error — use whatever localStorage has
+    _scoreCache = localData;
   }
 }
 
