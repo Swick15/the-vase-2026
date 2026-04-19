@@ -1452,6 +1452,46 @@
   .weather-wind { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); margin-top: 0.6rem; }
   .weather-loading { color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem; grid-column: 1/-1; }
 
+  /* ===== HERO PODIUM ===== */
+  .hero-podium { margin-top: 2rem; width: 100%; max-width: 480px; }
+  .hero-podium .podium-wrap { padding-top: 0; }
+  .hero-podium .podium-name { color: rgba(255,255,255,0.9); }
+  .hero-podium .podium-name-winner { color: var(--gold); }
+
+  /* ===== BOOK RESULT ===== */
+  .book-result-wrap { display: flex; justify-content: center; padding: 1rem 0 2rem; }
+  .book-result-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+  }
+  .book-result-crown { font-size: 3rem; margin-bottom: 0.5rem; }
+  .book-result-title {
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+  .book-result-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .book-result-sub {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
   /* ===== PODIUM ===== */
   .podium-wrap {
     display: flex;
@@ -1566,11 +1606,6 @@
     <li><a href="#courses">Courses</a></li>
     <li><a href="#weekend">Weekend</a></li>
     <li><a href="#venues">Venues</a></li>
-    <li><a href="#format">Format</a></li>
-    <li><a href="#draw">Draw</a></li>
-    <li><a href="#scramble">Teams</a></li>
-    <li><a href="#satdraw">Sat Draw</a></li>
-    <li><a href="#leaderboard">Leaderboard</a></li>
     <li><a href="#betting">The Book</a></li>
     <li><a href="#history">History</a></li>
     <li><a href="#podcast">Podcast</a></li>
@@ -1582,28 +1617,30 @@
 <div class="hero">
   <div class="hero-badge">Annual Golf Invitational</div>
   <h1>The<span>Vase</span></h1>
-  <p class="hero-subtitle">16 Men &nbsp;·&nbsp; 3 Courses &nbsp;·&nbsp; One Trophy</p>
+  <p class="hero-subtitle">Mornington Peninsula &nbsp;·&nbsp; April 2026</p>
   <p class="hero-quote">"Hello friends and welcome to a tradition unlike any other."</p>
 
-  <div class="countdown" id="countdown">
-    <div class="countdown-unit"><span class="countdown-num" id="cd-days">--</span><span class="countdown-label">Days</span></div>
-    <div class="countdown-unit"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-label">Hours</span></div>
-    <div class="countdown-unit"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-label">Minutes</span></div>
-    <div class="countdown-unit"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-label">Seconds</span></div>
-  </div>
-
-  <div class="hero-meta">
-    <div class="hero-meta-item">
-      <span class="label">Players</span>
-      <span class="value">16</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="label">Rounds</span>
-      <span class="value">3</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="label">Defending Champion</span>
-      <span class="value">Dan 'Spider' Hunt</span>
+  <div class="hero-podium">
+    <div class="podium-wrap">
+      <div class="podium-col podium-second">
+        <div class="podium-avatar">🥈</div>
+        <div class="podium-name">Travis Davis</div>
+        <div class="podium-label">Runner Up</div>
+        <div class="podium-block podium-block-2">2</div>
+      </div>
+      <div class="podium-col podium-first">
+        <div class="podium-crown">👑</div>
+        <div class="podium-avatar">🏆</div>
+        <div class="podium-name podium-name-winner">Heath Attwood</div>
+        <div class="podium-label">Champion</div>
+        <div class="podium-block podium-block-1">1</div>
+      </div>
+      <div class="podium-col podium-third">
+        <div class="podium-avatar">🥉</div>
+        <div class="podium-name">Brendan Hunt</div>
+        <div class="podium-label">3rd Place</div>
+        <div class="podium-block podium-block-3">3</div>
+      </div>
     </div>
   </div>
 
@@ -1866,435 +1903,21 @@
   </div>
 </div>
 
-<!-- ACCOMMODATION -->
-<section id="accommodation">
-  <div class="section-header">
-    <span class="eyebrow">Where We're Staying</span>
-    <h2>Accommodation</h2>
-    <div class="divider"></div>
-    <p>Two houses in Rye. Rosters confirmed.</p>
-  </div>
-
-  <div class="venue-grid">
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status confirmed">House 1</div>
-        <h4>A Splash of Rye</h4>
-        <div class="venue-location">&#128205; 7 Gladwell Street, Rye VIC 3941</div>
-      </div>
-      <p class="venue-desc">Mick · Trav · Jonesy · Pete · Heath · Chaders</p>
-      <p style="margin-top:0.7rem;font-size:0.8rem;"><a href="https://www.airbnb.com.au/rooms/975008689766124989" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">&#8599; View on Airbnb</a></p>
-    </div>
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status confirmed">House 2</div>
-        <h4>Lazy Days</h4>
-        <div class="venue-location">&#128205; 33 Pasadena Street, Rye VIC 3941</div>
-      </div>
-      <p class="venue-desc">Buff · Gow · Brad · Riley · Bren · Huss · Damo</p>
-      <p style="margin-top:0.7rem;font-size:0.8rem;"><a href="https://www.airbnb.com.au/rooms/52589980" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">&#8599; View on Airbnb</a></p>
-    </div>
-
-  </div>
-</section>
-
-<!-- VENUES -->
-<section id="venues">
-  <div class="section-header">
-    <span class="eyebrow">Saturday Afternoon</span>
-    <h2>After the Round</h2>
-    <div class="divider"></div>
-  </div>
-
-  <div class="venue-grid">
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status confirmed">Fireplace Confirmed</div>
-        <h4>Rosebud Hotel</h4>
-        <div class="venue-location">&#128205; Rosebud, Mornington Peninsula</div>
-      </div>
-      <p class="venue-desc">The known quantity. Hosted the presentation last year and does a solid counter meal. Reliable, comfortable, and proven.</p>
-    </div>
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status option">Option</div>
-        <h4>Rye Hotel</h4>
-        <div class="venue-location">&#128205; Rye, Mornington Peninsula</div>
-      </div>
-      <p class="venue-desc">Closest pub to the accommodation. Reputation yet to be established — but proximity counts.</p>
-    </div>
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status option">Option</div>
-        <h4>Continental Hotel Sorrento</h4>
-        <div class="venue-location">&#128205; Ocean Beach Rd, Sorrento VIC 3943</div>
-      </div>
-      <p class="venue-desc">The Conti. A step up in ambience — Sorrento's marquee venue if the group is after something a bit more upmarket on Saturday afternoon.</p>
-    </div>
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status option">Option</div>
-        <h4>Sorrento Hotel</h4>
-        <div class="venue-location">&#128205; Ocean Beach Rd, Sorrento VIC 3943</div>
-      </div>
-      <p class="venue-desc">The alternative Sorrento option. Same town, slightly different vibe. If not the Conti, this is the call — both are a step up from the local.</p>
-    </div>
-
-    <div class="venue-card">
-      <div class="venue-header">
-        <div class="venue-status wildcard">Wildcard</div>
-        <h4>Local Footy</h4>
-        <div class="venue-location">&#128205; Dromana &amp; Sorrento playing home games</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FORMAT -->
-<section id="format">
-  <div class="section-header">
-    <span class="eyebrow">How It Works</span>
-    <h2>Format &amp; Rules</h2>
-    <div class="divider"></div>
-    <p>The rules are simple. The handicaps are controversial. The trash talk is mandatory.</p>
-  </div>
-
-  <!-- POINTS TABLE -->
-  <div class="points-table-wrap">
-    <table class="points-table">
-      <thead>
-        <tr>
-          <th>Round</th>
-          <th>Venue</th>
-          <th>Format</th>
-          <th>Individual Pts</th>
-          <th>Team Pts</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="rd-badge"><span class="rd rd1">Rd 1</span></td>
-          <td>Moonah Links — Legends</td>
-          <td><span class="fmt-tag">Stableford</span></td>
-          <td><span class="pts-range">12 – 1</span></td>
-          <td><span class="pts-range">6 – 1</span> <span class="pts-sub">Pairs Aggregate</span></td>
-          <td class="pts-note">Points awarded to top 12 individually. Pairs combined Stableford score earns team points.</td>
-        </tr>
-        <tr>
-          <td class="rd-badge"><span class="rd rd2">Rd 2</span></td>
-          <td>Moonah Links — Open</td>
-          <td><span class="fmt-tag scramble-tag">Scramble</span></td>
-          <td><span class="pts-na">N/A</span></td>
-          <td><span class="pts-range">6 – 3 – 1</span> <span class="pts-sub">Win / Draw / Loss</span></td>
-          <td class="pts-note">
-            Team format only. No individual points on offer.<br><br>
-            <strong style="color:var(--cream)">The Snake Draft</strong><br>
-            The top 4 players from Round 1 become team captains. In rank order, each captain <em>chooses their draft position</em> in the snake — they don't get assigned it.<br><br>
-            The snake runs: <span style="color:var(--gold)">1 → 2 → 3 → 4 → 4 → 3 → 2 → 1…</span> and repeats.<br><br>
-            <em>Example:</em> The Round 1 leader might elect to draft <strong>4th</strong> in the first round — meaning they pick last initially, but first in round 2 of the draft, and last again in the final round. A calculated gamble on who's still available mid-draft.
-          </td>
-        </tr>
-        <tr class="rd3-row">
-          <td class="rd-badge"><span class="rd rd3">Rd 3</span></td>
-          <td>St Andrews Beach</td>
-          <td><span class="fmt-tag">Stableford</span></td>
-          <td><span class="pts-range">16 – 1</span></td>
-          <td><span class="pts-range">8 – 1</span> <span class="pts-sub">Pairs Aggregate</span></td>
-          <td class="pts-note">&#9733; Top 8 on the leaderboard randomised with bottom 8 for Saturday pairs. The final shake-up.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="format-grid" style="margin-top: 2rem;">
-    <div class="format-card">
-      <span class="icon">&#127358;</span>
-      <h4>Stableford Scoring</h4>
-      <p>Points awarded based on your score relative to par on each hole — Bogey = 1 pt, Par = 2 pts, Birdie = 3 pts, Eagle = 4 pts. Bad holes cost you nothing; you score zero and move on. Handicap strokes are applied per hole.</p>
-      <p style="margin-top:0.8rem;"><a href="https://www.randa.org/en/rog/2019/rules/the-rules-of-golf/rule-21#21-1" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-size:0.82rem;">&#8599; Rules of Golf — Stableford (R&amp;A)</a></p>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#129309;</span>
-      <h4>Scramble</h4>
-      <p>All players tee off. The best ball is selected and must remain in place — played as it lies. All other players drop within one club length, no closer to the hole. Repeat until holed.</p>
-      <ul style="margin-top:0.7rem;font-size:0.82rem;color:var(--text-dim);line-height:1.8;padding-left:1.1rem;">
-        <li>Every player must contribute a minimum of 3 tee shots across the round.</li>
-        <li>A ball in the bunker must be dropped in the bunker, not placed.</li>
-        <li>One club length applies throughout the course — if the drop moves you from rough to fairway, that's your good fortune. The drop may not bring you onto the green.</li>
-        <li>Exception: if the selected ball is in a hazard, all players must play from within that hazard within one club length.</li>
-        <li>Scramble is stroke play. Team handicap calculated via the <a href="http://www.leaderboard.com/scramcap.htm" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Scramble Handicap Calculator</a>.</li>
-      </ul>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#129351;</span>
-      <h4>The Vase</h4>
-      <p>The overall winner is determined by aggregate individual and team points across all three rounds. The player with the most points at the end of Saturday claims The Vase.</p>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#128256;</span>
-      <h4>The Saturday Shake-Up</h4>
-      <p>Top 8 randomised with bottom 8 for Round 3 pairs. No hiding. No safe draws. If you're leading, you're getting tested. If you're trailing, this is your lifeline.</p>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#127808;</span>
-      <h4>Handicap Integrity</h4>
-      <p>All handicaps are declared prior to the trip and locked in. Current official Golf Australia handicaps apply. Queries go to the committee — decisions are final.</p>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#9917;</span>
-      <h4>Nearest the Pin</h4>
-      <p>Each course has 4 par 3s. Open to anyone who wants in.</p>
-      <ul style="margin-top:0.7rem;font-size:0.82rem;color:var(--text-dim);line-height:1.9;padding-left:1.1rem;">
-        <li>$20 entry per round — $5 per par 3 hole.</li>
-        <li>Closest to the pin on each hole takes that hole's pot.</li>
-        <li>Applies to all three rounds. In the Round 2 scramble, everyone hits their own tee shot on par 3s for nearest the pin purposes.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-header" style="margin-top:3rem;">
-    <span class="eyebrow">Jug Rules</span>
-    <h2>Buying Jugs</h2>
-    <div class="divider"></div>
-    <p>Certain offences result in the immediate obligation to buy a jug. There is no appeal process.</p>
-  </div>
-
-  <div class="format-grid" style="margin-top:1.5rem;">
-    <div class="format-card">
-      <span class="icon">&#127866;</span>
-      <h4>Automatic Jug Offences</h4>
-      <ul style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-dim);line-height:2;padding-left:1.1rem;">
-        <li>4-putt on any hole</li>
-        <li>Playing from the ladies tee</li>
-        <li>4 shots in the sand on a single hole</li>
-        <li>Putting from on the green to off</li>
-      </ul>
-      <p style="margin-top:0.8rem;font-size:0.8rem;color:var(--text-dim);font-style:italic;">* Putts are only counted on the green. Strokes taken from off the green do not count as putts.</p>
-    </div>
-    <div class="format-card">
-      <span class="icon">&#127991;</span>
-      <h4>The 3-Putt Token</h4>
-      <p>At the start of Rounds 1 and 3, a token is given to the group. The first player to 3-putt takes possession of the token. The holder of the token at the end of the round buys a jug.</p>
-      <ul style="margin-top:0.8rem;font-size:0.82rem;color:var(--text-dim);line-height:1.9;padding-left:1.1rem;">
-        <li>To pass the token, the holder must first 2-putt on the same hole as someone else 3-putts.</li>
-        <li>If the holder 2-putts and two or more players 3-putt on the same hole, those players rock paper scissors for the token.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- FRIDAY DRAW -->
-<section id="draw">
-  <div class="draw-section">
-    <div class="section-header">
-      <span class="eyebrow">Round 1 — Moonah Links Legends</span>
-      <h2>Friday Draw</h2>
-      <div class="divider"></div>
-      <p>3 groups of 4 · 2 official handicap players per group · Pairs within each group</p>
-    </div>
-
-    <!-- Countdown (shown before 6pm Thursday) -->
-    <div class="draw-countdown-box" id="drawCountdownBox">
-      <p>🔒 Draw reveals</p>
-      <div class="draw-cd-units">
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="dcd-days">--</span><span class="draw-cd-label">Days</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="dcd-hours">--</span><span class="draw-cd-label">Hours</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="dcd-mins">--</span><span class="draw-cd-label">Mins</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="dcd-secs">--</span><span class="draw-cd-label">Secs</span></div>
-      </div>
-      <p class="draw-locked-msg">Thursday 16 April · 6:00pm</p>
-    </div>
-
-    <!-- Groups (shown at/after 6pm Thursday, or via test) -->
-    <div id="drawReveal" style="display:none;">
-      <div class="draw-groups" id="drawGroups"></div>
-      <p class="draw-official-note" id="drawNote"></p>
-    </div>
-
-    <div class="draw-btn-row">
-      <button class="draw-btn" onclick="testDraw()">🎲 Test Draw</button>
-    </div>
-  </div>
-</section>
-
-<!-- SCRAMBLE TEAMS -->
-<section id="scramble">
-  <div class="scramble-section">
-    <div class="section-header">
-      <span class="eyebrow">Round 2 — Saturday Scramble</span>
-      <h2>Team Draw</h2>
-      <div class="divider"></div>
-      <p>4 teams drafted by the Round 1 leaders. Handicap calculated automatically.</p>
-    </div>
-    <div class="scramble-teams" id="scrambleTeams"></div>
-    <div class="scramble-edit-bar">
-      <button class="scramble-edit-btn" id="scrambleEditBtn" onclick="scrambleEditToggle()">🔐 Edit Teams</button>
-    </div>
-  </div>
-</section>
-
-<!-- SATURDAY DRAW -->
-<section id="satdraw">
-  <div class="draw-section">
-    <div class="section-header">
-      <span class="eyebrow">Round 3 — St Andrews Beach</span>
-      <h2>Saturday Draw</h2>
-      <div class="divider"></div>
-      <p>4 groups of 4 · Top 8 paired with bottom 8 · 2 official handicap players per group · White tees · Slope 135</p>
-    </div>
-
-    <!-- Countdown (shown before 7:30pm Friday) -->
-    <div class="draw-countdown-box" id="satDrawCountdownBox">
-      <p>🔒 Draw reveals</p>
-      <div class="draw-cd-units">
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="scd-days">--</span><span class="draw-cd-label">Days</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="scd-hours">--</span><span class="draw-cd-label">Hours</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="scd-mins">--</span><span class="draw-cd-label">Mins</span></div>
-        <div class="draw-cd-unit"><span class="draw-cd-num" id="scd-secs">--</span><span class="draw-cd-label">Secs</span></div>
-      </div>
-      <p class="draw-locked-msg">Friday 17 April · 7:30pm</p>
-    </div>
-
-    <!-- Groups (shown at/after 7:30pm Friday, or via test) -->
-    <div id="satDrawReveal" style="display:none;">
-      <div class="sat-draw-groups" id="satDrawGroups"></div>
-      <p class="draw-official-note" id="satDrawNote"></p>
-    </div>
-
-    <div class="draw-btn-row">
-      <button class="draw-btn" onclick="testSatDraw()">🎲 Test Draw</button>
-    </div>
-  </div>
-</section>
-
-<!-- LEADERBOARD / PODIUM -->
-<section id="leaderboard" style="padding-top: 0;">
-  <div class="section-header">
-    <span class="eyebrow">Mornington Peninsula 2026</span>
-    <h2>Final Results</h2>
-    <div class="divider"></div>
-    <p>The Vase has been decided. Three men stood above the rest.</p>
-  </div>
-  <div class="podium-wrap">
-    <!-- 2nd -->
-    <div class="podium-col podium-second">
-      <div class="podium-avatar">🥈</div>
-      <div class="podium-name">Travis Davis</div>
-      <div class="podium-label">Runner Up</div>
-      <div class="podium-block podium-block-2">2</div>
-    </div>
-    <!-- 1st -->
-    <div class="podium-col podium-first">
-      <div class="podium-crown">👑</div>
-      <div class="podium-avatar">🏆</div>
-      <div class="podium-name podium-name-winner">Heath Attwood</div>
-      <div class="podium-label">Champion</div>
-      <div class="podium-block podium-block-1">1</div>
-    </div>
-    <!-- 3rd -->
-    <div class="podium-col podium-third">
-      <div class="podium-avatar">🥉</div>
-      <div class="podium-name">Brendan Hunt</div>
-      <div class="podium-label">3rd Place</div>
-      <div class="podium-block podium-block-3">3</div>
-    </div>
-  </div>
-</section>
-
 <!-- THE BOOK -->
 <section id="betting">
   <div class="section-header">
     <span class="eyebrow">Damo's Markets</span>
     <h2>The Book</h2>
     <div class="divider"></div>
-    <p>1,000 credits each · Spread across any market · Cash buy-in to Damo · Winner takes the pot</p>
+    <p>The markets are closed. The credits are counted.</p>
   </div>
-
-  <!-- Lock countdown -->
-  <div class="draw-countdown-box" id="betLockBox">
-    <p>🔒 Betting closes</p>
-    <div class="draw-cd-units">
-      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-days">--</span><span class="draw-cd-label">Days</span></div>
-      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-hours">--</span><span class="draw-cd-label">Hours</span></div>
-      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-mins">--</span><span class="draw-cd-label">Mins</span></div>
-      <div class="draw-cd-unit"><span class="draw-cd-num" id="bcd-secs">--</span><span class="draw-cd-label">Secs</span></div>
+  <div class="book-result-wrap">
+    <div class="book-result-card">
+      <div class="book-result-crown">🏆</div>
+      <div class="book-result-title">Winner of The Book</div>
+      <div class="book-result-name">Damo Lovie</div>
+      <div class="book-result-sub">Cleaned up the punters · 2026</div>
     </div>
-    <p class="draw-locked-msg">Thursday 16 April · 11:00pm</p>
-  </div>
-  <div id="betLockedMsg" style="display:none;text-align:center;padding:1rem 0 0.5rem;font-family:Arial,sans-serif;font-size:0.8rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">🔒 The book is closed</div>
-
-  <!-- Market tabs -->
-  <div class="bet-tabs">
-    <button class="bet-tab active" data-tab="outright">Outright</button>
-    <button class="bet-tab" data-tab="top3">Top 3</button>
-    <button class="bet-tab" data-tab="h2h">H2H</button>
-    <button class="bet-tab" data-tab="saturday">Saturday</button>
-  </div>
-
-  <div id="bet-panel-outright" class="bet-panel">
-    <p class="bet-market-note">Winner of The Vase — highest individual Stableford total across the weekend.</p>
-    <div class="bet-odds-grid" id="bet-odds-outright"></div>
-  </div>
-  <div id="bet-panel-top3" class="bet-panel" style="display:none">
-    <p class="bet-market-note">Player to finish in the top 3 on the final leaderboard.</p>
-    <div class="bet-odds-grid" id="bet-odds-top3"></div>
-  </div>
-  <div id="bet-panel-h2h" class="bet-panel" style="display:none">
-    <p class="bet-market-note">One-on-one matchups across the weekend. Buff v Dom is Saturday only.</p>
-    <p class="bet-market-note" style="margin-top:0.4rem;">* Settled on R1 + R3 individual rounds only — the Friday scramble (R2) is excluded as it's a team format.</p>
-    <div id="bet-odds-h2h"></div>
-  </div>
-  <div id="bet-panel-saturday" class="bet-panel" style="display:none">
-    <p class="bet-market-note">Highest individual score on Saturday among the ineligible four — Dom, Dan, Jonesy &amp; Shep.</p>
-    <div class="bet-odds-grid" id="bet-odds-saturday"></div>
-  </div>
-
-  <!-- Bet Entry -->
-  <div id="betEntrySection" style="margin-top:2.5rem;">
-    <div class="section-header">
-      <span class="eyebrow">Place Your Bets</span>
-      <h3 style="font-size:1.3rem;color:var(--cream);font-family:'Georgia',serif;">Bet Slip</h3>
-      <div class="divider"></div>
-      <p>Select your name, add your bets, lock them in before Thursday 11pm.</p>
-    </div>
-    <div class="bet-entry-box">
-      <div class="bet-entry-top">
-        <div>
-          <div style="font-family:Arial,sans-serif;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem;">Your Name</div>
-          <select id="betName" class="bet-sel-select" style="min-width:180px;">
-            <option value="">— Select —</option>
-          </select>
-        </div>
-        <div class="bet-credits-display">
-          <span class="bet-credits-num" id="betCreditsLeft">1,000</span>
-          <span class="bet-credits-lbl">credits remaining</span>
-        </div>
-      </div>
-      <div id="betSlipRows"></div>
-      <button class="bet-add-row-btn" onclick="betAddRow()">+ Add a bet</button>
-      <div class="bet-submit-row">
-        <button id="betSubmitBtn" class="draw-btn" onclick="betSubmit()">💰 Lock In Bets</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- The Board -->
-  <div style="margin-top:3rem;">
-    <div class="section-header">
-      <span class="eyebrow">All Bets</span>
-      <h3 style="font-size:1.3rem;color:var(--cream);font-family:'Georgia',serif;">The Board</h3>
-      <div class="divider"></div>
-      <p>Everyone's bets. Sorted by maximum potential return.</p>
-    </div>
-    <div id="betBoard"></div>
   </div>
 </section>
 
