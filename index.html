@@ -1452,6 +1452,72 @@
   .weather-wind { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); margin-top: 0.6rem; }
   .weather-loading { color: var(--text-dim); font-style: italic; text-align: center; padding: 2rem; grid-column: 1/-1; }
 
+  /* ===== PODIUM ===== */
+  .podium-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem 0;
+  }
+  .podium-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .podium-crown {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+    animation: floatCrown 2.5s ease-in-out infinite;
+  }
+  @keyframes floatCrown {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .podium-avatar { font-size: 2.4rem; line-height: 1; margin-bottom: 0.5rem; }
+  .podium-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .podium-name-winner {
+    font-size: 1.1rem;
+    color: var(--gold);
+  }
+  .podium-label {
+    font-family: Arial, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+  .podium-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 8px 8px 0 0;
+  }
+  .podium-block-1 { height: 130px; background: linear-gradient(160deg, #c5a050, #8b6914); color: #fff; box-shadow: 0 0 30px rgba(197,160,80,0.35); }
+  .podium-block-2 { height: 95px;  background: linear-gradient(160deg, #a8a8b0, #6b6b75); color: #fff; }
+  .podium-block-3 { height: 70px;  background: linear-gradient(160deg, #b87333, #7a4a1e); color: #fff; }
+  @media(max-width:480px) {
+    .podium-name { font-size: 0.82rem; }
+    .podium-name-winner { font-size: 0.95rem; }
+    .podium-avatar { font-size: 1.8rem; }
+    .podium-block-1 { height: 100px; } .podium-block-2 { height: 74px; } .podium-block-3 { height: 54px; }
+  }
+
   /* ===== LEADERBOARD EDIT ===== */
   .lb-toolbar { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
   .lb-edit-btn {
@@ -2109,45 +2175,38 @@
   </div>
 </section>
 
-<!-- LEADERBOARD -->
+<!-- LEADERBOARD / PODIUM -->
 <section id="leaderboard" style="padding-top: 0;">
   <div class="section-header">
-    <span class="eyebrow">Standings</span>
-    <h2>Leaderboard</h2>
+    <span class="eyebrow">Mornington Peninsula 2026</span>
+    <h2>Final Results</h2>
     <div class="divider"></div>
-    <p>Updated live during the trip. Until then — conjecture, hope, and dread.</p>
+    <p>The Vase has been decided. Three men stood above the rest.</p>
   </div>
-
-  <div class="lb-toolbar">
-    <button class="lb-edit-btn" id="lbEditBtn" onclick="toggleLeaderboardEdit()">&#9998; Edit Scores</button>
-    <button class="lb-edit-btn" id="lbExportBtn" onclick="exportScores()" style="background:rgba(197,160,80,0.12);">📤 Export</button>
-    <button class="lb-edit-btn" id="lbImportBtn" onclick="toggleImportBox()" style="background:rgba(197,160,80,0.12);">📥 Import</button>
+  <div class="podium-wrap">
+    <!-- 2nd -->
+    <div class="podium-col podium-second">
+      <div class="podium-avatar">🥈</div>
+      <div class="podium-name">Travis Davis</div>
+      <div class="podium-label">Runner Up</div>
+      <div class="podium-block podium-block-2">2</div>
+    </div>
+    <!-- 1st -->
+    <div class="podium-col podium-first">
+      <div class="podium-crown">👑</div>
+      <div class="podium-avatar">🏆</div>
+      <div class="podium-name podium-name-winner">Heath Attwood</div>
+      <div class="podium-label">Champion</div>
+      <div class="podium-block podium-block-1">1</div>
+    </div>
+    <!-- 3rd -->
+    <div class="podium-col podium-third">
+      <div class="podium-avatar">🥉</div>
+      <div class="podium-name">Brendan Hunt</div>
+      <div class="podium-label">3rd Place</div>
+      <div class="podium-block podium-block-3">3</div>
+    </div>
   </div>
-  <div id="importBox" style="display:none;margin-bottom:1rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1rem;">
-    <p style="font-family:Arial,sans-serif;font-size:0.82rem;color:var(--text-dim);margin:0 0 0.6rem;">Paste exported score data below then click Import:</p>
-    <textarea id="importText" rows="4" style="width:100%;background:#111;color:#eee;border:1px solid var(--card-border);border-radius:6px;padding:0.5rem;font-size:0.78rem;font-family:monospace;box-sizing:border-box;resize:vertical;"></textarea>
-    <button class="lb-edit-btn" onclick="doImport()" style="margin-top:0.5rem;">✅ Import Scores</button>
-    <button class="lb-edit-btn" onclick="toggleImportBox()" style="margin-top:0.5rem;margin-left:0.5rem;background:rgba(255,255,255,0.05);">Cancel</button>
-  </div>
-  <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 4px; overflow: hidden;">
-    <table class="leaderboard-table">
-      <thead>
-        <tr>
-          <th>Pos</th>
-          <th>Player</th>
-          <th>HC</th>
-          <th>Rd 1</th>
-          <th>Rd 2</th>
-          <th>Rd 3</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboardBody"></tbody>
-    </table>
-  </div>
-  <p style="text-align:center; margin-top: 1.5rem; font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-dim); letter-spacing: 1px;">
-    * Handicap disputes to be directed to the committee. The committee is unavailable.
-  </p>
 </section>
 
 <!-- THE BOOK -->
@@ -2916,7 +2975,7 @@ const pastWinners = [
   { year: '2023', name: 'Dan Hunt',      venue: 'Portarlington',       courses: ['13th Beach — Beach', 'Lonsdale Links', 'Curlewis'] },
   { year: '2024', name: 'Heath Attwood', venue: 'Portarlington',       courses: ['13th Beach — Creek', '13th Beach — Beach', 'Lonsdale Links'] },
   { year: '2025', name: 'Dan Hunt',      venue: 'Mornington Peninsula',courses: ['Moonah Links — Open', 'Moonah Links — Legends', 'Cape Schank'] },
-  { year: '2026', name: 'To Be Crowned', venue: 'Mornington Peninsula',courses: ['Moonah Links — Legends', 'Moonah Links — Open', 'St Andrews Beach'], pending: true },
+  { year: '2026', name: 'Heath Attwood', venue: 'Mornington Peninsula', courses: ['Moonah Links — Legends', 'Moonah Links — Open', 'St Andrews Beach'] },
 ];
 (function() {
   const grid = document.getElementById('winnersGrid');
