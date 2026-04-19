@@ -2120,6 +2120,14 @@
 
   <div class="lb-toolbar">
     <button class="lb-edit-btn" id="lbEditBtn" onclick="toggleLeaderboardEdit()">&#9998; Edit Scores</button>
+    <button class="lb-edit-btn" id="lbExportBtn" onclick="exportScores()" style="background:rgba(197,160,80,0.12);margin-left:0.5rem;">📤 Export</button>
+    <button class="lb-edit-btn" id="lbImportBtn" onclick="toggleImportBox()" style="background:rgba(197,160,80,0.12);margin-left:0.5rem;">📥 Import</button>
+  </div>
+  <div id="importBox" style="display:none;margin-bottom:1rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:1rem;">
+    <p style="font-family:Arial,sans-serif;font-size:0.82rem;color:var(--text-dim);margin:0 0 0.6rem;">Paste exported score data below then click Import:</p>
+    <textarea id="importText" rows="4" style="width:100%;background:#111;color:#eee;border:1px solid var(--card-border);border-radius:6px;padding:0.5rem;font-size:0.78rem;font-family:monospace;box-sizing:border-box;resize:vertical;"></textarea>
+    <button class="lb-edit-btn" onclick="doImport()" style="margin-top:0.5rem;">✅ Import Scores</button>
+    <button class="lb-edit-btn" onclick="toggleImportBox()" style="margin-top:0.5rem;margin-left:0.5rem;background:rgba(255,255,255,0.05);">Cancel</button>
   </div>
   <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 4px; overflow: hidden;">
     <table class="leaderboard-table">
@@ -2971,13 +2979,37 @@ const pastWinners = [
 
 // ── EDITABLE LEADERBOARD ───────────────────────────────────
 const SCORE_KEY = 'vase2026_scores';
-let lbEditMode = false;
+const SCORE_DB  = 'https://vase2026-default-rtdb.asia-southeast1.firebasedatabase.app';
+let lbEditMode  = false;
+let _scoreCache = {};
 
-function loadScores() {
-  try { return JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; }
-  catch { return {}; }
+// Load scores from Firebase (falls back to localStorage)
+async function fetchScoresFromDB() {
+  try {
+    const res  = await fetch(SCORE_DB + '/scores.json');
+    const data = await res.json();
+    _scoreCache = data || {};
+    localStorage.setItem(SCORE_KEY, JSON.stringify(_scoreCache)); // local backup
+  } catch(e) {
+    try { _scoreCache = JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; } catch(e2) { _scoreCache = {}; }
+  }
 }
-function saveScores(s) { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); }
+
+// Synchronous read from cache (so betting/draw code works unchanged)
+function loadScores() { return _scoreCache; }
+
+// Save to Firebase + update cache + localStorage backup
+async function saveScores(s) {
+  _scoreCache = s;
+  localStorage.setItem(SCORE_KEY, JSON.stringify(s));
+  try {
+    await fetch(SCORE_DB + '/scores.json', {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(s)
+    });
+  } catch(e) { console.error('Firebase score save failed', e); }
+}
 
 function buildLeaderboard() {
   const scores = loadScores();
@@ -3026,13 +3058,13 @@ function buildLeaderboard() {
   }).join('');
 }
 
-function toggleLeaderboardEdit() {
+async function toggleLeaderboardEdit() {
   const btn = document.getElementById('lbEditBtn');
   if (!lbEditMode) {
     const pwd = prompt('Enter admin password:');
     if (pwd !== 'vase2026') { alert('Incorrect password.'); return; }
     lbEditMode = true;
-    btn.textContent = '&#10003; Save Scores';
+    btn.innerHTML = '&#10003; Save Scores';
     btn.classList.add('saving');
   } else {
     const scores = loadScores();
@@ -3042,7 +3074,9 @@ function toggleLeaderboardEdit() {
       if (!scores[pid]) scores[pid] = {};
       scores[pid][rd] = inp.value !== '' ? +inp.value : null;
     });
-    saveScores(scores);
+    btn.disabled = true; btn.innerHTML = '💾 Saving…';
+    await saveScores(scores);
+    btn.disabled = false;
     lbEditMode = false;
     btn.innerHTML = '&#9998; Edit Scores';
     btn.classList.remove('saving');
@@ -3050,8 +3084,39 @@ function toggleLeaderboardEdit() {
   buildLeaderboard();
 }
 
-// Replace the old static leaderboard build with the new dynamic one
-buildLeaderboard();
+// ── EXPORT / IMPORT ─────────────────────────────────────────
+window.exportScores = function() {
+  const data = JSON.stringify(loadScores());
+  navigator.clipboard.writeText(data).then(function() {
+    alert('✅ Score data copied to clipboard!\n\nPaste it into the Import box on another device.');
+  }).catch(function() {
+    // Fallback: show in a prompt so they can copy manually
+    prompt('Copy this score data:', data);
+  });
+};
+
+window.toggleImportBox = function() {
+  const box = document.getElementById('importBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+};
+
+window.doImport = async function() {
+  const raw = document.getElementById('importText').value.trim();
+  if (!raw) { alert('Nothing to import — paste your exported data first.'); return; }
+  let parsed;
+  try { parsed = JSON.parse(raw); } catch(e) { alert('Invalid data — make sure you copied the full exported text.'); return; }
+  const btn = document.querySelector('#importBox .lb-edit-btn');
+  btn.disabled = true; btn.textContent = '💾 Saving…';
+  await saveScores(parsed);
+  btn.disabled = false; btn.textContent = '✅ Import Scores';
+  buildLeaderboard();
+  document.getElementById('importBox').style.display = 'none';
+  document.getElementById('importText').value = '';
+  alert('✅ Scores imported successfully!');
+};
+
+// ── INIT ─────────────────────────────────────────────────────
+fetchScoresFromDB().then(() => buildLeaderboard());
 
 // ── THE BOOK (BETTING) ─────────────────────────────────────────
 (function() {
@@ -3118,8 +3183,7 @@ buildLeaderboard();
 
   // ─── AUTO-RESULTS ───
   function getScores() {
-    var scores = {};
-    try { scores = JSON.parse(localStorage.getItem('vase2026_scores')) || {}; } catch(e) {}
+    var scores = loadScores(); // uses Firebase-backed cache
     // Build a name→scores map
     var result = {};
     players.forEach(function(p) {
@@ -3452,10 +3516,9 @@ buildLeaderboard();
     return a;
   }
 
-  // Read leaderboard from localStorage and return players sorted best→worst
+  // Read leaderboard from Firebase-backed cache and return players sorted best→worst
   function getRankedPlayers() {
-    let scores = {};
-    try { scores = JSON.parse(localStorage.getItem('vase2026_scores')) || {}; } catch(e) {}
+    let scores = loadScores();
     const ranked = players.map(function(p) {
       const s = scores[p.id] || {};
       const r1 = s.r1 != null && s.r1 !== '' ? +s.r1 : null;
